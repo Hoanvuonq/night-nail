@@ -19,3 +19,31 @@ export const DATA_SERVICE = [
     labelButton: "Xem Chi Tiết", 
   },
 ];
+
+export const SERVICE_PRICING = {
+  NAIL: [
+    { service: "Cắt Da", price: "19K" },
+    { service: "Sơn Gel", price: "69K" },
+    { service: "Úp Móng", price: "49K" },
+    { service: "Sơn Thạch", price: "59K" },
+    { service: "Mắt Mèo", price: "129K" },
+    { service: "Phá Gel", price: "29K" },
+    { service: "Tháo Móng Úp Gel", price: "39K" },
+  ],
+  COMBO: [
+    { service: "Cắt Da - Sơn Gel - Cứng Móng", price: "79K" },
+    { service: "Cắt Da - Úp Móng - Sơn Gel", price: "109K" },
+    { service: "Cắt Da - Úp Móng - Mắt Mèo", price: "159K" },
+    { service: "Cắt Da - Úp Móng - French", price: "179K" },
+  ],
+  DESIGN: [
+    { service: "Dặm Ombre", price: "5K/N" },
+    { service: "Tráng Gương", price: "5K/N" },
+    { service: "French", price: "7K/N" },
+    { service: "Vẽ (Tùy Mẫu)", price: "5K - 25K/N" },
+    { service: "Loang", price: "5K/N" },
+    { service: "Nặn Gel Nổi", price: "15K - 25K/N" },
+    { service: "Sticker", price: "3K - 5K/N" },
+    { service: "Đá Charm", price: "5K - 25K/N" },
+  ],
+};

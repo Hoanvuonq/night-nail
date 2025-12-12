@@ -45,7 +45,7 @@ export const MenuComponent = ({ isOpen, onClose }: IMenu) => {
         onClick={(e) => e.stopPropagation()}
         className={cn(
           "fixed top-0 bottom-0 right-0 z-50",
-          "w-full max-w-[40%] sm:max-w-sm md:max-w-md",
+          "w-full max-w-[80%] sm:max-w-sm md:max-w-md",
           "bg-[#0a0a0a] text-white shadow-2xl",
           "transform transition-transform duration-500 ease-in-out",
           isOpen ? "translate-x-0" : "translate-x-full"

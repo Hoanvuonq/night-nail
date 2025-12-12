@@ -19,7 +19,7 @@ const HomeScreens = () => {
           <h1 className={cn("leading-tight xl:text-start text-center mb-4 pacifico-regular-font text-main-color")}>
             <span className="leading-snug text-7xl md:text-6xl block">Chào mừng bạn,</span>
             <span className="leading-relaxed text-5xl md:text-8xl block mt-2">Night Nail</span>
-            <span className="leading-relaxed text-5xl md:text-7xl block">
+            <span className="leading-relaxed text-5xl md:text-7xl block"> 
               Nghệ thuật của riêng bạn.
             </span>
           </h1>

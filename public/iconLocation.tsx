@@ -1,8 +1,7 @@
-import React from "react";
 
-export const IconLocation = () => {
+export const IconLocation = ({ className }: { className?: string }) => {
   return (
-    <div data-testid="svgRoot-comp-kox326ho" className="VDJedC l4CAhn">
+    <div data-testid="svgRoot-comp-kox326ho"  className={`${className} VDJedC l4CAhn`}>
       <svg
         preserveAspectRatio="xMidYMid meet"
         data-bbox="46.001 43.157 107.996 113.685"

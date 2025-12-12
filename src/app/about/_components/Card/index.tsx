@@ -25,7 +25,7 @@ export const PolicyCard = ({
         className
       )}
     >
-      <div className="relative w-[360px] h-[460px]">
+      <div className="relative w-[360px] h-[480px]">
         <Image
           src={img}
           alt={title}
@@ -40,17 +40,12 @@ export const PolicyCard = ({
         className={cn(
           "absolute inset-x-0 bottom-0 w-[360px]",
           "bg-background-gradient text-black p-2", 
-          "h-[130px] transition-all duration-500 ease-in-out group-hover:h-[200px]", 
+          "h-10 transition-all duration-500 ease-in-out group-hover:h-[200px]", 
         )}
       >
         <h3 className="text-xl font-bold cherry-bomb-one-regular mb-2 uppercase">{title}</h3>
-
-        <p className="text-sm mb-4 leading-relaxed line-clamp-3">
-          {text}
-        </p>
-
-        <Link 
-          href={href} 
+        <p className="text-sm mb-4 leading-relaxed line-clamp-3">{text}</p>
+        <Link href={href} 
           className="flex items-center text-sm font-semibold transition-opacity duration-300 opacity-80 group-hover:opacity-100"
         >
           Read More 
