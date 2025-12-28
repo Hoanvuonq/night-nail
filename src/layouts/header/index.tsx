@@ -5,30 +5,28 @@ import { cn } from "@/utils/cn";
 import Button from "@/components/button";
 import { navItems } from "@/contants/menu";
 import { useState } from "react";
-import BookingModal from "@/app/(home)/_components/Booking";
-import {MenuComponent} from "@/components/menu";
+import BookingModal from "@/app/(home)/_components/Booking"; // Đây chính là NightNailLuxury
+import { MenuComponent } from "@/components/menu";
 import { Menu, X } from 'lucide-react'; 
-
-
-
 
 export const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <header className={cn(
-      "flex items-center justify-between px-4 py-4 md:px-8 md:py-6 w-full",
+      "flex items-center justify-between px-10 py-4 md:px-8 md:py-6 max-w-7xl mx-auto",
       "sticky top-0 z-30 bg-[#0a0a0a] shadow-sm"
     )}>
       <Link href="/">
         <div className="relative w-[100px] h-[60px] md:w-[140px] md:h-[90px]"> 
           <Image
             src="/images/logo/logo.png"
-            alt="Flora Nail Studio logo"
+            alt="Night Nail Studio logo"
             fill
             sizes="(max-width: 768px) 100px, 140px"
             className="object-contain"
@@ -42,9 +40,7 @@ export const Header = () => {
             key={item.name}
             href={item.href}
             className={cn(
-              "text-lg font-bold tracking-wide capitalize",
-              "hover:opacity-100 transition duration-300",
-              "underline-slide text-main-color"
+              "text-xl text-title font-bold tracking-wide capitalize transition duration-300 underline-slide text-main-color opacity-80 hover:opacity-100"
             )}
           >
             {item.name}
@@ -53,7 +49,8 @@ export const Header = () => {
       </nav>
 
       <div className="flex items-center gap-4">
-        <div onClick={handleOpenModal} className="hidden md:block">
+        {/* Nút Đặt lịch */}
+        <div onClick={handleOpenModal} className="hidden md:block cursor-pointer">
           <Button label="Đặt Lịch Ngay" />
         </div>
 
@@ -67,9 +64,11 @@ export const Header = () => {
       </div>
 
       <MenuComponent isOpen={isMenuOpen} onClose={toggleMenu} />
-      {isModalOpen && (
-        <BookingModal serviceTitle={""} onClose={handleCloseModal} />
-      )}
+
+      <BookingModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+      />
     </header>
   );
 };

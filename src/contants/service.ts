@@ -47,3 +47,11 @@ export const SERVICE_PRICING = {
     { service: "Đá Charm", price: "5K - 25K/N" },
   ],
 };
+
+export interface IServiceProps {
+  img?: string;
+  title: string;
+  description?: string;
+  labelButton?: string;
+  reverse?: boolean;
+}

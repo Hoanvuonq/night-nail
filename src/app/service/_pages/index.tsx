@@ -1,69 +1,95 @@
 "use client";
-import { cn } from "@/utils/cn";
-import { Video } from "../_components/Video";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { SERVICE_PRICING } from "@/contants/service";
+import { Video } from "../_components/Video";
 import { Pricing } from "../_components/Pricing";
-
+import { SERVICE_PRICING } from "@/contants/service";
 
 export const ServiceScreen = () => {
   return (
-    <div className={cn("w-full py-10 md:py-16 px-4 md:px-8 bg-black text-white")}>
-      <div className="max-w-6xl mx-auto flex flex-col gap-10 md:gap-12">
-        
-        <div className="w-full">
+    <section className="w-full py-20 px-6 bg-[#050505] text-white relative overflow-hidden">
+      {/* Background Decor: Những đám mây màu Rose Gold mờ ảo */}
+      <div className="absolute top-1/4 left-0 w-64 h-64 bg-[#D4AF37]/10 blur-[120px] rounded-full animate-pulse" />
+      <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-[#F4D8CD]/5 blur-[100px] rounded-full" />
+
+      <div className="max-w-7xl mx-auto flex flex-col gap-20 relative z-10">
+        {/* Header Video với khung bo tròn cực đại */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="w-full relative group"
+        >
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#D4AF37] to-[#F4D8CD] rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition" />
           <Video />
-        </div>
-        
-        <div className="w-full flex flex-col items-center gap-10 md:gap-12 lg:flex-row lg:items-start lg:gap-16">
-          
-          <div className="w-full lg:w-[35%] flex flex-col gap-6 items-center lg:items-start text-center lg:text-left">
-            <div className="flex xl:flex-row flex-col items-center gap-4">
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          {/* Cột trái: Brand & Chú cún dễ thương */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+            <motion.div
+              animate={{
+                y: [0, -15, 0],
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative"
+            >
+              <div className="absolute inset-0 bg-[#D4AF37]/20 blur-3xl rounded-full" />
               <Image
                 src="/images/service/icon-dogs.png"
-                height={80}
-                width={80}
-                alt="Night Nail Icon"
-                className=" object-cover w-full h-full md:w-42 md:h-42"
+                height={220}
+                width={220}
+                alt="Night Nail Puppy"
+                className="relative z-10 drop-shadow-[0_20px_50px_rgba(212,175,55,0.4)]"
               />
-              <h1 className="text-5xl md:text-6xl lg:text-8xl text-main-color pacifico-regular-font">
+              <div className="absolute -bottom-2 -right-2 bg-white text-black text-[10px] font-bold px-3 py-1 rounded-full shadow-lg rotate-12">
+                Woof! ✨
+              </div>
+            </motion.div>
+
+            <div className="space-y-4">
+              <h1 className="text-6xl md:text-8xl text-[#D4AF37] pacifico-regular-font leading-tight drop-shadow-glow">
                 Night Nail
               </h1>
+              <p className="text-xl text-white/60 font-serif italic leading-relaxed max-w-md">
+                "Nơi những bộ móng xinh được nâng niu bằng cả trái tim và sự
+                ngọt ngào."
+              </p>
             </div>
 
-            <p className="text-base md:text-lg text-gray-300">
-              Chúng tôi cung cấp dịch vụ làm móng chuyên nghiệp với đội ngũ thợ
-              lành nghề và sản phẩm chất lượng cao, cam kết mang lại sự hài lòng
-              và trải nghiệm thư giãn tuyệt vời nhất.
-            </p>
-            <p className="text-lg font-semibold text-main-color mt-2">
-              Xem bảng giá dịch vụ chi tiết:
-            </p>
-          </div>
-
-          <div className="w-full lg:w-[65%]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="md:col-span-2"> 
-
-              <Pricing title="NAIL" items={SERVICE_PRICING.NAIL} />
+            <div className="flex gap-4 pt-4">
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-[#D4AF37] animate-bounce">
+                <span>⭐</span>
               </div>
-              <div className="md:col-span-2"> 
-
-              <Pricing title="COMBO" items={SERVICE_PRICING.COMBO} />
-              </div>
-
-              <div className="md:col-span-2">
-                <Pricing title="DESIGN" items={SERVICE_PRICING.DESIGN} />
-              </div>
-
-              <p className="text-sm italic text-gray-500 md:col-span-2 mt-4">
-                Vui lòng đặt lịch trước để được phục vụ chu đáo nhất. Bảo hành
-                móng 7 ngày.
+              <p className="text-sm text-[#D4AF37] font-bold tracking-widest uppercase flex items-center">
+                Uy tín - Tận tâm - Dễ thương
               </p>
             </div>
           </div>
+
+          <div className="lg:col-span-7 grid grid-cols-1 gap-8">
+            <Pricing title="Dịch Vụ Móng Xinh" items={SERVICE_PRICING.NAIL} />
+            <Pricing title="Combo Ngọt Ngào" items={SERVICE_PRICING.COMBO} />
+            <Pricing title="Nail Design Art" items={SERVICE_PRICING.DESIGN} />
+
+            <motion.div
+              whileHover={{ x: 10 }}
+              className="p-6 rounded-[2rem] bg-[#D4AF37]/5 border border-[#D4AF37]/20 flex items-center gap-4 group"
+            >
+              <span className="text-3xl group-hover:scale-125 transition-transform">
+                🎁
+              </span>
+              <p className="text-sm italic text-white/50 leading-relaxed">
+                Tất cả dịch vụ đều đi kèm khăn nóng thư giãn và massage dưỡng
+                ẩm. <br />
+                Bảo hành móng xinh tận{" "}
+                <span className="text-[#D4AF37] font-bold">7 ngày</span> cho
+                nàng yên tâm!
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
