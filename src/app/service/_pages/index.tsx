@@ -19,7 +19,7 @@ export const ServiceScreen = () => {
           whileInView={{ opacity: 1, y: 0 }}
           className="w-full relative group"
         >
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#D4AF37] to-[#F4D8CD] rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition" />
+          <div className="absolute -inset-1 bg-linear-to-r from-[#D4AF37] to-[#F4D8CD] rounded-[3rem] blur opacity-20 group-hover:opacity-40 transition" />
           <Video />
         </motion.div>
 

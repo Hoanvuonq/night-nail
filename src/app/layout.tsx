@@ -12,7 +12,7 @@ const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
           content="Night Nails is a nails salon website that provides a variety of services for the nails"
         />
       </head>
-      <body className="relative bg-main-background">
+      <body className="relative bg-cream-luxury ">
         <main className="relative w-full">
           {children}
         </main>

@@ -5,7 +5,7 @@ export const Video = () => {
   return (
     <div className="w-full h-[60vw] md:h-[35vw] mx-auto relative group">
       {/* Khung viền lấp lánh phía sau */}
-      <div className="absolute -inset-2 bg-gradient-to-r from-[#D4AF37]/20 via-[#F4D8CD]/20 to-[#D4AF37]/20 blur-xl rounded-[2rem] opacity-50 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute -inset-2 bg-linear-to-r from-[#D4AF37]/20 via-[#F4D8CD]/20 to-[#D4AF37]/20 blur-xl rounded-[2rem] opacity-50 group-hover:opacity-100 transition-opacity" />
       
       <video
         src="/images/video/service.mp4"

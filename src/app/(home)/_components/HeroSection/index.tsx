@@ -1,137 +1,216 @@
 "use client";
+
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { cn } from "@/utils/cn";
-import { Leaf, MapPin, Sparkles } from "lucide-react";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  Variants,
+} from "framer-motion";
+import { Sparkles } from "lucide-react";
+import { Button } from "@/components"; // Đảm bảo đường dẫn đúng
+
+// --- 1. DEFINITIONS (Move outside component to prevent re-creation) ---
+
+const blobVariants: Variants = {
+  animate: {
+    borderRadius: [
+      "42% 58% 70% 30% / 45% 45% 55% 55%",
+      "56% 44% 30% 70% / 50% 54% 46% 50%",
+      "40% 60% 54% 46% / 49% 60% 40% 51%",
+      "42% 58% 70% 30% / 45% 45% 55% 55%",
+    ],
+    transition: {
+      duration: 10, // Tăng time lên để mượt hơn, đỡ giật
+      repeat: Infinity,
+      ease: "linear", // Linear đỡ tốn tính toán hơn easeInOut cho loop dài
+    },
+  },
+  hover: {
+    scale: 1.02,
+    rotate: 1,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+};
+
+const floatingBubble: Variants = {
+  animate: {
+    y: [0, -20, 0],
+    x: [0, 10, 0],
+    transition: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+  },
+};
+
+// --- 2. COMPONENT ---
 
 export default function HeroSection() {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 100]);
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Optimize Scroll Performance
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Parallax nhẹ nhàng hơn, dùng spring để khử rung
+  const yParallax = useSpring(useTransform(scrollYProgress, [0, 1], [0, 100]), {
+    stiffness: 50,
+    damping: 20,
+  });
 
   return (
     <section
-      id="home"
-      className="relative flex flex-col md:flex-row items-start justify-between max-w-7xl mx-auto px-6 py-12 md:py-20 gap-16 overflow-hidden"
+      ref={containerRef}
+      className="bg-cream-luxury relative flex items-center justify-center overflow-hidden px-6 py-20 sm:px-10"
     >
-      <h2 className="sr-only">
-        Night Nail - Tiệm Nail cao cấp Gò Vấp, dịch vụ làm móng chuyên nghiệp
-        tại TP.HCM
-      </h2>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">
+        <motion.div
+          animate={{
+            transform: [
+              "translate(0px, 0px) scale(1)",
+              "translate(20px, -20px) scale(1.1)",
+              "translate(0px, 0px) scale(1)",
+            ],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute -right-[10%] -top-[10%] h-125 w-125 rounded-full bg-amber-200/40 blur-[100px]"
+        />
+        {/* Blob 2 */}
+        <motion.div
+          animate={{
+            transform: [
+              "translate(0px, 0px) scale(1)",
+              "translate(-30px, 30px) scale(1.2)",
+              "translate(0px, 0px) scale(1)",
+            ],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[10%] -left-[5%] h-100 w-100 rounded-full bg-amber-100/50 blur-[80px]"
+        />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04]" />
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className="flex flex-col items-center md:items-start w-full md:w-3/5 z-10"
-      >
-        <header className="space-y-4 text-center md:text-left">
+      <div className="z-10 grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+        
+        <div className="order-2 text-center lg:order-1 lg:text-left">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-sm tracking-[0.2em] uppercase mb-4"
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <Sparkles size={14} /> <span>The Art of Beauty</span>
-          </motion.div>
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/60 px-5 py-2 shadow-sm backdrop-blur-sm">
+              <Sparkles size={14} className="animate-pulse text-amber-500" />
+              <span className="text-[10px] font-bold tracking-[0.3em] text-amber-600 uppercase">
+                Premium Nail Art Studio
+              </span>
+            </div>
 
-          <h1 className="leading-[1.1] text-6xl md:text-[7.5rem] font-bold text-white tracking-tighter">
-            Night{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-b from-[#D4AF37] to-[#B38F24] drop-shadow-sm">
-              Nail
-            </span>
-          </h1>
+            <div className="relative mb-8 select-none">
+              <h1 className="text-6xl font-black leading-44 tracking-widest md:text-7xl lg:text-8xl xl:text-[9rem] pacifico-regular-font">
+                <span className="text-stroke-gold block text-transparent opacity-20">
+                  Night
+                </span>
+                <span className="relative inline-block bg-linear-to-br from-[#D4AF37] via-[#F3E5AB] to-[#C5A028] bg-clip-text text-transparent drop-shadow-sm">
+                  Nail
+                  <motion.span
+                    variants={floatingBubble}
+                    animate="animate"
+                    className=" -top-4 text-4xl mr-10 lg:text-5xl"
+                  >
+                    ✨
+                  </motion.span>
+                </span>
+              </h1>
+            </div>
 
-          <div className="relative group">
-            <p className="pacifico-regular-font text-3xl md:text-5xl text-white/90 leading-tight">
-              Nghệ thuật của riêng bạn.
+            {/* Quote */}
+            <p className="mb-12 max-w-md border-l-4 border-amber-400 pl-6 text-lg font-medium italic leading-relaxed text-zinc-600 lg:mx-0 mx-auto">
+              "Nơi mỗi bộ móng là một vệt màu của cảm xúc, tan chảy như làn nước
+              lung linh."
             </p>
-            <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-[#D4AF37] group-hover:w-full transition-all duration-700 opacity-50" />
-          </div>
-        </header>
 
-        <div className="mt-12 space-y-8 w-full">
-          <address className="not-italic space-y-3">
-            <div className="flex items-center justify-center md:justify-start gap-3 group">
-              <div className="p-2 rounded-lg bg-white/5 group-hover:bg-[#D4AF37]/20 transition-colors">
-                <MapPin size={20} className="text-[#D4AF37]" />
-              </div>
-              <div>
-                <p className="text-xs tracking-[0.3em] uppercase text-[#D4AF37]/70 font-bold">
-                  Vị Trí Studio
-                </p>
-                <p className="text-lg text-white/60 font-medium tracking-wide">
-                  302/32 Phan Huy Ích, Gò Vấp, TP.HCM
-                </p>
-              </div>
-            </div>
-          </address>
-
-          <div className="flex flex-col sm:flex-row items-center gap-5">
-            <motion.button
-              whileHover={{
-                scale: 1.02,
-                boxShadow: "0 0 40px rgba(212,175,55,0.4)",
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="px-12 py-5 bg-linear-to-r from-[#D4AF37] via-[#FFD700] to-[#B38F24] text-black font-extrabold uppercase tracking-[0.2em] rounded-2xl shadow-xl transition-all duration-300 min-w-[240px]"
+            {/* CTA Button */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block"
             >
-              Đặt Lịch Ngay
-            </motion.button>
-
-            <button className="px-8 py-5 text-white/70 hover:text-white transition-colors uppercase tracking-widest text-sm font-bold border-b border-white/10 hover:border-[#D4AF37]">
-              Khám phá dịch vụ
-            </button>
-          </div>
+              <Button label="Đặt Lịch Ngay" className="shadow-amber-200/50 shadow-lg" />
+            </motion.div>
+          </motion.div>
         </div>
-      </motion.div>
-      <motion.div
-        style={{ y: y1 }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: "circOut" }}
-        className="relative w-full md:w-2/5 flex justify-center md:justify-end"
-      >
-        <div className="relative w-[320px] h-[480px] md:w-[460px] md:h-[680px]">
-          <div className="absolute -inset-10 bg-[#D4AF37]/10 blur-[80px] rounded-full mix-blend-screen opacity-50 animate-pulse" />
-          <div className="absolute -top-8 -left-8 w-full h-full border-2 border-[#D4AF37]/20 rounded-t-[140px] rounded-bl-[140px] z-0 hidden md:block" />
+
+        {/* --- RIGHT IMAGE (Parallax & Morphing) --- */}
+        <div className="order-1 flex w-full justify-center lg:order-2 lg:justify-end">
           <motion.div
-            whileHover={{ y: -10 }}
-            className="relative w-full h-full overflow-hidden rounded-t-[140px] rounded-bl-[140px] border-[6px] border-[#151515] shadow-[0_30px_60px_rgba(0,0,0,0.8)] z-10"
+            style={{ y: yParallax }}
+            className="relative aspect-square w-full max-w-150 lg:scale-105"
           >
-            <Image
-              src="/images/news/product-01.png"
-              alt="Mẫu Nail Art Cao Cấp - Night Nail Gò Vấp"
-              fill
-              priority
-              className="object-cover transition-transform duration-[5s] hover:scale-110"
+            {/* Blob Background Behind Image */}
+            <motion.div
+              variants={blobVariants}
+              animate="animate"
+              className="will-change-transform absolute inset-0 -z-10 scale-105 border border-amber-200/40 bg-white/20 blur-md"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
 
-            <div className="absolute bottom-10 left-10 right-10 p-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl">
-              <p className="text-[10px] text-[#D4AF37] tracking-[0.2em] uppercase font-bold">
-                Sáng tạo bởi
-              </p>
-              <p className="text-white text-sm font-serif italic">
-                Đội ngũ nghệ nhân Night Nail
-              </p>
-            </div>
-          </motion.div>
+            <motion.div
+              variants={blobVariants}
+              animate="animate"
+              whileHover="hover"
+              className="will-change-transform group relative h-full w-full cursor-pointer overflow-hidden border-[6px] border-white bg-white shadow-2xl"
+            >
+              <Image
+                src="/images/news/product-01.png"
+                alt="Nail Art Design"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 "
+                priority
+              />
 
-          <motion.div
-            animate={{
-              y: [0, -15, 0],
-              rotate: [55, 62, 55],
-            }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-12 -left-20 z-20 text-[#D4AF37] filter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
-          >
-            <Leaf size={140} fill="currentColor" strokeWidth={1} />
+              {/* Artisan Badge (Optimized position) */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6 }}
+                className="absolute bottom-8 left-8 z-20"
+              >
+                <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/40 bg-white/30 p-2 text-center shadow-xl backdrop-blur-md">
+                  <div className="flex flex-col items-center">
+                    <span className="mb-1 text-[7px] font-black leading-none text-amber-700 uppercase">
+                      Artisan
+                    </span>
+                    <span className="text-[9px] font-bold leading-tight text-zinc-800">
+                      Night Nail
+                    </span>
+                  </div>
+                  {/* Rotating Border */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className="absolute inset-0 rounded-full border border-dashed border-amber-500/40"
+                  />
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Decor Bubble */}
+            <motion.div
+              variants={floatingBubble}
+              animate="animate"
+              className="absolute -right-4 -top-8 flex h-20 w-20 items-center justify-center rounded-full border border-amber-100 bg-white/40 shadow-inner backdrop-blur-sm"
+            >
+              <div className="h-5 w-5 rounded-full bg-amber-200/60 blur-[2px]" />
+            </motion.div>
           </motion.div>
         </div>
-      </motion.div>
-
-      <div className="absolute -top-20 -left-20 w-[400px] h-[400px] bg-[#D4AF37]/5 blur-[150px] rounded-full z-0" />
-      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-[#D4AF37]/5 blur-[100px] rounded-full z-0" />
+      </div>
     </section>
   );
 }

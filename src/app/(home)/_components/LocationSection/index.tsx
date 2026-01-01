@@ -9,7 +9,7 @@ const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d391
 
 const LocationSection = () => {
   return (
-    <section id="location" className="relative w-full py-20 bg-[#0A0A0A] overflow-hidden">
+    <section id="location" className="relative w-full py-20  overflow-hidden">
       {/* Trang trí "Dễ thương": Các đốm sáng tròn mềm mại */}
       <div className="absolute top-10 left-10 w-32 h-32 bg-[#D4AF37]/10 blur-3xl rounded-full animate-pulse" />
       <div className="absolute bottom-10 right-10 w-48 h-48 bg-[#D4AF37]/5 blur-3xl rounded-full animate-bounce duration-[5s]" />
@@ -27,18 +27,18 @@ const LocationSection = () => {
             <span>Ghé thăm tiệm nhỏ của tụi mình</span>
           </div>
           
-          <h2 className="text-4xl md:text-6xl pacifico-regular-font text-white leading-tight">
+          <h2 className="text-4xl md:text-6xl pacifico-regular-font text-black leading-tight">
             Chỉ đường tới <span className="text-[#D4AF37]">Night Nail</span>
           </h2>
-          <p className="mt-4 text-white/40 font-light tracking-widest text-xs uppercase">✨ 302/32 Phan Huy Ích, Gò Vấp ✨</p>
+          <p className="mt-4 text-black/40 font-light tracking-widest text-xs uppercase">✨ 302/32 Phan Huy Ích, Gò Vấp ✨</p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row items-center gap-10 bg-[#151515]/50 p-6 md:p-10 rounded-[3rem] border border-white/5 backdrop-blur-xl">
+        <div className="flex flex-col lg:flex-row items-center gap-10  p-6 md:p-10 rounded-[3rem] border border-white/5 backdrop-blur-xl">
           
           {/* Map Container: Bo góc tròn cực lớn */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
-            className="w-full lg:w-1/2 aspect-square max-h-[450px] rounded-[2.5rem] overflow-hidden border-4 border-white/5 shadow-2xl relative group"
+            className="w-full lg:w-1/2 aspect-square max-h-112 rounded-4xl overflow-hidden border-4 border-white/5 shadow-2xl relative group"
           >
             <iframe
               src={MAP_EMBED_URL}
@@ -55,8 +55,8 @@ const LocationSection = () => {
 
           {/* Info Side */}
           <div className="w-full lg:w-1/2 flex flex-col space-y-8">
-            <div className="bg-[#D4AF37]/5 p-8 rounded-[2rem] border-l-4 border-[#D4AF37]">
-              <p className="text-2xl md:text-3xl font-serif italic text-white leading-relaxed">
+            <div className="bg-[#D4AF37]/5 p-8 rounded-4xl border-l-4 border-[#D4AF37]">
+              <p className="text-2xl md:text-3xl font-serif italic text-black leading-relaxed">
                 "{STUDIO_ADDRESS}"
               </p>
             </div>
@@ -66,14 +66,14 @@ const LocationSection = () => {
                 <div className="w-12 h-12 rounded-2xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] group-hover:rotate-12 transition-transform">
                   <Car size={20} />
                 </div>
-                <span className="text-white/70 text-lg font-light">Chỗ đậu xe <strong className="text-white">miễn phí</strong> cho cả ô tô nè!</span>
+                <span className="text-black/70 text-lg font-light">Chỗ đậu xe <strong className="text-black">miễn phí</strong> cho cả ô tô nè!</span>
               </div>
 
               <div className="flex items-center gap-4 group">
                 <div className="w-12 h-12 rounded-2xl bg-[#D4AF37]/10 flex items-center justify-center text-[#D4AF37] group-hover:rotate-12 transition-transform">
                   <Sparkles size={20} />
                 </div>
-                <span className="text-white/70 text-lg font-light">Khu vực <strong className="text-white">an toàn & yên tĩnh</strong> tuyệt đối.</span>
+                <span className="text-black/70 text-lg font-light">Khu vực <strong className="text-black">an toàn & yên tĩnh</strong> tuyệt đối.</span>
               </div>
             </div>
 
@@ -81,7 +81,7 @@ const LocationSection = () => {
             <Link
               href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STUDIO_ADDRESS)}`}
               target="_blank"
-              className="group relative w-full overflow-hidden py-5 rounded-[2rem] bg-[#D4AF37] text-black font-bold uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_15px_30px_rgba(212,175,55,0.2)]"
+              className="group relative w-full overflow-hidden py-5 rounded-4xl bg-[#D4AF37] text-black font-bold uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_15px_30px_rgba(212,175,55,0.2)]"
             >
               <motion.div
                 animate={{ x: [0, 5, 0] }}

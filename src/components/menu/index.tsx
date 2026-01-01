@@ -5,7 +5,7 @@ import { cn } from "@/utils/cn";
 import { X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Button from "../button";
+import {Button} from "../button";
 
 interface IMenu {
   isOpen: boolean;

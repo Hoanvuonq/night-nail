@@ -25,7 +25,7 @@ const AboutUsScreen = () => {
             <motion.div 
               animate={{ scale: [1, 1.02, 1] }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="w-[200px] h-[300px] rounded-t-full bg-gradient-to-b from-[#D4AF37] via-[#B38F24] to-transparent opacity-20 blur-sm absolute -inset-4"
+              className="w-[200px] h-[300px] rounded-t-full bg-linear-to-b from-[#D4AF37] via-[#B38F24] to-transparent opacity-20 blur-sm absolute -inset-4"
             />
             <div className="w-[200px] h-[300px] rounded-t-full border-2 border-[#D4AF37]/30 relative z-0 flex items-end justify-center pb-10">
                <div className="w-12 h-12 rounded-full bg-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.5)] animate-bounce" />
@@ -66,7 +66,7 @@ const AboutUsScreen = () => {
           
           <div className="lg:col-span-4 hidden lg:block">
             {/* Có thể thêm một tấm ảnh chân dung owner hoặc ảnh studio mờ ở đây */}
-            <div className="h-full w-full rounded-[40px] border border-white/5 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center italic text-white/20 text-center p-10">
+            <div className="h-full w-full rounded-[40px] border border-white/5 bg-linear-to-br from-white/5 to-transparent flex items-center justify-center italic text-white/20 text-center p-10">
                "Nghệ thuật không nằm ở màu sơn, mà nằm ở tâm hồn người thợ."
             </div>
           </div>

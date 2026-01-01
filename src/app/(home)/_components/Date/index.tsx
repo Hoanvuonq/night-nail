@@ -1,8 +1,8 @@
 "use client";
-import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
 
-export const DateComponent = () => {
+export const DateComponent = ({ selectedDate, setSelectedDate }: { selectedDate: string; setSelectedDate: React.Dispatch<React.SetStateAction<string>> }) => {
   const dateList = useMemo(() => {
     const days = [];
     const today = new Date();
@@ -11,8 +11,9 @@ export const DateComponent = () => {
       d.setDate(today.getDate() + i);
       const dayOfWeek = d.getDay();
       const dateNum = d.getDate();
-      let dayLabel = `T${dayOfWeek + 1}`;
-      if (dayOfWeek === 0) dayLabel = "CN";
+      
+      // Chỉnh nhãn ngày tiếng Việt chuẩn hơn
+      let dayLabel = dayOfWeek === 0 ? "CN" : `T${dayOfWeek + 1}`;
       if (i === 0) dayLabel = "Hôm nay";
       
       days.push({
@@ -25,44 +26,55 @@ export const DateComponent = () => {
     return days;
   }, []);
 
-  const [selectedDate, setSelectedDate] = useState(dateList[0].value);
-
   return (
-    <div className="relative group">
-      {/* Container cuộn ngang với hiệu ứng mờ ở hai đầu (Luxury Touch) */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#0C0C0C] to-transparent z-10 pointer-events-none" />
+    <div className="relative group overflow-hidden py-2">
+      {/* Cạnh mờ (Faded edges) - Điều chỉnh sang màu sáng của nền #FBFAF8 */}
+      <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[#FBFAF8] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#FBFAF8] to-transparent z-10 pointer-events-none" />
 
-      <div className="flex gap-3 overflow-x-auto pb-6 no-scrollbar snap-x px-2 font-['Outfit']">
+      <div className="flex gap-4 overflow-x-auto pb-6 no-scrollbar snap-x px-6 py-2">
         {dateList.map((item, index) => {
           const isSelected = selectedDate === item.value;
           return (
             <motion.div
               key={index}
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedDate(item.value)}
               className={`
-                relative min-w-[72px] h-[96px] rounded-[24px] flex flex-col items-center justify-center cursor-pointer snap-center transition-all duration-500 border-2
+                relative min-w-[76px] h-[100px] rounded-[28px] flex flex-col items-center justify-center cursor-pointer snap-center transition-all duration-500 border-2
                 ${
                   isSelected
-                    ? "bg-gradient-to-b from-[#D4AF37] to-[#B38F24] border-[#D4AF37] shadow-[0_10px_25px_rgba(212,175,55,0.3)] scale-105"
-                    : "bg-white/[0.03] border-white/5 hover:border-[#D4AF37]/30 group/item"
+                    ? "bg-gradient-to-b from-[#D4AF37] to-[#B38F24] border-[#D4AF37] shadow-[0_12px_24px_rgba(212,175,55,0.3)] scale-105 z-20"
+                    : "bg-white border-zinc-100 hover:border-amber-200 hover:bg-amber-50/30 group/item z-0"
                 }
               `}
             >
-              <div className={`w-1 h-1 rounded-full mb-2 transition-all ${isSelected ? "bg-black/40" : "bg-[#D4AF37]/40 group-hover/item:bg-[#D4AF37]"}`} />
-              <span className={`text-[10px] uppercase sour-gummy tracking-[0.2em] mb-1 ${isSelected ? "text-black font-black" : "text-white/40 font-bold"}`}>
+              {/* Chấm tròn nhỏ trang trí */}
+              <div className={`w-1 h-1 rounded-full mb-2 transition-all ${
+                isSelected 
+                ? "bg-white/60" 
+                : "bg-amber-500/30 group-hover/item:bg-amber-500"
+              }`} />
+
+              {/* Nhãn Thứ */}
+              <span className={`text-[10px] uppercase tracking-[0.15em] mb-1 font-bold ${
+                isSelected ? "text-white" : "text-zinc-400"
+              }`}>
                 {item.dayLabel}
               </span>
               
-              <span className={`text-3xl lemonada italic tracking-tighter ${isSelected ? "text-black font-black" : "text-white font-medium"}`}>
+              {/* Số ngày */}
+              <span className={`text-2xl font-serif italic ${
+                isSelected ? "text-white font-black" : "text-zinc-800 font-bold"
+              }`}>
                 {item.dateNum}
               </span>
 
+              {/* Indicator thanh mảnh bên dưới khi chọn */}
               {isSelected && (
                 <motion.div 
-                  layoutId="glow"
-                  className="absolute -bottom-1 w-8 h-1 bg-[#D4AF37] blur-sm rounded-full"
+                  layoutId="glow-light"
+                  className="absolute -bottom-2 w-6 h-1 bg-amber-500 rounded-full shadow-[0_0_10px_#D4AF37]"
                 />
               )}
             </motion.div>

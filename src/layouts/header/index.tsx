@@ -1,74 +1,72 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
-import { cn } from "@/utils/cn";
-import Button from "@/components/button";
+import { Button } from "@/components/button";
 import { navItems } from "@/contants/menu";
-import { useState } from "react";
-import BookingModal from "@/app/(home)/_components/Booking"; // Đây chính là NightNailLuxury
+import { motion } from "framer-motion";
+import { Menu, X } from 'lucide-react';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { MenuComponent } from "@/components/menu";
-import { Menu, X } from 'lucide-react'; 
 
 export const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className={cn(
-      "flex items-center justify-between px-10 py-4 md:px-8 md:py-6 max-w-7xl mx-auto",
-      "sticky top-0 z-30 bg-[#0a0a0a] shadow-sm"
-    )}>
-      <Link href="/">
-        <div className="relative w-[100px] h-[60px] md:w-[140px] md:h-[90px]"> 
-          <Image
-            src="/images/logo/logo.png"
-            alt="Night Nail Studio logo"
-            fill
-            sizes="(max-width: 768px) 100px, 140px"
-            className="object-contain"
-          />
-        </div>
-      </Link>
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
+      <motion.div
+        initial={false}
+        animate={{
+          width: scrolled ? "90%" : "100%",
+          maxWidth: scrolled ? "1000px" : "1280px",
+          backgroundColor: scrolled ? "rgba(255, 255, 255, 0.7)" : "rgba(255, 255, 255, 0.1)",
+          backdropFilter: scrolled ? "blur(15px)" : "blur(0px)",
+          y: scrolled ? 10 : 0,
+          border: scrolled ? "1px solid rgba(245, 158, 11, 0.2)" : "1px solid transparent",
+        }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center justify-between px-6 py-2 rounded-full pointer-events-auto shadow-2xl shadow-black/3"
+      >
+        <Link href="/">
+          <motion.div whileHover={{ scale: 1.05 }} className="relative w-24 h-12 md:w-32 md:h-16">
+            <Image src="/images/logo/logo.png" alt="Logo" fill className="object-contain" />
+          </motion.div>
+        </Link>
 
-      <nav className="hidden lg:flex items-center gap-8">
-        {navItems.map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className={cn(
-              "text-xl text-title font-bold tracking-wide capitalize transition duration-300 underline-slide text-main-color opacity-80 hover:opacity-100"
-            )}
+        <nav className="hidden lg:flex items-center gap-2">
+          {navItems.map((item) => (
+            <Link key={item.name} href={item.href} className="group relative px-4 py-2">
+              <span className="relative z-10 text-xs font-black uppercase tracking-[0.2em] text-amber-900/80 group-hover:text-amber-600 transition-colors">
+                {item.name}
+              </span>
+              <motion.div 
+                className="absolute inset-0 bg-amber-50 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" 
+              />
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <div className="hidden md:block">
+            <Button label="Booking Now" />
+          </div>
+          
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-600 relative z-[101]"
           >
-            {item.name}
-          </Link>
-        ))}
-      </nav>
-
-      <div className="flex items-center gap-4">
-        {/* Nút Đặt lịch */}
-        <div onClick={handleOpenModal} className="hidden md:block cursor-pointer">
-          <Button label="Đặt Lịch Ngay" />
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
+      </motion.div>
 
-        <button 
-          onClick={toggleMenu} 
-          className="lg:hidden text-main-color"
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      <MenuComponent isOpen={isMenuOpen} onClose={toggleMenu} />
-
-      <BookingModal 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-      />
+      <MenuComponent isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </header>
   );
 };

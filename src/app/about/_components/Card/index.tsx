@@ -23,7 +23,7 @@ export const PolicyCard = ({ title, text, img, href, className }: any) => {
       />
       
       {/* Lớp phủ Gradient chuẩn Luxury để làm nổi chữ */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent" />
       
       {/* Nội dung: Hiển thị tiêu đề sẵn, chỉ ẩn text chi tiết */}
       <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end min-h-[160px] transition-all duration-500">

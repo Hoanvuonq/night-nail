@@ -14,10 +14,10 @@ const FormInput = ({ icon, name, placeholder, value, onChange, type = "text" }: 
   return (
     <div className="relative group">
       {/* Glow Effect nền khi focus */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#D4AF37]/0 via-[#D4AF37]/20 to-[#D4AF37]/0 rounded-[22px] blur opacity-0 group-focus-within:opacity-100 transition duration-500" />
+      <div className="absolute -inset-0.5 bg-linear-to-r from-[#D4AF37]/0 via-[#D4AF37]/20 to-[#D4AF37]/0 rounded-[22px] blur opacity-0 group-focus-within:opacity-100 transition duration-500" />
       
       <div className={`relative flex ${isTextarea ? "items-start" : "items-center"} bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-[20px] p-1.5 transition-all duration-300 group-focus-within:border-[#D4AF37]/40`}>
-        <div className={`flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-[#1C1C1C] to-black text-[#D4AF37] shadow-inner ${isTextarea ? "mt-1" : ""}`}>
+        <div className={`flex items-center justify-center w-11 h-11 rounded-xl bg-linear-to-br from-[#1C1C1C] to-black text-[#D4AF37] shadow-inner ${isTextarea ? "mt-1" : ""}`}>
           {icon}
         </div>
         {isTextarea ? (
@@ -95,14 +95,14 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-linear-to-r from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20"
             >
               <Sparkles size={12} className="text-[#D4AF37] animate-pulse" />
               <span className="text-[10px] text-[#D4AF37] font-bold tracking-[0.2em] uppercase">The Art of Beauty</span>
             </motion.div>
             <h2 className="text-4xl font-serif text-white leading-tight">
               Nghệ thuật của <br />
-              <span className="italic font-light bg-gradient-to-r from-[#D4AF37] via-[#FFF5D1] to-[#D4AF37] bg-clip-text text-transparent">riêng bạn</span>
+              <span className="italic font-light bg-linear-to-r from-[#D4AF37] via-[#FFF5D1] to-[#D4AF37] bg-clip-text text-transparent">riêng bạn</span>
             </h2>
           </section>
 
@@ -126,7 +126,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
                     }`}
                   >
                     <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-700 hover:scale-110" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent" />
                     
                     <div className="absolute bottom-6 left-6 right-6 z-10 space-y-2">
                       <AnimatePresence>
@@ -171,7 +171,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
         </div>
 
         {/* Floating Footer - Web 3 Gradient Action */}
-        <footer className="absolute bottom-0 left-0 right-0 p-8 pt-12 bg-gradient-to-t from-black via-black/90 to-transparent backdrop-blur-md z-40 border-t border-white/5">
+        <footer className="absolute bottom-0 left-0 right-0 p-8 pt-12 bg-linear-to-t from-black via-black/90 to-transparent backdrop-blur-md z-40 border-t border-white/5">
           <div className="flex justify-between items-center mb-6 px-2">
             <div className="space-y-1">
               <p className="text-[10px] text-white/30 uppercase tracking-[0.2em] font-bold">Thanh toán dự kiến</p>
@@ -190,7 +190,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
           <motion.button 
             whileHover={{ scale: 1.02, filter: "brightness(1.1)" }}
             whileTap={{ scale: 0.98 }}
-            className="group relative w-full h-[70px] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38F24] rounded-[24px] overflow-hidden flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(212,175,55,0.2)]"
+            className="group relative w-full h-[70px] bg-linear-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38F24] rounded-[24px] overflow-hidden flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(212,175,55,0.2)]"
           >
             {/* Tia sáng quét qua khi hover */}
             <div className="absolute inset-0 w-1/2 h-full bg-white/20 -skew-x-[45deg] -translate-x-[200%] group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
