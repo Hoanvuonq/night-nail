@@ -1,5 +1,5 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants, BezierDefinition } from "framer-motion";
 import { navItems } from "@/contants/menu";
 import Link from "next/link";
 import { X, Sparkles, ArrowRight, Instagram, Facebook } from "lucide-react";
@@ -10,39 +10,41 @@ interface MenuProps {
 }
 
 export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
-  // Biến thể animation trượt từ TRÁI qua
-  const menuVariants = {
+  const transitionEase: BezierDefinition = [0.42, 0, 0.58, 1];
+  const itemEase: BezierDefinition = [0.16, 1, 0.3, 1];
+
+  // Variants cho container chính
+  const menuVariants: Variants = {
     closed: {
-      x: "-100%", // Nằm ngoài màn hình bên trái
+      x: "-100%",
       transition: {
-        duration: 0.6,
-        ease: [0.76, 0, 0.24, 1], // Cubic-bezier chuẩn Wix Studio
+        duration: 0.5,
+        ease: "easeInOut",
       },
     },
     open: {
       x: 0,
       transition: {
         duration: 0.6,
-        ease: [0.76, 0, 0.24, 1],
+        ease: transitionEase,
       },
     },
   };
 
-  // Hiệu ứng mờ nền (Overlay)
-  const overlayVariants = {
+  const overlayVariants: Variants = {
     closed: { opacity: 0 },
     open: { opacity: 1 },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     closed: { x: -30, opacity: 0 },
     open: (i: number) => ({
       x: 0,
       opacity: 1,
       transition: {
-        delay: 0.4 + i * 0.1,
+        delay: 0.3 + i * 0.1,
         duration: 0.5,
-        ease: "easeOut",
+        ease: itemEase,
       },
     }),
   };
@@ -51,7 +53,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Lớp nền mờ khi mở menu */}
+          {/* Overlay */}
           <motion.div
             initial="closed"
             animate="open"
@@ -61,15 +63,15 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
             className="fixed inset-0 z-[99] bg-black/20 backdrop-blur-sm"
           />
 
-          {/* Container Menu chính trượt từ trái */}
+          {/* Side Menu */}
           <motion.div
             initial="closed"
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed top-0 left-0 bottom-0 z-[100] w-[85%] max-w-[400px] bg-[#FDFCF9] flex flex-col px-6 py-10 shadow-2xl"
+            className="fixed top-0 left-0 bottom-0 z-[100] w-[85%] max-w-[400px] bg-[#FDFCF9] flex flex-col px-6 py-10 shadow-2xl overflow-y-auto"
           >
-            {/* Header Menu */}
+            {/* Header */}
             <div className="flex justify-between items-center mb-12">
               <div className="flex items-center gap-2">
                 <Sparkles className="text-amber-500" size={18} />
@@ -86,7 +88,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
               </motion.button>
             </div>
 
-            {/* Navigation Links */}
+            {/* Navigation */}
             <nav className="flex flex-col gap-6">
               {navItems.map((item, index) => (
                 <motion.div
@@ -97,13 +99,13 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
                   <Link
                     href={item.href}
                     onClick={onClose}
-                    className="group flex items-end justify-between border-b border-amber-50/50 pb-3"
+                    className="group flex items-end justify-between border-b border-amber-50/50 pb-4 transition-all duration-300"
                   >
                     <div className="flex flex-col">
                       <span className="text-amber-500 text-[9px] font-bold uppercase tracking-[0.2em] mb-1">
                         0{index + 1}
                       </span>
-                      <h2 className="text-3xl font-black text-zinc-800 tracking-tight group-active:text-amber-600 transition-colors">
+                      <h2 className="text-3xl font-black text-zinc-800 tracking-tight group-hover:text-amber-600 transition-colors">
                         {item.name}
                       </h2>
                     </div>
@@ -117,7 +119,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
               ))}
             </nav>
 
-            {/* Footer Menu */}
+            {/* Footer */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -134,20 +136,20 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
                 
                 <div className="space-y-3">
                   <p className="text-[8px] uppercase font-black text-amber-600 tracking-widest">Mạng xã hội</p>
-                  <div className="flex gap-3">
-                    <Link href="#" className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors">
-                      <Instagram size={14} />
+                  <div className="flex gap-4">
+                    <Link href="#" className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-all">
+                      <Instagram size={16} />
                     </Link>
-                    <Link href="#" className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors">
-                      <Facebook size={14} />
+                    <Link href="#" className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-all">
+                      <Facebook size={16} />
                     </Link>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Noise Texture cho lớp nền sang trọng */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none" />
+            {/* Grainy Texture */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
           </motion.div>
         </>
       )}

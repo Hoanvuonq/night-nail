@@ -1,13 +1,12 @@
 "use client";
-import { cn } from "@/utils/cn";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { MapPin, Car, ShieldCheck, Heart, Sparkles } from "lucide-react";
+import { Car, Heart, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 const STUDIO_ADDRESS = "302/32 Phan Huy Ích, Phường 12, Quận Gò Vấp, TP.HCM";
 const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7878345719!2d106.63473487570415!3d10.827552058249051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529437b04e8b3%3A0xe079379654e58b3e!2zMzAyLzMyIFBoYW4gSHV5IMWNoLCBQaMaw4budbmcgMTIsIEfDsiBW4bqlcCwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1710000000000!5m2!1svi!2s"; 
 
-const LocationSection = () => {
+export const LocationSection = () => {
   return (
     <section id="location" className="relative w-full py-20  overflow-hidden">
       {/* Trang trí "Dễ thương": Các đốm sáng tròn mềm mại */}
@@ -108,5 +107,3 @@ const LocationSection = () => {
     </section>
   );
 };
-
-export default LocationSection;

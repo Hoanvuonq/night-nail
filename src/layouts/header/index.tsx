@@ -52,18 +52,18 @@ export const Header = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           <div className="hidden md:block">
             <Button label="Booking Now" />
           </div>
           
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-600 relative z-[101]"
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-600 relative z-101"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-        </div>
+        </div> */}
       </motion.div>
 
       <MenuComponent isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />

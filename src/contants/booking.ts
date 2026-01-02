@@ -40,14 +40,14 @@ export const SERVICES_DATA = [
 ];
 
 export const TIME_SLOTS = [
+  "07:00",
   "09:00",
-  "10:00",
   "11:00",
   "13:00",
-  "14:30",
-  "16:00",
-  "17:30",
+  "15:00",
+  "17:00",
   "19:00",
+  "21:00",
+  "23:00",
 ];
-// Thêm hằng số ghi chú để bạn hiển thị dưới form nếu cần
 export const NOTE_PRICE = "Giá trên chưa bao gồm tháo gel cũ & design nâng cao.";

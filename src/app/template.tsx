@@ -15,9 +15,9 @@ const Template = ({ children }: ITemplateProps) => {
         <Header />
       <div className="pt-20 w-full relative">
         {children} 
-        <MobileNav />
+        {/* <MobileNav /> */}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

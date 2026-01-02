@@ -15,59 +15,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
-import { DateComponent } from "../Date";
+import { DateComponent } from "../../../booking/_components/DateTime";
 import { TimePickerCustom } from "../TimePickerCustom";
-
-// --- Sub-component: Form Input chuẩn Web 3 ---
-const FormInput = ({
-  icon,
-  name,
-  placeholder,
-  value,
-  onChange,
-  type = "text",
-}: any) => {
-  const isTextarea = type === "textarea";
-  return (
-    <div className="relative group">
-      {/* Glow Effect nền khi focus */}
-      <div className="absolute -inset-0.5 bg-linear-to-r from-[#D4AF37]/0 via-[#D4AF37]/20 to-[#D4AF37]/0 rounded-[22px] blur opacity-0 group-focus-within:opacity-100 transition duration-500" />
-
-      <div
-        className={`relative flex ${
-          isTextarea ? "items-start" : "items-center"
-        } bg-[#121212]/80 backdrop-blur-xl border border-white/5 rounded-[20px] p-1.5 transition-all duration-300 group-focus-within:border-[#D4AF37]/40`}
-      >
-        <div
-          className={`flex items-center justify-center w-11 h-11 rounded-xl bg-linear-to-br from-[#1C1C1C] to-black text-[#D4AF37] shadow-inner ${
-            isTextarea ? "mt-1" : ""
-          }`}
-        >
-          {icon}
-        </div>
-        {isTextarea ? (
-          <textarea
-            name={name}
-            placeholder={placeholder}
-            rows={2}
-            className="bg-transparent w-full p-3 text-sm text-white placeholder-white/20 focus:outline-none resize-none"
-            value={value}
-            onChange={onChange}
-          />
-        ) : (
-          <input
-            type={type}
-            name={name}
-            placeholder={placeholder}
-            className="bg-transparent w-full p-3 text-sm text-white placeholder-white/20 focus:outline-none"
-            value={value}
-            onChange={onChange}
-          />
-        )}
-      </div>
-    </div>
-  );
-};
+import { FormInput } from "@/components/formInput";
 
 const NightNailLuxury = ({ isOpen, onClose }: any) => {
   const [selectedService, setSelectedService] = useState(SERVICES_DATA[0]?.id);
@@ -86,10 +36,9 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
       isOpen={isOpen}
       onClose={onClose}
       width="max-w-[560px]"
-      className="!bg-[#0A0A0A] !border-white/10 !p-0 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+      className="[#0A0A0A]! border-white/10! p-0! overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)]"
     >
       <div className="h-[88vh] flex flex-col relative bg-radial-at-t from-[#1A1A1A] to-[#0A0A0A]">
-        {/* Header - Glassmorphism Sticky */}
         <header className="sticky top-0 z-50 px-8 py-6 flex justify-between items-center border-b border-white/5 bg-black/60 backdrop-blur-xl">
           <motion.button
             whileHover={{ scale: 1.1, rotate: 90 }}
@@ -204,7 +153,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
               <h3 className="font-serif italic text-lg">Thời gian hẹn</h3>
             </div>
 
-            <div className="bg-white/5 rounded-[24px] p-2">
+            <div className="bg-white/5 rounded-3xl p-2">
               {/* <DateComponent
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
