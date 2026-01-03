@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components";
 import { motion } from "framer-motion";
 import { Car, Heart, Sparkles } from "lucide-react";
 import Link from "next/link";
@@ -9,7 +10,6 @@ const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d391
 export const LocationSection = () => {
   return (
     <section id="location" className="relative w-full py-20  overflow-hidden">
-      {/* Trang trí "Dễ thương": Các đốm sáng tròn mềm mại */}
       <div className="absolute top-10 left-10 w-32 h-32 bg-[#D4AF37]/10 blur-3xl rounded-full animate-pulse" />
       <div className="absolute bottom-10 right-10 w-48 h-48 bg-[#D4AF37]/5 blur-3xl rounded-full animate-bounce duration-[5s]" />
 
@@ -20,7 +20,6 @@ export const LocationSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          {/* Badge dễ thương */}
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#D4AF37]/10 border-2 border-[#D4AF37]/20 text-[#D4AF37] text-sm font-medium mb-4">
             <Heart size={14} fill="currentColor" className="animate-beat" />
             <span>Ghé thăm tiệm nhỏ của tụi mình</span>
@@ -34,7 +33,6 @@ export const LocationSection = () => {
 
         <div className="flex flex-col lg:flex-row items-center gap-10  p-6 md:p-10 rounded-[3rem] border border-white/5 backdrop-blur-xl">
           
-          {/* Map Container: Bo góc tròn cực lớn */}
           <motion.div 
             whileHover={{ scale: 1.02 }}
             className="w-full lg:w-1/2 aspect-square max-h-112 rounded-4xl overflow-hidden border-4 border-white/5 shadow-2xl relative group"
@@ -48,11 +46,9 @@ export const LocationSection = () => {
               loading="lazy"
               className="grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700"
             />
-            {/* Overlay trái tim nhỏ khi hover */}
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent pointer-events-none transition-all" />
+            <div className="absolute inset-0 pointer-events-none transition-all" />
           </motion.div>
 
-          {/* Info Side */}
           <div className="w-full lg:w-1/2 flex flex-col space-y-8">
             <div className="bg-[#D4AF37]/5 p-8 rounded-4xl border-l-4 border-[#D4AF37]">
               <p className="text-2xl md:text-3xl font-serif italic text-black leading-relaxed">
@@ -76,20 +72,12 @@ export const LocationSection = () => {
               </div>
             </div>
 
-            {/* Nút bấm siêu dễ thương */}
             <Link
               href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STUDIO_ADDRESS)}`}
               target="_blank"
-              className="group relative w-full overflow-hidden py-5 rounded-4xl bg-[#D4AF37] text-black font-bold uppercase tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_15px_30px_rgba(212,175,55,0.2)]"
+              className="group relative w-full overflow-hidden py-5 rounded-4xl font-bold uppercase tracking-widest flex items-center justify-center gap-3 transition-all"
             >
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                <Sparkles size={18} />
-              </motion.div>
-              Nhấn để xem đường đi ngay
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <Button label="Nhấn để xem đường đi ngay" />
             </Link>
           </div>
         </div>

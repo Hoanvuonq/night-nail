@@ -43,18 +43,15 @@ const floatingBubble: Variants = {
   },
 };
 
-// --- 2. COMPONENT ---
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
 
-  // Optimize Scroll Performance
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  // Parallax nhẹ nhàng hơn, dùng spring để khử rung
   const yParallax = useSpring(useTransform(scrollYProgress, [0, 1], [0, 100]), {
     stiffness: 50,
     damping: 20,
@@ -63,7 +60,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="bg-cream-luxury relative flex items-center justify-center overflow-hidden px-6 py-20 sm:px-10"
+      className="relative flex items-center justify-center overflow-hidden px-6 py-20 sm:px-10"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">
         <motion.div
@@ -75,7 +72,7 @@ export default function HeroSection() {
             ],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute -right-[10%] -top-[10%] h-125 w-125 rounded-full bg-amber-200/40 blur-[100px]"
+          className="absolute -right-[10%] -top-[10%] h-125 w-125 rounded-full blur-[100px]"
         />
         {/* Blob 2 */}
         <motion.div

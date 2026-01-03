@@ -6,11 +6,12 @@ import { Sparkles } from "lucide-react";
 interface ButtonProps {
   label?: string;
   className?: string;
+  disabled?: boolean;
   icon?: React.ReactNode; 
   onClick?: () => void;
 }
 
-export const Button = ({ label = "Đặt Lịch Ngay", className, icon, onClick }: ButtonProps) => {
+export const Button = ({ label = "Đặt Lịch Ngay", className, disabled, icon, onClick }: ButtonProps) => {
   return (
     <motion.button
       initial="initial"
@@ -23,6 +24,7 @@ export const Button = ({ label = "Đặt Lịch Ngay", className, icon, onClick 
         "hover:border-amber-300 shadow-sm hover:shadow-amber-500/20",
         className
       )}
+      disabled={disabled}
     >
       <motion.div
         variants={{

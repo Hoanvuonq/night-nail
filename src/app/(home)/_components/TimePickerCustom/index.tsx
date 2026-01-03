@@ -18,14 +18,12 @@ export const TimePickerCustom = ({ selectedTime, setSelectedTime }: any) => {
 
   return (
     <div className="space-y-4">
-      {/* Tiêu đề nhỏ xinh */}
       <div className="flex items-center gap-2 text-[#D4AF37] mb-2 px-1">
         <Clock size={16} className="animate-pulse" />
-        <span className="text-[12px] sour-gummy italic tracking-wider">Nàng muốn ghé tiệm lúc mấy giờ?</span>
+        <span className="text-[12px] playwrite-no-font italic tracking-wider">Nàng muốn ghé tiệm lúc mấy giờ?</span>
       </div>
 
       <div className="grid grid-cols-4 gap-3">
-        {/* Render danh sách giờ có sẵn */}
         {TIME_SLOTS.map((time) => {
           const isSelected = selectedTime === time && !isCustom;
           return (

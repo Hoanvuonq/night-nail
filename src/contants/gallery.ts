@@ -1,6 +1,7 @@
 export const GALLERY_DATA = [
-  { img: "/images/about/about_01.png", title: "Pearl Nebula", price: "450,000đ" },
-  { img: "/images/about/about_02.png", title: "Cyber Gold", price: "550,000đ" },
-  { img: "/images/about/about_03.png", title: "Aurora Dream", price: "390,000đ" },
-  { img: "/images/about/about_01.png", title: "Hologram Rose", price: "420,000đ" },
+  { img: "/booking/booking_service_01.jpg", title: "Sơn Gel/Thạch", price: "109,000đ" },
+  { img: "/booking/booking_service_02.jpg", title: "Design Mắt Mèo/Nhũ", price: "159,000đ" },
+  { img: "/booking/booking_service_03.jpg", title: "Sơn Gel/Thạch", price: "139,000đ" },
+  { img: "/booking/booking_service_04.jpg", title: "Design Cơ Bản", price: "159,000đ" },
+  { img: "/booking/booking_service_05.jpg", title: "Design Full Dặm Đầu Móng", price: "179,000đ" },
 ];

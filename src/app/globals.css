@@ -28,30 +28,19 @@
   }
 }
 
-.lemonada {
-  font-family: "Lemonada", cursive;
-}
-
-.sour-gummy {
-  font-family: "Sour Gummy", sans-serif;
-}
 
 .text-title {
   font-family: "Sriracha", cursive;
 }
 
-.font-outfit {
-  font-family: 'Outfit', sans-serif;
+.playwrite-no-font {
+  font-family: "Playwrite NO", cursive !important;
 }
 
-.manrope {
-  font-family: "Manrope", sans-serif;
+.pacifico-regular-font {
+  font-family: "Pacifico", cursive !important;
 }
 
-.geom {
-  font-family: "Geom", sans-serif;
-
-}
 
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
@@ -88,23 +77,6 @@
   align-items: center;
 }
 
-.nabla-font {
-  font-family: "Nabla", system-ui !important;
-  font-optical-sizing: auto;
-  
-}
-
- .playwrite-no-font {
-  font-family: "Playwrite NO", cursive !important;
-} 
-
-.pacifico-regular-font {
-  font-family: "Pacifico", cursive !important;
-}
-
-.cherry-bomb-one-regular {
-  font-family: "Cherry Bomb One", system-ui !important;
-}
 
 
 body {
@@ -209,10 +181,8 @@ body {
   }
 }
 
-/* Custom Scrollbar cho Luxury UI */
 .luxury-scrollbar::-webkit-scrollbar {
   width: 4px;
-  /* Rất mảnh */
 }
 
 .luxury-scrollbar::-webkit-scrollbar-track {
@@ -224,7 +194,6 @@ body {
   border-radius: 20px;
 }
 
-/* Ẩn thanh cuộn cho các phần ngang (Dịch vụ nổi bật) */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -234,10 +203,8 @@ body {
   scrollbar-width: none;
 }
 
-/* Tùy chỉnh màu Autofill cho toàn bộ Website */
 @layer base {
 
-  /* Nhắm vào tất cả input và textarea khi trình duyệt tự động điền */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -245,16 +212,9 @@ body {
   textarea:-webkit-autofill,
   textarea:-webkit-autofill:hover,
   textarea:-webkit-autofill:focus {
-    /* Ép màu nền đen của Studio bằng Inner Shadow */
     -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
-
-    /* Ép màu chữ trắng */
     -webkit-text-fill-color: black !important;
-
-    /* Làm mượt quá trình chuyển đổi */
     transition: background-color 5000s ease-in-out 0s;
-
-    /* Bo góc để khớp với giao diện Luxury */
     border-radius: 20px;
   }
 
@@ -263,7 +223,6 @@ body {
   }
 }
 
-/* Custom Scrollbar mảnh cho đẹp chuẩn Web3 (tặng thêm) */
 .luxury-scrollbar::-webkit-scrollbar {
   width: 4px;
 }

@@ -69,7 +69,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed top-0 left-0 bottom-0 z-[100] w-[85%] max-w-[400px] bg-[#FDFCF9] flex flex-col px-6 py-10 shadow-2xl overflow-y-auto"
+            className="fixed top-0 left-0 bottom-0 z-[100] w-[85%] max-w-[400px] flex flex-col px-6 py-10 shadow-2xl overflow-y-auto"
           >
             {/* Header */}
             <div className="flex justify-between items-center mb-12">

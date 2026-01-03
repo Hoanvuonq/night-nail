@@ -52,7 +52,7 @@ export const Header = () => {
           ))}
         </nav>
 
-        {/* <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <div className="hidden md:block">
             <Button label="Booking Now" />
           </div>
@@ -63,7 +63,7 @@ export const Header = () => {
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-        </div> */}
+        </div>
       </motion.div>
 
       <MenuComponent isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
