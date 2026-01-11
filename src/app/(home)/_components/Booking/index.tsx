@@ -66,7 +66,6 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
           </motion.button>
         </header>
 
-        {/* Body - Smooth Scroll Area */}
         <div className="flex-1 overflow-y-auto luxury-scrollbar px-8 pt-8 pb-48 space-y-12 no-scrollbar">
           {/* Hero Branding */}
           <section className="text-center space-y-4">
@@ -80,7 +79,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
                 The Art of Beauty
               </span>
             </motion.div>
-            <h2 className="text-4xl font-serif text-white leading-tight">
+            <h2 className="text-4xl font-serif text-white leading-tight ">
               Nghệ thuật của <br />
               <span className="italic font-light bg-linear-to-r from-[#D4AF37] via-[#FFF5D1] to-[#D4AF37] bg-clip-text text-transparent">
                 riêng bạn
@@ -88,7 +87,6 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
             </h2>
           </section>
 
-          {/* Service Selector - Bento Style Scroll */}
           <section className="space-y-5">
             <div className="flex items-center justify-between">
               <h3 className="text-[#D4AF37] font-serif italic text-lg">
@@ -107,7 +105,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
                     key={item.id}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedService(item.id)}
-                    className={`relative min-w-[240px] h-[320px] rounded-[32px] overflow-hidden cursor-pointer transition-all duration-500 border-2 snap-start ${
+                    className={`relative min-w-60 h-80 rounded-4xl overflow-hidden cursor-pointer transition-all duration-500 border-2 snap-start ${
                       isActive
                         ? "border-[#D4AF37] shadow-[0_20px_40px_rgba(212,175,55,0.15)]"
                         : "border-white/5 opacity-40 hover:opacity-100"
@@ -146,7 +144,6 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
             </div>
           </section>
 
-          {/* Time Picker - Modern Grid */}
           <section className="space-y-6">
             <div className="flex items-center gap-3 text-[#D4AF37]">
               <Calendar size={18} />
@@ -166,7 +163,6 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
             />
           </section>
 
-          {/* Contact Form */}
           <section className="space-y-6">
             <h3 className="text-[#D4AF37] font-serif italic text-lg">
               Thông tin cá nhân
@@ -199,7 +195,6 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
           </section>
         </div>
 
-        {/* Floating Footer - Web 3 Gradient Action */}
         <footer className="absolute bottom-0 left-0 right-0 p-8 pt-12 bg-linear-to-t from-black via-black/90 to-transparent backdrop-blur-md z-40 border-t border-white/5">
           <div className="flex justify-between items-center mb-6 px-2">
             <div className="space-y-1">
@@ -223,11 +218,9 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
           <motion.button
             whileHover={{ scale: 1.02, filter: "brightness(1.1)" }}
             whileTap={{ scale: 0.98 }}
-            className="group relative w-full h-[70px] bg-linear-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38F24] rounded-[24px] overflow-hidden flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(212,175,55,0.2)]"
+            className="group relative w-full h-17.5 bg-linear-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38F24] rounded-4xl overflow-hidden flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(212,175,55,0.2)]"
           >
-            {/* Tia sáng quét qua khi hover */}
-            <div className="absolute inset-0 w-1/2 h-full bg-white/20 -skew-x-[45deg] -translate-x-[200%] group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
-
+            <div className="absolute inset-0 w-1/2 h-full bg-white/20 -skew-x-45 -translate-x-[200%] group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
             <span className="text-black font-black uppercase tracking-[0.2em] text-sm">
               Xác nhận lịch hẹn
             </span>

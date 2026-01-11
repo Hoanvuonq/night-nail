@@ -120,7 +120,7 @@ export const ServiceStep = ({
                 </div>
 
                 <div className="flex flex-col gap-2 p-5 pt-2">
-                  <h4 className={`font-serif text-lg leading-tight transition-colors ${
+                  <h4 className={`font-medium text-lg leading-tight transition-colors ${
                     isActive ? "text-amber-900" : "text-zinc-800"
                   }`}>
                     {item.title}

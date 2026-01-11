@@ -21,7 +21,7 @@ type ServiceType = {
 
 const NightNailBookingRouter = () => {
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyWuhLPGZAlE6BKwBPJwOJ6JCDyufYQU6PqzTRzDA8vWb82Ho5PZlO0R_NeEyDy4rzA9g/exec";
+    "https://script.google.com/macros/s/AKfycbyJvM9FG7mMbHrVLzYhGruKaFCzoq4RhSD2oQvmxgwkx8xErn9kXCakFCVg4BsUCNjUeA/exec";
 
   const [step, setStep] = useState(1);
   const [isConfirmed, setIsConfirmed] = useState(false);

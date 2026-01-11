@@ -31,7 +31,7 @@ export const Web3LuxuryCarousel = () => {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-7xl md:text-9xl font-black playwrite-no-font   leading-[1.2] tracking-tighter text-zinc-900"
+              className="text-7xl md:text-9xl font-black playwrite-no-font leading-[1.2] tracking-tighter text-zinc-900"
             >
               Nghệ thuật <br />
               <span className="relative inline-block text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-amber-600 to-amber-500 drop-shadow-sm">

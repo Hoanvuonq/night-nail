@@ -2,7 +2,7 @@
 import { cn } from "@/utils/cn";
 import HeroSection from "../_components/HeroSection";
 import { LocationSection } from "../_components/LocationSection";
-import Service from "../_components/Service";
+import { Service } from "../_components/Service";
 import { Web3LuxuryCarousel } from "../_components/ProcessSection";
 import { Testimonials } from "../_components/Testimonials";
 import { BentoLookbook } from "@/components/bentoLookbook";

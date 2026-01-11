@@ -45,7 +45,6 @@ export const TimeStep = ({
       exit={{ opacity: 0, y: -10 }}
       className="flex flex-1 flex-col p-5 md:px-10 space-y-4" // Giảm space-y xuống 4
     >
-      {/* Header Section */}
       <div className="flex flex-col gap-0.5">
         <div className="flex items-center gap-2 text-amber-600">
           <Sparkles size={14} className="animate-pulse" />
