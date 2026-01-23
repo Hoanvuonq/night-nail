@@ -75,7 +75,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
             <div className="flex justify-between items-center mb-12">
               <div className="flex items-center gap-2">
                 <Sparkles className="text-amber-500" size={18} />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500">
                   Night Nail
                 </span>
               </div>
@@ -105,7 +105,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
                       <span className="text-amber-500 text-[9px] font-bold uppercase tracking-[0.2em] mb-1">
                         0{index + 1}
                       </span>
-                      <h2 className="text-3xl font-black text-zinc-800 tracking-tight group-hover:text-amber-600 transition-colors">
+                      <h2 className="text-3xl font-bold text-zinc-800 tracking-tight group-hover:text-amber-600 transition-colors">
                         {item.name}
                       </h2>
                     </div>
@@ -128,14 +128,14 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
             >
               <div className="grid grid-cols-1 gap-6">
                 <div className="space-y-1">
-                  <p className="text-[8px] uppercase font-black text-amber-600 tracking-widest">Địa chỉ</p>
-                  <p className="text-[11px] text-zinc-500 leading-tight">
+                  <p className="text-[8px] uppercase font-bold text-amber-600 tracking-widest">Địa chỉ</p>
+                  <p className="text-[13px] text-zinc-500 leading-tight">
                     302/32 Phan Huy Ích, Gò Vấp, TP.HCM
                   </p>
                 </div>
                 
                 <div className="space-y-3">
-                  <p className="text-[8px] uppercase font-black text-amber-600 tracking-widest">Mạng xã hội</p>
+                  <p className="text-[8px] uppercase font-bold text-amber-600 tracking-widest">Mạng xã hội</p>
                   <div className="flex gap-4">
                     <Link href="#" className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-all">
                       <Instagram size={16} />

@@ -5,9 +5,9 @@ import { SERVICES_DATA, TIME_SLOTS } from "@/contants/booking";
 import { AnimatePresence } from "framer-motion";
 import _ from "lodash";
 import { CheckCircle2, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import { useMemo, useState, useEffect } from "react";
-import { BookingTicket } from "../(home)/_components/BookingTicket";
-import { ServiceStep } from "./_components/BookingSelectService";
+import { useMemo, useState, useEffect, useCallback } from "react";
+import { BookingTicket } from "./_components/BookingTicket";
+import { BookingSelectService } from "./_components/BookingSelectService";
 import { TimeStep } from "./_components/BookingSelectTime";
 import { BookingSummaryForm } from "./_components/BookingSummaryForm";
 
@@ -21,7 +21,7 @@ type ServiceType = {
 
 const NightNailBookingRouter = () => {
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyJvM9FG7mMbHrVLzYhGruKaFCzoq4RhSD2oQvmxgwkx8xErn9kXCakFCVg4BsUCNjUeA/exec";
+    "https://script.google.com/macros/s/AKfycbwXtyoDLvbi2GJuEXdkS8REY7W6c2naMu6DvBD0bFWn3oJcIelnwiXdk97arXqCsT6hZQ/exec"; 
 
   const [step, setStep] = useState(1);
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -33,21 +33,32 @@ const NightNailBookingRouter = () => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [formData, setFormData] = useState({ name: "", phone: "", note: "" });
 
+  const fetchBookedSlots = useCallback(async () => {
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: "GET",
+        redirect: "follow",
+      });
+      if (!res.ok) throw new Error("Network response was not ok");
+      const data = await res.json();
+      setBookedSlots(data);
+    } catch (err) {
+      console.error("Không thể lấy lịch hẹn cũ", err);
+    }
+  }, [SCRIPT_URL]);
+
   useEffect(() => {
-    const fetchBookedSlots = async () => {
-      try {
-        const res = await fetch(SCRIPT_URL);
-        const data = await res.json();
-        setBookedSlots(data);
-      } catch (err) {
-        console.error("Không thể lấy lịch hẹn cũ", err);
-      }
-    };
     fetchBookedSlots();
     setSelectedDate(new Date().toISOString().split("T")[0]);
+    
     const firstServiceId = _.get(SERVICES_DATA as ServiceType[], "[0].id");
     if (firstServiceId) setSelectedService(firstServiceId);
-  }, [isConfirmed]);
+  }, [fetchBookedSlots]);
+
+  // Cập nhật lại lịch khi hoàn thành hoặc chuyển bước quan trọng
+  useEffect(() => {
+    if (isConfirmed) fetchBookedSlots();
+  }, [isConfirmed, fetchBookedSlots]);
 
   const currentService: ServiceType | undefined = useMemo(() => {
     return _.find(
@@ -72,8 +83,10 @@ const NightNailBookingRouter = () => {
     }
 
     const fullDateTime = `${selectedDate} lúc ${selectedTime}`;
+    
+    // Kiểm tra trùng ngay lập tức trước khi gửi
     if (bookedSlots.includes(fullDateTime)) {
-      alert("Nàng ơi, khung giờ này vừa có người đặt mất rồi!");
+      alert("Nàng ơi, khung giờ này vừa có người đặt mất rồi, nàng chọn giờ khác nhé!");
       return;
     }
 
@@ -88,15 +101,16 @@ const NightNailBookingRouter = () => {
     };
 
     try {
-      await fetch(SCRIPT_URL, {
+      // Dùng mode: 'cors' hoặc bỏ no-cors để có thể đọc response nếu App Script hỗ trợ
+      const response = await fetch(SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bookingData),
       });
 
+      // Nếu dùng no-cors, response.ok sẽ luôn false, ta dựa vào việc không nhảy vào catch
       setIsConfirmed(true);
     } catch (error) {
+      console.error("Error submitting:", error);
       alert("Gửi đơn thất bại, nàng thử lại nhé!");
     } finally {
       setIsSubmitting(false);
@@ -113,15 +127,15 @@ const NightNailBookingRouter = () => {
   }
 
   return (
-    <section className="flex w-full all-center h-screen items-center justify-center overflow-hidden">
+    <section className="flex w-full h-screen items-center justify-center overflow-hidden bg-zinc-50/50">
       <div className="relative flex h-full w-full max-w-[96%] md:max-w-xl flex-col bg-white shadow-lg sm:h-[min(850px,90dvh)] rounded-2xl sm:border border-zinc-100">
         <header className="relative z-10 shrink-0 border-b border-zinc-50 p-5 pb-4">
           <div className="flex items-center justify-between mb-1">
             <div className="w-10" />
-            <h2 className="text-center font-bold text-zinc-800 uppercase tracking-widest text-xs">
+            <h2 className="text-center font-bold text-zinc-800 uppercase tracking-widest text-md">
               Bước {step} / 3
             </h2>
-            <div className="text-[10px] font-bold bg-zinc-100 px-2 py-1 rounded-md text-zinc-400">
+            <div className="text-[14px] font-bold bg-zinc-100 px-2 py-1 rounded-md text-zinc-400">
               {Math.round((step / 3) * 100)}%
             </div>
           </div>
@@ -136,7 +150,7 @@ const NightNailBookingRouter = () => {
         <main className="relative flex-1 overflow-y-auto no-scrollbar outline-none">
           <AnimatePresence mode="wait">
             {step === 1 && (
-              <ServiceStep
+              <BookingSelectService
                 services={SERVICES_DATA}
                 selectedService={selectedService as number}
                 onSelectService={(id: number) => setSelectedService(id)}
@@ -150,7 +164,7 @@ const NightNailBookingRouter = () => {
                 onSelectTime={setSelectedTime}
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
-                bookedSlots={bookedSlots}
+                bookedSlots={bookedSlots} // Truyền dữ liệu để TimeStep ẩn giờ đã đặt
               />
             )}
 
@@ -171,18 +185,18 @@ const NightNailBookingRouter = () => {
           </AnimatePresence>
         </main>
 
-        <footer className="relative z-10 shrink-0 border-t rounded-2xl border-zinc-100 bg-white p-5 pb-safe-offset-4 mb-safe">
+        <footer className="relative z-10 shrink-0 border-t rounded-2xl border-zinc-100 bg-white p-5 pb-safe-offset-4">
           <div className="flex gap-3 h-13">
-           {step > 1 && (
+            {step > 1 && (
               <button
                 onClick={prevStep}
                 disabled={isSubmitting}
-                className="flex flex-1 items-center justify-center gap-2 rounded-2xl border border-zinc-200 text-xs font-bold text-zinc-500 active:scale-95 transition-all disabled:opacity-50"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-2xl border border-zinc-200 text-xs font-bold text-zinc-500 active:scale-95 transition-all disabled:opacity-50"
               >
                 <ChevronLeft size={16} /> QUAY LẠI
               </button>
             )}
-            <div className="flex-2">
+            <div className="flex-1" style={{ flex: 2 }}>
               <Button
                 label={
                   isSubmitting

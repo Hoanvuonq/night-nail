@@ -68,7 +68,7 @@ export const WhyChooseUs = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-[#D4AF37] text-white rounded-[2rem] font-bold shadow-lg shadow-amber-200/50 hover:bg-[#B8860B] transition-all flex items-center gap-2"
+              className="px-8 py-4 bg-[#D4AF37] text-white rounded-4xl font-bold shadow-lg shadow-amber-200/50 hover:bg-[#B8860B] transition-all flex items-center gap-2"
             >
               Tìm hiểu thêm <Heart size={18} fill="white" />
             </motion.button>

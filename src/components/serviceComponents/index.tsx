@@ -59,7 +59,7 @@ export const ServiceComponents = ({
 
         <div className="absolute -top-2 right-4 w-14 h-14 bg-linear-to-br from-[#FFD700] to-[#D4AF37] rounded-full z-20 flex flex-col items-center justify-center text-black shadow-lg">
           <span className="text-[10px] font-bold leading-none">Sweet</span>
-          <span className="text-xl font-black italic">0{index}</span>
+          <span className="text-xl font-bold italic">0{index}</span>
         </div>
       </div>
 
@@ -71,7 +71,7 @@ export const ServiceComponents = ({
             whileInView={{ opacity: 1 }}
           >
             <div className="h-0.5 w-8 bg-[#D4AF37]" />
-            <span className="text-[#D4AF37] text-[10px] tracking-[0.4em] uppercase font-black">Lovely Service</span>
+            <span className="text-[#D4AF37] text-[10px] tracking-[0.4em] uppercase font-bold">Lovely Service</span>
             <div className="h-0.5 w-8 bg-[#D4AF37]" />
           </motion.div>
           

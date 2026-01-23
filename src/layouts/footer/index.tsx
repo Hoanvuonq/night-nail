@@ -26,7 +26,7 @@ const FooterInfoItem = ({
       <Icon size={18} />
     </div>
     <div className="space-y-1 text-left">
-      <p className="text-[9px] text-zinc-400 uppercase tracking-[0.2em] font-black">
+      <p className="text-[9px] text-zinc-400 uppercase tracking-[0.2em] font-bold">
         {title}
       </p>
       <p
@@ -148,7 +148,7 @@ export const Footer = () => {
               >
                 Night Nail
               </motion.h1>
-              <p className="text-[11px] text-zinc-400 uppercase tracking-[0.5em] font-bold px-1">
+              <p className="text-[13px] text-zinc-400 uppercase tracking-[0.5em] font-bold px-1">
                 Beauty & Artistry
               </p>
             </div>
@@ -180,7 +180,7 @@ export const Footer = () => {
             </Link>
 
             <div className="space-y-5 text-right">
-              <p className="text-[10px] text-zinc-300 uppercase tracking-[0.4em] font-black">
+              <p className="text-[10px] text-zinc-300 uppercase tracking-[0.4em] font-bold">
                 Theo dõi em nhé
               </p>
               <div className="flex gap-4 justify-end">

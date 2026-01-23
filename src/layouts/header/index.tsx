@@ -58,7 +58,7 @@ export const Header = () => {
               href={item.href}
               className="group relative px-4 py-2"
             >
-              <span className="relative z-10 text-xs font-black uppercase tracking-[0.2em] text-amber-900/80 group-hover:text-amber-600 transition-colors">
+              <span className="relative z-10 text-xs font-bold uppercase tracking-[0.2em] text-amber-900/80 group-hover:text-amber-600 transition-colors">
                 {item.name}
               </span>
               <motion.div className="absolute inset-0 bg-amber-50 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />

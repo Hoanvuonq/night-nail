@@ -1,5 +1,4 @@
 export const SERVICES_DATA = [
-  // --- COMBO MÓNG THẬT ---
   {
     id: 1,
     title: "Combo Móng Thật: Sơn Gel/Thạch",
@@ -38,21 +37,26 @@ export const SERVICES_DATA = [
   },
   {
     id: 6,
-    title: "Combo Móng Úp: Design Theo Yêu Cầu",
+    title: "Design Theo Yêu Cầu",
     desc: "Nàng gửi mẫu yêu cầu cho kỹ thuật viên để được tư vấn và báo giá chính xác nhất dựa trên độ phức tạp.",
-    price: "Khách gửi mẫu",
+    price: "Freestyle",
     image: "/booking/booking_service_06.jpg",
   },
 ];
 
 export const TIME_SLOTS = [
   "07:00",
+  "08:00",
   "09:00",
+  "10:00",
   "11:00",
   "13:00",
+  "14:00",
   "15:00",
+  "16:00",
   "17:00",
   "19:00",
+  "20:00",
   "21:00",
   "23:00",
 ];

@@ -20,11 +20,11 @@ export const MarqueeBanner = () => {
             key={group}
             className="flex flex-nowrap items-center pacifico-regular-font"
           >
-            <span className="text-[120px] font-black  tracking-tighter text-white mx-10">
+            <span className="text-[120px] font-bold  tracking-tighter text-white mx-10">
               Night Nail • Night Nail • Night Nail • Night Nail • Night Nail •
               Night Nail • Night Nail • Night Nail •
             </span>
-            <span className="text-[120px] font-black  tracking-tighter text-white mx-10">
+            <span className="text-[120px] font-bold  tracking-tighter text-white mx-10">
               Night Nail • Night Nail • Night Nail • Night Nail • Night Nail •
               Night Nail • Night Nail • Night Nail •
             </span>

@@ -13,10 +13,10 @@ export const Service = () => {
           whileInView={{ opacity: 1, y: 0 }}
           className="mb-32 text-center lg:text-left"
         >
-          <span className="text-amber-500 text-xs font-black uppercase tracking-[0.4em] mb-4 block">
+          <span className="text-amber-500 text-xs font-bold uppercase tracking-[0.4em] mb-4 block">
             Our Expertise
           </span>
-          <h2 className="text-6xl md:text-8xl playwrite-no-font  font-black text-slate-300 tracking-tighter leading-none">
+          <h2 className="text-6xl md:text-8xl playwrite-no-font  font-bold text-slate-300 tracking-tighter leading-none">
             ARTISTRY <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-amber-500 to-amber-700">
               SERVICES

@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
-import { DateComponent } from "../../../booking/_components/DateTime";
+import { DateComponent } from "../../../booking/_components/SelectDateTime";
 import { TimePickerCustom } from "../TimePickerCustom";
 import { FormInput } from "@/components/formInput";
 
@@ -221,7 +221,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
             className="group relative w-full h-17.5 bg-linear-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38F24] rounded-4xl overflow-hidden flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(212,175,55,0.2)]"
           >
             <div className="absolute inset-0 w-1/2 h-full bg-white/20 -skew-x-45 -translate-x-[200%] group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
-            <span className="text-black font-black uppercase tracking-[0.2em] text-sm">
+            <span className="text-black font-bold uppercase tracking-[0.2em] text-sm">
               Xác nhận lịch hẹn
             </span>
             <ChevronRight size={20} className="text-black" />

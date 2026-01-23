@@ -22,32 +22,31 @@ export const DATA_SERVICE = [
 
 export const SERVICE_PRICING = {
   NAIL: [
-    { service: "Cắt Da", price: "19K" },
-    { service: "Sơn Gel", price: "69K" },
-    { service: "Úp Móng", price: "49K" },
-    { service: "Sơn Thạch", price: "59K" },
-    { service: "Mắt Mèo", price: "129K" },
-    { service: "Phá Gel", price: "29K" },
-    { service: "Tháo Móng Úp Gel", price: "39K" },
+    { service: "Cắt Da", price: "19K", image: "/images/service/pricing_menu01.jpg" },
+    { service: "Sơn Gel", price: "69K", image: "/images/service/pricing_menu02.jpg" },
+    { service: "Úp Móng", price: "49K", image: "/images/service/pricing_menu03.jpg" },
+    { service: "Sơn Thạch", price: "59K", image: "/images/service/pricing_menu04.jpg" },
+    { service: "Mắt Mèo", price: "129K", image: "/images/service/pricing_menu05.jpg" },
+    { service: "Phá Gel", price: "29K", image: "/images/service/pricing_menu06.jpg" },
+    { service: "Tháo Móng Úp Gel", price: "39K", image: "/images/service/pricing_menu07.jpg" },
   ],
   COMBO: [
-    { service: "Cắt Da - Sơn Gel - Cứng Móng", price: "79K" },
-    { service: "Cắt Da - Úp Móng - Sơn Gel", price: "109K" },
-    { service: "Cắt Da - Úp Móng - Mắt Mèo", price: "159K" },
-    { service: "Cắt Da - Úp Móng - French", price: "179K" },
+    { service: "Cắt Da - Sơn Gel - Cứng Móng", price: "79K", image: "/images/service/pricing_menu08.jpg" },
+    { service: "Cắt Da - Úp Móng - Sơn Gel", price: "109K", image: "/images/service/pricing_menu09.jpg" },
+    { service: "Cắt Da - Úp Móng - Mắt Mèo", price: "159K", image: "/images/service/pricing_menu10.jpg" },
+    { service: "Cắt Da - Úp Móng - French", price: "179K", image: "/images/service/pricing_menu11.jpg" },
   ],
   DESIGN: [
-    { service: "Dặm Ombre", price: "5K/N" },
-    { service: "Tráng Gương", price: "5K/N" },
-    { service: "French", price: "7K/N" },
-    { service: "Vẽ (Tùy Mẫu)", price: "5K - 25K/N" },
-    { service: "Loang", price: "5K/N" },
-    { service: "Nặn Gel Nổi", price: "15K - 25K/N" },
-    { service: "Sticker", price: "3K - 5K/N" },
-    { service: "Đá Charm", price: "5K - 25K/N" },
+    { service: "Dặm Ombre", price: "5K/N", image: "/images/service/pricing_menu12.jpg" },
+    { service: "Tráng Gương", price: "5K/N", image: "/images/service/pricing_menu13.jpg" },
+    { service: "French", price: "7K/N", image: "/images/service/pricing_menu14.jpg" },
+    { service: "Vẽ (Tùy Mẫu)", price: "5K - 25K/N", image: "/images/service/pricing_menu15.jpg" },
+    { service: "Loang", price: "5K/N", image: "/images/service/pricing_menu16.jpg" },
+    { service: "Nặn Gel Nổi", price: "15K - 25K/N", image: "/images/service/pricing_menu17.jpg" },
+    { service: "Sticker", price: "3K - 5K/N", image: "/images/service/pricing_menu18.jpg" },
+    { service: "Đá Charm", price: "5K - 25K/N", image: "/images/service/pricing_menu19.jpg" },
   ],
 };
-
 export interface IServiceProps {
   img?: string;
   title: string;

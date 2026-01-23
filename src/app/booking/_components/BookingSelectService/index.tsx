@@ -1,9 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { LayoutGrid, CheckCircle2, Info, Sparkles } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  LayoutGrid,
+  CheckCircle2,
+  Info,
+  Sparkles,
+  ReceiptText,
+} from "lucide-react";
 import Image from "next/image";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { PricingModal } from "../PricingModal";
 
 interface ServiceStepProps {
   services: any[];
@@ -11,17 +18,18 @@ interface ServiceStepProps {
   onSelectService: (id: number) => void;
 }
 
-export const ServiceStep = ({
+export const BookingSelectService = ({
   services,
   selectedService,
   onSelectService,
 }: ServiceStepProps) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<Map<number, HTMLDivElement>>(new Map());
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSelect = (id: number) => {
     onSelectService(id);
-    
+
     const element = itemsRef.current.get(id);
     if (element) {
       element.scrollIntoView({
@@ -60,16 +68,20 @@ export const ServiceStep = ({
           <h3 className="font-serif text-2xl text-zinc-900 italic">
             Chọn combo nàng yêu
           </h3>
-          <div className="p-2 bg-zinc-50 rounded-full text-zinc-400">
-            <LayoutGrid size={18} />
-          </div>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 border border-amber-200 rounded-2xl text-[10px] font-bold transition-all active:scale-95 hover:bg-amber-100"
+          >
+            <ReceiptText size={14} strokeWidth={2.5} />
+            XEM BẢNG GIÁ
+          </button>
         </div>
       </div>
 
       <div className="relative group -mx-6 px-6">
-        <div 
+        <div
           ref={scrollContainerRef}
-          className="flex flex-nowrap gap-5 overflow-x-auto no-scrollbar snap-x scroll-smooth px-1"
+          className="flex flex-nowrap gap-5 overflow-x-auto no-scrollbar snap-x scroll-smooth p-2"
         >
           {services.map((item) => {
             const isActive = selectedService === item.id;
@@ -89,7 +101,7 @@ export const ServiceStep = ({
                     : "border-zinc-100 bg-white/50 hover:border-amber-100 shadow-sm"
                 }`}
               >
-                <div className="relative p-2.5">
+                <div className="relative p-4">
                   <div className="relative aspect-16/11 w-full overflow-hidden rounded-4xl">
                     <Image
                       src={item.image}
@@ -120,13 +132,15 @@ export const ServiceStep = ({
                 </div>
 
                 <div className="flex flex-col gap-2 p-5 pt-2">
-                  <h4 className={`font-medium text-lg leading-tight transition-colors ${
-                    isActive ? "text-amber-900" : "text-zinc-800"
-                  }`}>
+                  <h4
+                    className={`sriracha-regular text-lg transition-colors ${
+                      isActive ? "text-amber-900" : "text-zinc-800"
+                    }`}
+                  >
                     {item.title}
                   </h4>
 
-                  <p className="text-[11px] text-zinc-500 line-clamp-2 leading-relaxed font-light">
+                  <p className="sriracha-regular text-[12px]  text-zinc-600 line-clamp-2 leading-relaxed font-light">
                     {item.desc}
                   </p>
 
@@ -135,12 +149,12 @@ export const ServiceStep = ({
                       <span className="text-[9px] text-zinc-400 uppercase font-bold tracking-widest">
                         Giá trọn gói
                       </span>
-                      <span className="font-black text-amber-600 text-xl tracking-tighter">
+                      <span className="font-bold text-amber-600 text-xl tracking-tighter">
                         {item.price}
                       </span>
                     </div>
                     <div
-                      className={`px-4 py-2 rounded-2xl text-[10px] font-bold transition-all duration-300 ${
+                      className={`px-4 py-2 rounded-2xl text-[12px] font-bold playwrite-no-font transition-all duration-300 ${
                         isActive
                           ? "bg-amber-500 text-white shadow-lg shadow-amber-200"
                           : "bg-zinc-100 text-zinc-400"
@@ -164,17 +178,33 @@ export const ServiceStep = ({
             <Info size={14} className="text-amber-500" />
           </div>
           <div className="space-y-1">
-            <p className="text-[11px] font-bold text-amber-900/80 uppercase tracking-tighter">
-              Lưu ý nhỏ dành cho nàng
-            </p>
-            <p className="text-[10px] italic text-zinc-500 leading-relaxed">
-              Giá trên chưa bao gồm phí tháo gel cũ, phá bột & các yêu cầu
-              design đính đá nâng cao.
+            <div className="flex justify-between items-center">
+              <p className="text-[13px] font-bold text-amber-900/80 uppercase tracking-tighter">
+                Lưu ý nhỏ dành cho nàng
+              </p>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="text-[10px] text-amber-600 font-bold underline"
+              >
+                Xem menu lẻ
+              </button>
+            </div>
+            <p className="text-[12px] italic text-zinc-500 leading-relaxed">
+              Combo đã được giảm giá. Nếu nàng muốn làm lẻ hoặc thêm design, vui
+              lòng xem bảng giá chi tiết.
             </p>
           </div>
         </div>
         <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-amber-200/20 rounded-full blur-2xl" />
       </div>
+      <AnimatePresence>
+        {isModalOpen && (
+          <PricingModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

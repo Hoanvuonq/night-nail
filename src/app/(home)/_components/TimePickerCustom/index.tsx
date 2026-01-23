@@ -35,7 +35,7 @@ export const TimePickerCustom = ({ selectedTime, setSelectedTime }: any) => {
                 setIsCustom(false);
                 setSelectedTime(time);
               }}
-              className={`py-3.5 rounded-2xl text-[11px] font-bold tracking-widest transition-all duration-300 border ${
+              className={`py-3.5 rounded-2xl text-[13px] font-bold tracking-widest transition-all duration-300 border ${
                 isSelected
                   ? "bg-[#D4AF37] text-black border-[#D4AF37] shadow-[0_8px_20px_rgba(212,175,55,0.3)]"
                   : "bg-white/5 text-white/30 border-white/5 hover:border-[#D4AF37]/30 hover:text-white"
@@ -76,7 +76,7 @@ export const TimePickerCustom = ({ selectedTime, setSelectedTime }: any) => {
               />
               <button 
                 onClick={() => setIsCustom(false)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-black text-[#D4AF37] uppercase"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-bold text-[#D4AF37] uppercase"
               >
                 Đóng
               </button>

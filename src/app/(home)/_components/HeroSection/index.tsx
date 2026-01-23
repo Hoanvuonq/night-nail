@@ -105,7 +105,7 @@ export default function HeroSection() {
             </div>
 
             <div className="relative mb-8 select-none">
-              <h1 className="text-6xl font-black leading-44 tracking-widest md:text-7xl lg:text-8xl xl:text-[9rem] pacifico-regular-font">
+              <h1 className="text-6xl font-bold leading-44 tracking-widest md:text-7xl lg:text-8xl xl:text-[9rem] pacifico-regular-font">
                 <span className="text-stroke-gold block text-transparent opacity-20">
                   Night
                 </span>
@@ -176,7 +176,7 @@ export default function HeroSection() {
               >
                 <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/40 bg-white/30 p-2 text-center shadow-xl backdrop-blur-md">
                   <div className="flex flex-col items-center">
-                    <span className="mb-1 text-[7px] font-black leading-none text-amber-700 uppercase">
+                    <span className="mb-1 text-[7px] font-bold leading-none text-amber-700 uppercase">
                       Artisan
                     </span>
                     <span className="text-[9px] font-bold leading-tight text-zinc-800">

@@ -69,7 +69,7 @@ export const MobileNav = () => {
                   className="mb-1"
                 />
                 <span 
-                  className="text-[8px] font-black tracking-[0.15em] uppercase"
+                  className="text-[8px] font-bold tracking-[0.15em] uppercase"
                   style={{ color: isActive ? GOLD_DARK : "#71717a" }}
                 >
                   {item.label}

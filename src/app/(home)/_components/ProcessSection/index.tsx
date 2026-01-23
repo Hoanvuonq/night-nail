@@ -23,7 +23,7 @@ export const Web3LuxuryCarousel = () => {
               className="flex items-center gap-4 text-amber-600 mb-6"
             >
               <Zap size={16} fill="currentColor" />
-              <span className="text-[16px] font-black uppercase tracking-[0.6em]">
+              <span className="text-[16px] font-bold uppercase tracking-[0.6em]">
                 Lookbook 2026
               </span>
             </motion.div>
@@ -31,7 +31,7 @@ export const Web3LuxuryCarousel = () => {
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-7xl md:text-9xl font-black playwrite-no-font leading-[1.2] tracking-tighter text-zinc-900"
+              className="text-7xl md:text-9xl font-bold playwrite-no-font leading-[1.2] tracking-tighter text-zinc-900"
             >
               Nghệ thuật <br />
               <span className="relative inline-block text-transparent bg-clip-text bg-linear-to-r from-amber-400 via-amber-600 to-amber-500 drop-shadow-sm">
@@ -86,7 +86,7 @@ export const Web3LuxuryCarousel = () => {
                   >
                     <Plus size={28} strokeWidth={1.5} />
                   </motion.div>
-                  <span className="text-amber-100 opacity-60 text-7xl font-black tracking-tighter">
+                  <span className="text-amber-100 opacity-60 text-7xl font-bold tracking-tighter">
                     0{index + 1}
                   </span>
                 </div>
@@ -98,14 +98,14 @@ export const Web3LuxuryCarousel = () => {
 
                   <div className="flex items-center justify-between pt-8 border-t border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-1000">
                     <div className="flex flex-col">
-                      <span className="text-[9px] text-white/70 uppercase tracking-[0.4em] mb-1 font-black">
+                      <span className="text-[9px] text-white/70 uppercase tracking-[0.4em] mb-1 font-bold">
                         Estimate Price
                       </span>
-                      <span className="text-amber-400 font-black text-2xl">
+                      <span className="text-amber-400 font-bold text-2xl">
                         {item.price}
                       </span>
                     </div>
-                    <button className="flex items-center gap-3 text-white text-[10px] font-black uppercase tracking-[0.2em] group/btn">
+                    <button className="flex items-center gap-3 text-white text-[10px] font-bold uppercase tracking-[0.2em] group/btn">
                       Khám phá
                       <div className="w-10 h-10 rounded-full border-2 border-white/40 flex items-center justify-center group-hover/btn:bg-amber-500 group-hover/btn:border-amber-500 transition-all">
                         <ArrowRight
@@ -130,7 +130,7 @@ export const Web3LuxuryCarousel = () => {
               <Sparkles size={48} strokeWidth={1} />
               <div className="absolute inset-0 rounded-full border-2 border-amber-200 animate-ping opacity-30" />
             </div>
-            <h4 className="text-zinc-900 font-black text-4xl mb-6 tracking-tighter">
+            <h4 className="text-zinc-900 font-bold text-4xl mb-6 tracking-tighter">
               Đặt lịch <br /> Toả sáng
             </h4>
             <p className="text-zinc-400 text-xs mb-12 tracking-widest uppercase font-bold">

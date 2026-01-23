@@ -13,14 +13,14 @@ export const QualityCommitment = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-zinc-100 text-[#B8860B] text-[10px] font-black uppercase tracking-[0.3em] shadow-sm"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-zinc-100 text-[#B8860B] text-[10px] font-bold uppercase tracking-[0.3em] shadow-sm"
         >
           <Gem size={12} /> Excellence Standard
         </motion.div>
         
         <h2 className="text-4xl md:text-5xl text-zinc-800  leading-tight">
           Cam kết{" "}
-          <span className="text-[#D4AF37] not-italic font-black uppercase tracking-tighter block md:inline">
+          <span className="text-[#D4AF37] not-italic font-bold uppercase tracking-tighter block md:inline">
             Chất lượng Vàng
           </span>
         </h2>
@@ -54,11 +54,11 @@ export const QualityCommitment = () => {
               </div>
             </div>
 
-            <h3 className="text-zinc-800 font-black mb-3 uppercase tracking-widest text-xs group-hover:text-[#B8860B] transition-colors">
+            <h3 className="text-zinc-800 font-bold mb-3 uppercase tracking-widest text-xs group-hover:text-[#B8860B] transition-colors">
               {item.title}
             </h3>
             
-            <p className="text-zinc-400 text-[11px] leading-relaxed font-medium">
+            <p className="text-zinc-400 text-[13px] leading-relaxed font-medium">
               {item.desc}
             </p>
 
