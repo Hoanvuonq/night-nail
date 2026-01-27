@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
-import { DateComponent } from "../../../booking/_components/SelectDateTime";
+import { SelectDateTime } from "../../../booking/_components/SelectDateTime";
 import { TimePickerCustom } from "../TimePickerCustom";
 import { FormInput } from "@/components/formInput";
 
