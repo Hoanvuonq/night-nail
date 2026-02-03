@@ -21,7 +21,7 @@ type ServiceType = {
 
 const NightNailBookingRouter = () => {
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbwXtyoDLvbi2GJuEXdkS8REY7W6c2naMu6DvBD0bFWn3oJcIelnwiXdk97arXqCsT6hZQ/exec"; 
+    "https://script.google.com/macros/s/AKfycbxjWpvNgrz_DMs6p--pX1hDNipdeR47XXH-taIg6oq_HURb2-ZzwykBEyRASx9lbYkxjQ/exec"; 
 
   const [step, setStep] = useState(1);
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -31,7 +31,7 @@ const NightNailBookingRouter = () => {
   const [selectedService, setSelectedService] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState("11:00");
   const [selectedDate, setSelectedDate] = useState<string>("");
-  const [formData, setFormData] = useState({ name: "", phone: "", note: "" });
+  const [formData, setFormData] = useState({ name: "", phone: "", note: "", social: "" });
 
   const fetchBookedSlots = useCallback(async () => {
     try {
@@ -55,7 +55,6 @@ const NightNailBookingRouter = () => {
     if (firstServiceId) setSelectedService(firstServiceId);
   }, [fetchBookedSlots]);
 
-  // Cập nhật lại lịch khi hoàn thành hoặc chuyển bước quan trọng
   useEffect(() => {
     if (isConfirmed) fetchBookedSlots();
   }, [isConfirmed, fetchBookedSlots]);
@@ -84,7 +83,6 @@ const NightNailBookingRouter = () => {
 
     const fullDateTime = `${selectedDate} lúc ${selectedTime}`;
     
-    // Kiểm tra trùng ngay lập tức trước khi gửi
     if (bookedSlots.includes(fullDateTime)) {
       alert("Nàng ơi, khung giờ này vừa có người đặt mất rồi, nàng chọn giờ khác nhé!");
       return;
@@ -98,16 +96,15 @@ const NightNailBookingRouter = () => {
       description: formData.note,
       service: currentService?.title,
       price: currentService?.price,
+      social: formData.social,
     };
 
     try {
-      // Dùng mode: 'cors' hoặc bỏ no-cors để có thể đọc response nếu App Script hỗ trợ
       const response = await fetch(SCRIPT_URL, {
         method: "POST",
         body: JSON.stringify(bookingData),
       });
 
-      // Nếu dùng no-cors, response.ok sẽ luôn false, ta dựa vào việc không nhảy vào catch
       setIsConfirmed(true);
     } catch (error) {
       console.error("Error submitting:", error);

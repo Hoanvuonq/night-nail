@@ -1,9 +1,5 @@
-"use client";
-import React from "react";
-import HomeScreens from "./(home)/_page";
+import HomeScreens from "./(home)/_page"; // Đây là component chứa logic Client
 
-const Page: React.FC = () => {
+export default function Page() {
   return <HomeScreens />;
-};
-
-export default Page;
+}

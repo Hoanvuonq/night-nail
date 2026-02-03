@@ -1,24 +1,22 @@
-"use client"
+import { Metadata } from "next";
 import { PropsWithChildren } from "react";
+import "./globals.css";
 
-const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
+export const metadata: Metadata = {
+  title: "Night Nails",
+  description:
+    "Night Nails is a nails salon website that provides a variety of services for the nails",
+  icons: {
+    icon: "/favicon/favicon.ico",
+  },
+};
+
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" data-theme="white">
-      <head>
-        <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
-        <title>Night Nails</title>
-        <meta
-          name="description"
-          content="Night Nails is a nails salon website that provides a variety of services for the nails"
-        />
-      </head>
-      <body className="relative bg-cream-luxury ">
-        <main className="relative w-full">
-          {children}
-        </main>
+    <html lang="en" data-theme="white" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <main className="relative w-full bg-cream-luxury">{children}</main>
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}
