@@ -1,8 +1,8 @@
 "use client";
-import { motion, AnimatePresence, Variants, BezierDefinition } from "framer-motion";
 import { navItems } from "@/contants/menu";
+import { AnimatePresence, BezierDefinition, motion, Variants } from "framer-motion";
+import { ArrowRight, Facebook, Instagram, Sparkles, X } from "lucide-react";
 import Link from "next/link";
-import { X, Sparkles, ArrowRight, Instagram, Facebook } from "lucide-react";
 
 interface MenuProps {
   isOpen: boolean;
@@ -13,7 +13,6 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
   const transitionEase: BezierDefinition = [0.42, 0, 0.58, 1];
   const itemEase: BezierDefinition = [0.16, 1, 0.3, 1];
 
-  // Variants cho container chính
   const menuVariants: Variants = {
     closed: {
       x: "-100%",
@@ -60,7 +59,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
             exit="closed"
             variants={overlayVariants}
             onClick={onClose}
-            className="fixed inset-0 z-[99] bg-black/20 backdrop-blur-sm"
+            className="fixed inset-0 z-99 bg-black/20 backdrop-blur-sm"
           />
 
           {/* Side Menu */}
@@ -69,7 +68,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed top-0 left-0 bottom-0 z-[100] w-[85%] max-w-[400px] flex flex-col px-6 py-10 shadow-2xl overflow-y-auto"
+            className="fixed top-0 left-0 bottom-0 z-100 w-[85%] max-w-[400px] flex flex-col px-6 py-10 shadow-2xl overflow-y-auto"
           >
             {/* Header */}
             <div className="flex justify-between items-center mb-12">
@@ -109,18 +108,17 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
                         {item.name}
                       </h2>
                     </div>
-                    <ArrowRight 
-                      className="text-amber-200 group-hover:text-amber-500 transition-transform group-hover:translate-x-2" 
-                      size={24} 
-                      strokeWidth={1.5} 
+                    <ArrowRight
+                      className="text-amber-200 group-hover:text-amber-500 transition-transform group-hover:translate-x-2"
+                      size={24}
+                      strokeWidth={1.5}
                     />
                   </Link>
                 </motion.div>
               ))}
             </nav>
 
-            {/* Footer */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -133,7 +131,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
                     302/32 Phan Huy Ích, Gò Vấp, TP.HCM
                   </p>
                 </div>
-                
+
                 <div className="space-y-3">
                   <p className="text-[8px] uppercase font-bold text-amber-600 tracking-widest">Mạng xã hội</p>
                   <div className="flex gap-4">

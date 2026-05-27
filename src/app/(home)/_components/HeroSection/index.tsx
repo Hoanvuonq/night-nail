@@ -1,16 +1,16 @@
 "use client";
 
-import Image from "next/image";
-import { useRef } from "react";
+import { Button, PinkPawIcon, SectionPage } from "@/components";
 import {
   motion,
   useScroll,
-  useTransform,
   useSpring,
+  useTransform,
   Variants,
 } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { Button } from "@/components";
+import Image from "next/image";
+import { useRef } from "react";
 
 
 const blobVariants: Variants = {
@@ -43,7 +43,7 @@ const floatingBubble: Variants = {
 };
 
 
-export default function HeroSection() {
+export const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -57,9 +57,10 @@ export default function HeroSection() {
   });
 
   return (
-    <section
+    <SectionPage
       ref={containerRef}
-      className="relative flex items-center justify-center overflow-hidden px-6 md:py-20 py-6 sm:px-10"
+      id="hero"
+      className="relative flex items-center justify-center overflow-hidden "
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">
         <motion.div
@@ -96,26 +97,20 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#f4c7cc] bg-white/60 px-5 py-2 shadow-sm backdrop-blur-sm">
-              <Sparkles size={14} className="animate-pulse text-[#e9b2b8]" />
-              <span className="text-[10px] text-title font-bold tracking-[0.3em] text-[#f8bfc5] uppercase">
+              <Sparkles size={14} className="animate-pulse text-[#ff7ba9]" />
+              <span className="text-[10px] text-title font-bold tracking-[0.3em] text-[#ff7ba9] uppercase">
                 Premium Nail Art Studio
               </span>
             </div>
 
-            <div className="relative mb-8 select-none flex flex-col">
-              <h1 className="flex flex-col relative z-10">
-                <span className="block text-[#ff7ba9] opacity-30 pinyon-script-regular text-8xl md:text-[10rem] lg:text-[13rem] tracking-normal font-normal leading-none -mb-6 md:-mb-12 z-0 ml-4 drop-shadow-sm">
+            <div className="relative mb-8 select-none flex flex-col items-center lg:items-start">
+              <h1 className="flex flex-col relative z-10 pinyon-script-regular">
+                <span className="block text-[#ff7ba9] opacity-30 text-[7rem] md:text-[10rem] lg:text-[13rem] font-normal leading-80 -mb-10 md:-mb-16 z-0 ml-0 md:ml-8 drop-shadow-sm">
                   Night
                 </span>
-                <span className="relative z-10 inline-block text-6xl md:text-7xl lg:text-8xl xl:text-[9rem] sriracha-regular  font-bold tracking-widest bg-linear-to-br from-[#e9b2b8] via-[#ff7ba9] to-[#ff4d79] bg-clip-text text-transparent drop-shadow-sm pb-4">
+                <span className="relative z-10 inline-block text-7xl md:text-[10rem] font-normal tracking-normal bg-linear-to-br from-[#ff7ba9] to-[#ff4d79] bg-clip-text text-transparent drop-shadow-sm pb-4 ml-12 md:ml-24">
                   Nail
-                  <motion.span
-                    variants={floatingBubble}
-                    animate="animate"
-                    className="absolute -top-4 -right-12 text-4xl lg:text-5xl"
-                  >
-                    ✨
-                  </motion.span>
+                  <PinkPawIcon />
                 </span>
               </h1>
             </div>
@@ -202,6 +197,6 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </SectionPage>
   );
 }

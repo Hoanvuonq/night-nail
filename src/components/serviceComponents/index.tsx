@@ -1,10 +1,12 @@
 "use client";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { Button } from "../button";
+import { PinkPawIcon } from "@/components";
 import { IServiceProps } from "@/contants/service";
-import { Star, Sparkles } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { motion } from "framer-motion";
+import { Sparkles, Star } from "lucide-react";
+import Image from "next/image";
+import { Button } from "../button";
+
 export const ServiceComponents = ({
   img,
   title,
@@ -75,13 +77,15 @@ export const ServiceComponents = ({
             <div className="h-0.5 w-8 bg-[#e9b2b8]" />
           </motion.div>
 
-          <h3 className="text-5xl md:text-7xl font-serif text-black leading-tight pinyon-script-regular ">
-            {title}
-            <span className="text-[#ff7ba9] inline-block animate-bounce ml-2">✨</span>
+          <h3 className="text-5xl md:text-5xl font-bold text-[#ff7ba9] leading-tight pacifico-regular-font ">
+            <span className="relative inline-block">
+              {title}
+              <PinkPawIcon size={28} iconClassName="w-8 h-8 md:w-10 md:h-10" className="-top-4 -right-10 md:-top-5 md:-right-12" />
+            </span>
           </h3>
         </div>
 
-        <p className="text-lg md:text-xl text-black/70 font-light leading-relaxed font-serif italic">
+        <p className="text-lg md:text-lg text-gray-600 font-medium italic leading-normal playpen-sans">
           "{description}"
         </p>
 

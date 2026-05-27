@@ -1,12 +1,12 @@
 "use client";
-import { Button } from "@/components";
+import { Button, PinkPawIcon, TitleSection } from "@/components";
 import { GALLERY_DATA } from "@/contants/gallery";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, Plus, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, ArrowLeft, Plus, Zap, PawPrint, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { useRef, useEffect } from "react";
 
-export const Web3LuxuryCarousel = () => {
+export const ProcessSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,40 +34,26 @@ export const Web3LuxuryCarousel = () => {
   };
 
   return (
-    <section className="md:py-16 py-10 overflow-hidden relative">
+    <section className="md:py-16 py-2 overflow-hidden relative">
       <div className="absolute inset-0 bg-linear-to-br from-[#f4c7cc]/30 via-[#fff5f4]/50 to-[#fce9eb]/30 pointer-events-none blur-3xl" />
 
       <div className="md:max-w-7xl max-w-full mx-auto">
-        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-10 px-6 lg:px-0">
+        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-10 px-6 lg:px-0">
           <div className="md:max-w-3xl max-w-full">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-4 text-[#ff7ba9] mb-6"
-            >
-              <Zap size={16} fill="currentColor" />
-              <span className="text-[16px] font-bold uppercase tracking-widest">
-                Lookbook 2026
-              </span>
-            </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-6xl md:text-8xl sriracha-regular font-bold text-[#f4c7cc] tracking-tighter leading-none"
-            >
-              Nghệ thuật <br />
-              <span className="text-transparent pr-2 bg-clip-text bg-linear-to-r from-[#e9b2b8] via-[#ff7ba9] to-[#ff4d79]">
-                Vô cực
-                <motion.span
-                  animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.2, 1] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute -right-16 top-0 text-5xl"
-                >
-                  ✨
-                </motion.span>
-              </span>
-            </motion.h2>
+            <TitleSection
+              tagIcon={<Zap size={16} fill="currentColor" />}
+              tagText="Lookbook 2026"
+              titleNormal="Nghệ thuật"
+              titleHighlight={
+                <>
+                  Vô cực
+                  <PinkPawIcon />
+                </>
+              }
+              titleNormalClassName="sriracha-regular text-[#f4c7cc]"
+              align="left"
+              className="mb-0 md:mb-0"
+            />
           </div>
 
           <div className="flex flex-col items-start md:items-end gap-8 mt-6 md:mt-0">

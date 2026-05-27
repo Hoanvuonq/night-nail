@@ -7,10 +7,9 @@ import { DATA_ABOUT, OWNER_NAME, STUDIO_NAME, LETTER_CONTENT } from "@/contants/
 
 const AboutUsScreen = () => {
   return (
-    <section className="w-full py-24 px-6 lg:px-12 bg-[#050505] overflow-hidden">
+    <section className="w-full px-6 lg:px-12 bg-[#050505] overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        
-        {/* HEADER: Tiêu đề lồng ghép hình vòm Gold */}
+
         <div className="relative flex flex-col md:flex-row items-center justify-between mb-32">
           <motion.h2
             initial={{ opacity: 0, x: -50 }}
@@ -21,22 +20,20 @@ const AboutUsScreen = () => {
           </motion.h2>
 
           <div className="relative mt-12 md:mt-0">
-            {/* Khối vòm Gold chuẩn Luxury */}
-            <motion.div 
+            <motion.div
               animate={{ scale: [1, 1.02, 1] }}
               transition={{ duration: 4, repeat: Infinity }}
               className="w-[200px] h-[300px] rounded-t-full bg-linear-to-b from-[#D4AF37] via-[#B38F24] to-transparent opacity-20 blur-sm absolute -inset-4"
             />
             <div className="w-[200px] h-[300px] rounded-t-full border-2 border-[#D4AF37]/30 relative z-0 flex items-end justify-center pb-10">
-               <div className="w-12 h-12 rounded-full bg-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.5)] animate-bounce" />
+              <div className="w-12 h-12 rounded-full bg-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.5)] animate-bounce" />
             </div>
           </div>
         </div>
 
-        {/* CONTENT: Chuyện của Night Nail (Dạng lá thư Glassmorphism) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-32 items-start">
           <div className="lg:col-span-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               className="p-8 md:p-12 rounded-[40px] bg-white/[0.03] border border-white/10 backdrop-blur-md relative"
@@ -44,16 +41,16 @@ const AboutUsScreen = () => {
               <h3 className="text-[#D4AF37] font-bold text-2xl tracking-[0.3em] uppercase mb-8">
                 Chuyện của Night Nail
               </h3>
-              
+
               <div className="space-y-6 text-lg md:text-xl text-white/80 font-light leading-relaxed font-serif italic">
                 <p className="text-2xl text-[#D4AF37] font-serif">"Xin chào!"</p>
                 <p>{LETTER_CONTENT.shortIntro}</p>
                 <p>{LETTER_CONTENT.mission}</p>
                 <p>{LETTER_CONTENT.callToAction}</p>
                 <div className="pt-8 flex flex-col items-end">
-                   <p className="text-white opacity-60 italic mb-2 tracking-widest uppercase text-xs">{LETTER_CONTENT.closing}</p>
-                   <p className="text-3xl font-serif text-[#D4AF37]">{OWNER_NAME}</p>
-                   <p className="text-xs uppercase tracking-[0.2em] text-white/40 mt-1">Chủ sáng lập {STUDIO_NAME}</p>
+                  <p className="text-white opacity-60 italic mb-2 tracking-widest uppercase text-xs">{LETTER_CONTENT.closing}</p>
+                  <p className="text-3xl font-serif text-[#D4AF37]">{OWNER_NAME}</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-white/40 mt-1">Chủ sáng lập {STUDIO_NAME}</p>
                 </div>
               </div>
 
@@ -63,11 +60,11 @@ const AboutUsScreen = () => {
               </div>
             </motion.div>
           </div>
-          
+
           <div className="lg:col-span-4 hidden lg:block">
             {/* Có thể thêm một tấm ảnh chân dung owner hoặc ảnh studio mờ ở đây */}
             <div className="h-full w-full rounded-[40px] border border-white/5 bg-linear-to-br from-white/5 to-transparent flex items-center justify-center italic text-white/20 text-center p-10">
-               "Nghệ thuật không nằm ở màu sơn, mà nằm ở tâm hồn người thợ."
+              "Nghệ thuật không nằm ở màu sơn, mà nằm ở tâm hồn người thợ."
             </div>
           </div>
         </div>

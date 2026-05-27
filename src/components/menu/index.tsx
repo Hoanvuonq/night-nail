@@ -4,8 +4,8 @@ import { navItems } from "@/contants/menu";
 import { cn } from "@/utils/cn";
 import { X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Button } from "../button";
 
 interface IMenu {

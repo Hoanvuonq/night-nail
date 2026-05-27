@@ -1,115 +1,156 @@
 "use client";
-import { motion } from "framer-motion";
-import { Heart, Stars, Coffee, ShieldCheck, Sparkles } from "lucide-react";
+import { TitleSection } from "@/components";
 import { cn } from "@/utils/cn";
+import { motion } from "framer-motion";
+import { Sparkles, Heart, Palette, HandHeart, MessageCircleHeart, Wand2 } from "lucide-react";
 
 export const WhyChooseUs = () => {
   const reasons = [
     {
-      icon: <ShieldCheck className="w-6 h-6" />,
-      title: "An Tâm Tuyệt Đối",
-      desc: "Quy trình khử khuẩn chuẩn y khoa, dụng cụ riêng biệt cho mỗi nàng thơ.",
-      color: "bg-[#fce9eb] text-[#ff7ba9]",
-      badge: "Best-Seller"
+      id: "01",
+      icon: <MessageCircleHeart className="w-14 h-14" strokeWidth={1} />,
+      title: "Tư vấn tận tâm",
+      desc: "Lắng nghe sở thích, đưa ra gợi ý phù hợp với phong cách của bạn.",
+      color: {
+        badgeBg: "bg-[#a855f7]",
+        titleText: "text-[#a855f7]",
+        borderColor: "border-[#f3e8ff] hover:border-[#a855f7]/30",
+        iconColor: "text-[#a855f7]",
+        iconPos: "bottom-6 left-6"
+      }
     },
     {
-      icon: <Stars className="w-6 h-6" />,
-      title: "Nghệ Thuật Chibi",
-      desc: "Vẽ hoạt hình, đính đá công chúa, mọi yêu cầu dễ thương đều được đáp ứng.",
-      color: "bg-[#fff5f4] text-[#ff4d79]",
-      badge: "Cute Art"
+      id: "02",
+      icon: <Palette className="w-14 h-14" strokeWidth={1} />,
+      title: "Nghệ thuật sáng tạo",
+      desc: "Mẫu mã đa dạng, luôn cập nhật xu hướng mới nhất.",
+      color: {
+        badgeBg: "bg-[#ff7ba9]",
+        titleText: "text-[#ff7ba9]",
+        borderColor: "border-[#fce9eb] hover:border-[#ff7ba9]/30",
+        iconColor: "text-[#ff7ba9]",
+        iconPos: "bottom-6 right-6"
+      }
     },
     {
-      icon: <Coffee className="w-6 h-6" />,
-      title: "Góc Nhỏ Chill",
-      desc: "Không gian thơm nến, có trà và bánh ngọt đợi nàng đến thư giãn.",
-      color: "bg-[#f4c7cc]/30 text-[#e9b2b8]",
-      badge: "Sweetie"
+      id: "03",
+      icon: <Wand2 className="w-14 h-14" strokeWidth={1} />,
+      title: "Bền đẹp tự nhiên",
+      desc: "Kỹ thuật chuẩn xác đem lại bộ móng bền đẹp, không lo hư tổn.",
+      color: {
+        badgeBg: "bg-[#fbbf24]",
+        titleText: "text-[#fbbf24]",
+        borderColor: "border-[#fef3c7] hover:border-[#fbbf24]/30",
+        iconColor: "text-[#fbbf24]",
+        iconPos: "bottom-6 left-6"
+      }
     },
     {
-      icon: <Heart className="w-6 h-6" />,
-      title: "Chăm Sóc Tận Tâm",
-      desc: "Lắng nghe sở thích, tư vấn form móng xinh xắn phù hợp với bàn tay nàng.",
-      color: "bg-[#fce9eb] text-[#ff7ba9]",
-      badge: "Princess"
+      id: "04",
+      icon: <HandHeart className="w-14 h-14" strokeWidth={1} />,
+      title: "Chăm sóc chu đáo",
+      desc: "Hướng dẫn chăm sóc móng tại nhà để luôn giữ được vẻ đẹp lâu dài.",
+      color: {
+        badgeBg: "bg-[#60a5fa]",
+        titleText: "text-[#60a5fa]",
+        borderColor: "border-[#dbeafe] hover:border-[#60a5fa]/30",
+        iconColor: "text-[#60a5fa]",
+        iconPos: "bottom-6 right-6"
+      }
     }
   ];
 
   return (
-    <section className="bg-[#fff5f4] relative overflow-hidden font-sans py-16">
+    <section className="bg-linear-to-br from-[#f3e8ff]/50 via-[#fff5f4]/80 to-[#fce9eb]/60 relative overflow-hidden font-sans py-16">
       <div className="absolute top-10 right-10 opacity-30 rotate-12 pointer-events-none">
-        <Sparkles size={120} className="text-[#f4c7cc] fill-[#fce9eb]" />
+        <Sparkles size={120} className="text-[#a855f7]" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10 px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-16 items-center">
 
           <div className="lg:w-1/2 space-y-6 text-left">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-[#fce9eb] shadow-sm"
-            >
-              <Sparkles size={16} className="text-[#ff7ba9]" />
-              <span className="text-xs font-bold text-[#ff7ba9] uppercase tracking-widest">Tuyệt vời nhất</span>
-            </motion.div>
-
-            <div className="space-y-2">
-              <h2 className="text-5xl md:text-7xl font-bold text-zinc-800 leading-tight tracking-tighter">
-                Thế Giới Móng Tay <br />
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-[#e9b2b8] via-[#ff7ba9] to-[#ff4d79] sriracha-regular pr-4">Cổ Tích</span>
-              </h2>
-            </div>
-
-            <p className="text-zinc-500 text-lg font-medium leading-relaxed max-w-md italic border-l-2 border-[#e9b2b8] pl-6">
-              "Nơi mỗi bộ móng là một câu chuyện cổ tích ngọt ngào dành riêng cho nàng."
-            </p>
+            <TitleSection
+              tagIcon={<Sparkles size={14} className="text-[#a855f7] fill-current" />}
+              tagText="TAY ĐẸP - TỰ TIN MỖI NGÀY"
+              titleNormal="Thế Giới Móng Tay"
+              titleHighlight={
+                <span className="relative text-transparent bg-clip-text bg-linear-to-r from-[#a855f7] to-[#ff7ba9]">
+                  Cổ Tích
+                  <span className="absolute -top-1 -right-8 flex text-[#a855f7] opacity-80">
+                    <Sparkles size={18} className="animate-pulse" />
+                  </span>
+                </span>
+              }
+              description="Không chỉ là làm nail, chúng mình mang đến cho bạn một trải nghiệm thư giãn, xinh đẹp và đầy cảm hứng."
+              align="left"
+              className="mb-8 md:mb-10"
+              titleNormalClassName="text-zinc-800"
+            />
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 mt-6 bg-linear-to-r from-[#ff7ba9] to-[#ff4d79] text-white rounded-4xl font-bold shadow-[0_10px_30px_-10px_rgba(255,123,169,0.5)] hover:shadow-[0_15px_40px_-10px_rgba(255,123,169,0.6)] transition-all flex items-center gap-2"
+              className="px-8 py-4 bg-linear-to-r from-[#a855f7] to-[#d946ef] text-white rounded-full font-bold shadow-[0_10px_30px_-10px_rgba(168,85,247,0.5)] hover:shadow-[0_15px_40px_-10px_rgba(168,85,247,0.6)] transition-all flex items-center gap-2"
             >
-              Khám phá ngay <Heart size={18} fill="currentColor" />
+              Khám phá ngay &rarr;
             </motion.button>
+
+            <div className="flex items-center gap-4 mt-12">
+              <div className="flex -space-x-3">
+                <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" src="https://i.pravatar.cc/100?img=1" alt="Avatar" />
+                <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" src="https://i.pravatar.cc/100?img=2" alt="Avatar" />
+                <img className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" src="https://i.pravatar.cc/100?img=3" alt="Avatar" />
+              </div>
+              <div className="text-xs text-zinc-500 font-medium">
+                <strong className="text-zinc-800 text-sm block">10.000+ khách hàng</strong>
+                tin tưởng & yêu thích
+              </div>
+            </div>
           </div>
 
-          {/* Cột phải: Grid thẻ bo tròn đồng bộ Gold */}
-          <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-8 relative">
+          <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6 relative p-2 md:p-4">
+            <div className="hidden sm:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 bg-white/80 backdrop-blur-md rounded-full shadow-[0_20px_50px_rgba(168,85,247,0.15)] border-4 border-[#f3e8ff] flex-col items-center justify-center z-20">
+              <span className="text-[#a855f7] sriracha-regular text-[40px] -rotate-12 leading-none mt-2">Night</span>
+              <span className="text-[#a855f7] sriracha-regular text-[40px] -rotate-12 ml-10 leading-none">Nail</span>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 text-[#a855f7]">
+                <Heart size={80} fill="currentColor" />
+              </div>
+              <div className="absolute top-8 right-6 text-[#ff7ba9] animate-bounce">
+                <Heart size={16} />
+              </div>
+            </div>
+
             {reasons.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.1 }}
                 className={cn(
-                  "p-8 rounded-[3rem] bg-white border-4 border-[#fce9eb] shadow-[0_20px_60px_-15px_rgba(233,178,184,0.15)] group relative overflow-hidden h-70",
-                  i % 2 !== 0 ? "sm:mt-12" : ""
+                  "p-6 md:p-8 rounded-4xl bg-white border-2 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] group relative overflow-hidden h-64 md:h-72 transition-all duration-300",
+                  item.color.borderColor
                 )}
               >
-                {/* Badge góc trên */}
-                <span className="absolute top-4 right-6 text-[9px] font-bold px-3 py-1 bg-[#fff5f4] text-[#ff7ba9] border border-[#f4c7cc]/50 rounded-full">
-                  {item.badge}
-                </span>
-
-                <div className={cn(
-                  "w-14 h-14 rounded-3xl flex items-center justify-center mb-6 transition-all group-hover:scale-110",
-                  item.color
-                )}>
-                  {item.icon}
+                <div className="flex items-center gap-3 mb-4 relative z-10">
+                  <div className={cn(
+                    "w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-sm",
+                    item.color.badgeBg
+                  )}>
+                    {item.id}
+                  </div>
+                  <h4 className={cn("font-bold text-[16px] md:text-[17px]", item.color.titleText)}>
+                    {item.title}
+                  </h4>
                 </div>
 
-                <h4 className="font-bold text-zinc-800 text-lg mb-2">
-                  {item.title}
-                </h4>
-
-                <p className="text-zinc-500 text-sm leading-relaxed font-medium">
+                <p className="text-zinc-500 text-[13px] leading-relaxed font-medium relative z-10">
                   {item.desc}
                 </p>
 
-                {/* Decor nhỏ xíu góc dưới */}
-                <div className="absolute -bottom-2 -right-2 opacity-10 group-hover:opacity-30 transition-opacity">
-                  <Sparkles size={60} className="text-[#f4c7cc]" />
+                {/* Icon ở góc */}
+                <div className={cn("absolute transition-transform duration-500 group-hover:scale-110", item.color.iconPos, item.color.iconColor)}>
+                  {item.icon}
                 </div>
               </motion.div>
             ))}

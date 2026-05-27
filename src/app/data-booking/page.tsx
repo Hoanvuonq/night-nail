@@ -189,7 +189,7 @@ export default function DataBooking() {
                           key={index}
                           className="bg-white rounded-[2.5rem] p-6 border border-zinc-100 flex flex-col md:flex-row items-center gap-8 hover:shadow-xl transition-all duration-500 group relative"
                         >
-                          <div className="relative w-24 h-24 md:w-32 md:h-32 shrink-0 overflow-hidden rounded-[2rem] border-4 border-[#FBFAF8]">
+                          <div className="relative w-24 h-24 md:w-32 md:h-32 shrink-0 overflow-hidden rounded-4xl border-4 border-[#FBFAF8]">
                             <Image
                               src={
                                 serviceInfo?.image ||
