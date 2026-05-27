@@ -10,9 +10,8 @@ import {
   Variants,
 } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { Button } from "@/components"; // Đảm bảo đường dẫn đúng
+import { Button } from "@/components";
 
-// --- 1. DEFINITIONS (Move outside component to prevent re-creation) ---
 
 const blobVariants: Variants = {
   animate: {
@@ -23,9 +22,9 @@ const blobVariants: Variants = {
       "42% 58% 70% 30% / 45% 45% 55% 55%",
     ],
     transition: {
-      duration: 10, // Tăng time lên để mượt hơn, đỡ giật
+      duration: 10,
       repeat: Infinity,
-      ease: "linear", // Linear đỡ tốn tính toán hơn easeInOut cho loop dài
+      ease: "linear",
     },
   },
   hover: {
@@ -60,7 +59,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative flex items-center justify-center overflow-hidden px-6 py-20 sm:px-10"
+      className="relative flex items-center justify-center overflow-hidden px-6 md:py-20 py-6 sm:px-10"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">
         <motion.div
@@ -74,7 +73,6 @@ export default function HeroSection() {
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           className="absolute -right-[10%] -top-[10%] h-125 w-125 rounded-full blur-[100px]"
         />
-        {/* Blob 2 */}
         <motion.div
           animate={{
             transform: [
@@ -84,37 +82,37 @@ export default function HeroSection() {
             ],
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-[10%] -left-[5%] h-100 w-100 rounded-full bg-amber-100/50 blur-[80px]"
+          className="absolute -bottom-[10%] -left-[5%] h-100 w-100 rounded-full bg-[#f8d4d8]/50 blur-[80px]"
         />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04]" />
       </div>
 
       <div className="z-10 grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
-        
+
         <div className="order-2 text-center lg:order-1 lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/60 px-5 py-2 shadow-sm backdrop-blur-sm">
-              <Sparkles size={14} className="animate-pulse text-amber-500" />
-              <span className="text-[10px] font-bold tracking-[0.3em] text-amber-600 uppercase">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#f4c7cc] bg-white/60 px-5 py-2 shadow-sm backdrop-blur-sm">
+              <Sparkles size={14} className="animate-pulse text-[#e9b2b8]" />
+              <span className="text-[10px] text-title font-bold tracking-[0.3em] text-[#f8bfc5] uppercase">
                 Premium Nail Art Studio
               </span>
             </div>
 
-            <div className="relative mb-8 select-none">
-              <h1 className="text-6xl font-bold leading-44 tracking-widest md:text-7xl lg:text-8xl xl:text-[9rem] pacifico-regular-font">
-                <span className="text-stroke-gold block text-transparent opacity-20">
+            <div className="relative mb-8 select-none flex flex-col">
+              <h1 className="flex flex-col relative z-10">
+                <span className="block text-[#ff7ba9] opacity-30 pinyon-script-regular text-8xl md:text-[10rem] lg:text-[13rem] tracking-normal font-normal leading-none -mb-6 md:-mb-12 z-0 ml-4 drop-shadow-sm">
                   Night
                 </span>
-                <span className="relative inline-block bg-linear-to-br from-[#D4AF37] via-[#F3E5AB] to-[#C5A028] bg-clip-text text-transparent drop-shadow-sm">
+                <span className="relative z-10 inline-block text-6xl md:text-7xl lg:text-8xl xl:text-[9rem] sriracha-regular  font-bold tracking-widest bg-linear-to-br from-[#e9b2b8] via-[#ff7ba9] to-[#ff4d79] bg-clip-text text-transparent drop-shadow-sm pb-4">
                   Nail
                   <motion.span
                     variants={floatingBubble}
                     animate="animate"
-                    className=" -top-4 text-4xl mr-10 lg:text-5xl"
+                    className="absolute -top-4 -right-12 text-4xl lg:text-5xl"
                   >
                     ✨
                   </motion.span>
@@ -122,44 +120,42 @@ export default function HeroSection() {
               </h1>
             </div>
 
-            {/* Quote */}
-            <p className="mb-12 max-w-md border-l-4 border-amber-400 pl-6 text-lg font-medium italic leading-relaxed text-zinc-600 lg:mx-0 mx-auto">
+            <p className="mb-12 max-w-md border-l-4 border-[#e9b2b8] pl-6 text-lg font-medium italic leading-relaxed text-zinc-600 lg:mx-0 mx-auto">
               "Nơi mỗi bộ móng là một vệt màu của cảm xúc, tan chảy như làn nước
               lung linh."
             </p>
 
-            {/* CTA Button */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-block"
             >
-              <Button label="Đặt Lịch Ngay" className="shadow-amber-200/50 shadow-lg" />
+              <Button label="Đặt Lịch Ngay" className="shadow-[#f4c7cc]/50 shadow-lg" />
             </motion.div>
           </motion.div>
         </div>
 
-        {/* --- RIGHT IMAGE (Parallax & Morphing) --- */}
         <div className="order-1 flex w-full justify-center lg:order-2 lg:justify-end">
           <motion.div
             style={{ y: yParallax }}
             className="relative aspect-square w-full max-w-150 lg:scale-105"
           >
-            {/* Blob Background Behind Image */}
             <motion.div
+              initial={{ borderRadius: "42% 58% 70% 30% / 45% 45% 55% 55%" }}
               variants={blobVariants}
               animate="animate"
-              className="will-change-transform absolute inset-0 -z-10 scale-105 border border-amber-200/40 bg-white/20 blur-md"
+              className="will-change-transform absolute inset-0 -z-10 scale-105 border border-[#f4c7cc]/40 bg-white/20 blur-md"
             />
 
             <motion.div
+              initial={{ borderRadius: "42% 58% 70% 30% / 45% 45% 55% 55%" }}
               variants={blobVariants}
               animate="animate"
               whileHover="hover"
-              className="will-change-transform group relative h-full w-full cursor-pointer overflow-hidden border-[6px] border-white bg-white shadow-2xl"
+              className="will-change-transform group relative h-full w-full cursor-pointer overflow-hidden border-[6px] border-[#fff5f4] bg-[#fff5f4] shadow-2xl"
             >
               <Image
-                src="/images/news/product-01.png"
+                src="/images/news/product-01.jpg"
                 alt="Nail Art Design"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -167,43 +163,41 @@ export default function HeroSection() {
                 priority
               />
 
-              {/* Artisan Badge (Optimized position) */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6 }}
-                className="absolute bottom-8 left-8 z-20"
-              >
-                <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/40 bg-white/30 p-2 text-center shadow-xl backdrop-blur-md">
-                  <div className="flex flex-col items-center">
-                    <span className="mb-1 text-[7px] font-bold leading-none text-amber-700 uppercase">
-                      Artisan
-                    </span>
-                    <span className="text-[9px] font-bold leading-tight text-zinc-800">
-                      Night Nail
-                    </span>
-                  </div>
-                  {/* Rotating Border */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 10,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="absolute inset-0 rounded-full border border-dashed border-amber-500/40"
-                  />
-                </div>
-              </motion.div>
             </motion.div>
 
-            {/* Decor Bubble */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+              className="absolute bottom-4 left-4 md:bottom-[10%] md:left-[5%] z-30"
+            >
+              <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/40 bg-white/30 p-2 text-center shadow-xl backdrop-blur-md">
+                <div className="flex flex-col items-center">
+                  <span className="mb-1 text-[7px] font-bold leading-none text-[#e9b2b8] uppercase">
+                    Artisan
+                  </span>
+                  <span className="text-[9px] font-bold leading-tight text-zinc-800">
+                    Night Nail
+                  </span>
+                </div>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="absolute inset-0 rounded-full border border-dashed border-[#e9b2b8]/40"
+                />
+              </div>
+            </motion.div>
+
             <motion.div
               variants={floatingBubble}
               animate="animate"
-              className="absolute -right-4 -top-8 flex h-20 w-20 items-center justify-center rounded-full border border-amber-100 bg-white/40 shadow-inner backdrop-blur-sm"
+              className="absolute top-10 right-20 flex h-20 w-20 items-center justify-center rounded-full border border-[#f8d4d8] bg-white/40 shadow-inner backdrop-blur-sm"
             >
-              <div className="h-5 w-5 rounded-full bg-amber-200/60 blur-[2px]" />
+              <div className="h-5 w-5 rounded-full bg-[#f4c7cc]/60 blur-[2px]" />
             </motion.div>
           </motion.div>
         </div>

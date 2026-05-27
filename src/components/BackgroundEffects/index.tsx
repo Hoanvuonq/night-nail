@@ -23,7 +23,7 @@ const FloatingParticles = () => {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-[#D4AF37] animate-float shadow-[0_0_10px_#D4AF37]"
+          className="absolute rounded-full bg-[#e9b2b8] animate-float shadow-[0_0_10px_#e9b2b8]"
           style={{
             left: `${p.left}%`,
             width: `${p.size}px`,
@@ -41,13 +41,13 @@ const FloatingParticles = () => {
 
 export const LuxuryBackground = () => {
   return (
-    <div className="fixed inset-0 z-0 bg-[#fffdfd] overflow-hidden">
-      <div className="absolute -top-[10%] -left-[10%] w-[500px] h-[500px] bg-[#D4AF37]/20 rounded-full blur-[120px] animate-pulse-slow" />
+    <div className="fixed inset-0 z-0 bg-[#fff5f4] overflow-hidden">
+      <div className="absolute -top-[10%] -left-[10%] w-[500px] h-[500px] bg-[#e9b2b8]/20 rounded-full blur-[120px] animate-pulse-slow" />
       <div
-        className="absolute top-[40%] -right-[10%] w-[400px] h-[400px] bg-[#F59E0B]/10 rounded-full blur-[100px] animate-pulse-slow"
+        className="absolute top-[40%] -right-[10%] w-[400px] h-[400px] bg-[#f4c7cc]/20 rounded-full blur-[100px] animate-pulse-slow"
         style={{ animationDelay: "2s" }}
       />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full blur-[80px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#e9b2b8]/5 rounded-full blur-[80px]" />
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{

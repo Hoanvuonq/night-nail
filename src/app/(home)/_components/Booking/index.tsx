@@ -66,7 +66,6 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
         </header>
 
         <div className="flex-1 overflow-y-auto luxury-scrollbar px-8 pt-8 pb-48 space-y-12 no-scrollbar">
-          {/* Hero Branding */}
           <section className="text-center space-y-4">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -84,6 +83,7 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
                 riêng bạn
               </span>
             </h2>
+
           </section>
 
           <section className="space-y-5">
@@ -104,11 +104,10 @@ const NightNailLuxury = ({ isOpen, onClose }: any) => {
                     key={item.id}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedService(item.id)}
-                    className={`relative min-w-60 h-80 rounded-4xl overflow-hidden cursor-pointer transition-all duration-500 border-2 snap-start ${
-                      isActive
-                        ? "border-[#D4AF37] shadow-[0_20px_40px_rgba(212,175,55,0.15)]"
-                        : "border-white/5 opacity-40 hover:opacity-100"
-                    }`}
+                    className={`relative min-w-60 h-80 rounded-4xl overflow-hidden cursor-pointer transition-all duration-500 border-2 snap-start ${isActive
+                      ? "border-[#D4AF37] shadow-[0_20px_40px_rgba(212,175,55,0.15)]"
+                      : "border-white/5 opacity-40 hover:opacity-100"
+                      }`}
                   >
                     <Image
                       src={item.image}

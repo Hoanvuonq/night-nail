@@ -12,19 +12,18 @@ interface ITemplateProps {
 
 const Template = ({ children }: ITemplateProps) => {
   const pathname = usePathname();
-  
-  // FIX: Ẩn template cho cả trang booking và trang xem dịch vụ/bảng giá
+
   const isFullScreenPage = pathname?.includes("/booking") || pathname?.includes("/services");
 
   return (
-    <div className="flex flex-col min-h-screen relative w-full bg-[#FBFAF8] selection:bg-amber-100">
+    <div className="flex flex-col min-h-screen relative w-full bg-[#fff5f4] selection:bg-[#f8d4d8]">
       <LuxuryBackground />
-      
+
       {!isFullScreenPage && <Header />}
 
       <main className={`flex-1 w-full relative z-10 ${!isFullScreenPage ? "pt-20" : "pt-0"}`}>
-        {children} 
-        
+        {children}
+
         {!isFullScreenPage && <MobileNav />}
       </main>
 

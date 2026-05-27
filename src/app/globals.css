@@ -2,7 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Manrope:wght@200..800&family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Geom:ital,wght@0,300..900;1,300..900&family=Sriracha&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lemonada:wght@300..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Sriracha&display=swap');
+
+
+/* Font Mới  */
+
 
 @import "tailwindcss";
 
@@ -16,10 +20,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-detail-color: #A0522D;
-  --color-main-color: #ebaa12;
+  --color-detail-color: #e9b2b8;
+  --color-main-color: #e9b2b8;
   --color-code-foreground: #171717;
-  --background-image-background-gradient: linear-gradient(160deg, #e7aa51 0%, #ffe499 30%, #8d5a1b 60%, #e7aa51 80%, #ac7031 100%);
+  --background-image-background-gradient: linear-gradient(160deg, #fff5f4 0%, #fce9eb 30%, #e9b2b8 60%, #fff5f4 80%, #f8d4d8 100%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,12 +68,12 @@
   }
 
   .luxury-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(233, 178, 184, 0.2);
     border-radius: 10px;
   }
 
   .luxury-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #D4AF37;
+    background: #e9b2b8;
   }
 }
 
@@ -83,12 +87,17 @@
   font-family: "Sriracha", cursive;
 }
 
+.pinyon-script-regular {
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 
 body {
   background: radial-gradient(circle at top left,
-      #fcfbf9 0%,
-      #f5eee6 45%,
-      #ebe3d5 100%);
+      #ffffff 0%,
+      #fff5f4 45%,
+      #fce9eb 100%);
   color: var(--foreground);
   font-family: "Kode Mono", monospace;
 }
@@ -195,7 +204,7 @@ body {
 }
 
 .luxury-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #D4AF37, #B38F24);
+  background: linear-gradient(to bottom, #f8d4d8, #e9b2b8);
   border-radius: 20px;
 }
 
@@ -237,13 +246,13 @@ body {
 }
 
 .luxury-scrollbar::-webkit-scrollbar-thumb {
-  background: #D4AF37;
+  background: #e9b2b8;
   border-radius: 10px;
 }
 
 @layer utilities {
   .text-stroke-gold {
-    -webkit-text-stroke: 1px #D4AF37;
+    -webkit-text-stroke: 1px #e9b2b8;
   }
 }
 
@@ -251,7 +260,7 @@ body {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0) 70%);
+  background: radial-gradient(circle, rgba(233, 178, 184, 0.15) 0%, rgba(233, 178, 184, 0) 70%);
   filter: blur(80px);
   pointer-events: none;
 }

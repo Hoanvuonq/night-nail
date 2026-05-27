@@ -33,7 +33,7 @@ export const BentoLookbook = () => {
   ];
 
   return (
-    <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden bg-[#FBFAF8]">
+    <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden bg-[#fff5f4]">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 md:mb-24 gap-10">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -41,15 +41,15 @@ export const BentoLookbook = () => {
           viewport={{ once: true }}
           className="max-w-3xl"
         >
-          <div className="flex items-center gap-2 text-[#D4AF37] mb-6">
+          <div className="flex items-center gap-2 text-[#ff7ba9] mb-6">
             <Sparkles size={14} className="animate-pulse" />
             <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em]">
               Premium Lookbook
             </span>
           </div>
-          <h2 className="text-5xl md:text-8xl font-serif text-zinc-900 leading-[1.05]">
+          <h2 className="text-5xl md:text-7xl font-bold text-zinc-800 leading-[1.1] tracking-tighter">
             Nơi những ngón tay <br />
-            <span className="italic text-[#D4AF37] font-light">Kể Chuyện</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#e9b2b8] via-[#ff7ba9] to-[#ff4d79] sriracha-regular pr-4 italic">Kể Chuyện</span>
           </h2>
         </motion.div>
 
@@ -75,7 +75,7 @@ export const BentoLookbook = () => {
             viewport={{ once: true }}
             whileHover={{ y: -12 }}
             className={cn(
-              "group relative rounded-[45px] md:rounded-[60px] overflow-hidden bg-white shadow-[0_15px_45px_rgba(0,0,0,0.03)] cursor-pointer border border-white",
+              "group relative rounded-[45px] md:rounded-[60px] overflow-hidden bg-white shadow-[0_15px_45px_rgba(255,123,169,0.08)] cursor-pointer border-4 border-[#fff5f4] transform-gpu",
               item.className
             )}
           >
@@ -87,8 +87,8 @@ export const BentoLookbook = () => {
                 fill
                 className="object-cover transition-transform duration-[2.5s] ease-out group-hover:scale-110"
               />
-              {/* Gradient Overlay mờ nhẹ màu nâu gold */}
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent opacity-40 group-hover:opacity-80 transition-opacity duration-500" />
+              {/* liear Overlay mờ nhẹ màu nâu gold */}
+              <div className="absolute inset-0 bg-liear-to-t from-zinc-900/60 via-transparent to-transparent opacity-40 group-hover:opacity-80 transition-opacity duration-500" />
             </div>
 
             {/* Content Overlay - Text trắng mảnh sang trọng */}
@@ -98,10 +98,10 @@ export const BentoLookbook = () => {
                   {item.tag}
                 </span>
                 <div className="flex justify-between items-end gap-4">
-                  <h3 className="text-white text-2xl md:text-3xl font-serif italic leading-none">
+                  <h3 className="text-white text-2xl md:text-3xl font-semibold tracking-wide leading-none">
                     {item.title}
                   </h3>
-                  <div className="shrink-0 w-12 h-12 rounded-full bg-white flex items-center justify-center text-zinc-900 shadow-xl group-hover:bg-[#D4AF37] group-hover:text-white transition-all duration-500">
+                  <div className="shrink-0 w-12 h-12 rounded-full bg-white flex items-center justify-center text-zinc-900 shadow-xl group-hover:bg-linear-to-r group-hover:from-[#ff7ba9] group-hover:to-[#ff4d79] group-hover:text-white transition-all duration-500">
                     <ArrowUpRight size={22} strokeWidth={1.5} />
                   </div>
                 </div>

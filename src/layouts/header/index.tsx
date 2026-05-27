@@ -1,16 +1,18 @@
 "use client";
 import { Button } from "@/components/button";
+import { MenuComponent } from "@/components/menu";
 import { navItems } from "@/contants/menu";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { MenuComponent } from "@/components/menu";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -19,7 +21,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 md:p-6 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 pointer-events-none">
       <motion.div
         initial={false}
         animate={{
@@ -31,51 +33,54 @@ export const Header = () => {
           backdropFilter: scrolled ? "blur(15px)" : "blur(0px)",
           y: scrolled ? 10 : 0,
           border: scrolled
-            ? "1px solid rgba(245, 158, 11, 0.2)"
+            ? "1px solid rgba(233, 178, 184, 0.2)"
             : "1px solid transparent",
         }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="flex items-center justify-between px-6 py-2 rounded-full pointer-events-auto shadow-2xl shadow-black/3"
+        className="flex items-center justify-between px-6 py-2 rounded-full pointer-events-auto shadow-xl"
       >
         <Link href="/">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="relative w-24 h-12 md:w-32 md:h-16"
+            className="relative w-14 h-14 md:w-20 md:h-20 border-2 border-[#f3d5df] shadow-custom rounded-full"
           >
             <Image
-              src="/images/logo/logo.png"
+              src="/images/logo/logo1.png"
               alt="Logo"
               fill
-              className="object-contain"
+              className="object-contain rounded-full"
             />
           </motion.div>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="group relative px-4 py-2"
-            >
-              <span className="relative z-10 text-xs font-bold uppercase tracking-[0.2em] text-amber-900/80 group-hover:text-amber-600 transition-colors">
-                {item.name}
-              </span>
-              <motion.div className="absolute inset-0 bg-amber-50 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="group relative px-4 py-2"
+              >
+                <span className={`relative text-title z-10 text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive ? 'text-[#ff7ba9]' : 'text-[#eb9ea7] group-hover:text-[#ff7ba9]'}`}>
+                  {item.name}
+                </span>
+                <motion.div className={`absolute inset-0 bg-[#fff5f4] rounded-full transition-transform duration-300 ${isActive ? 'scale-100' : 'scale-0 group-hover:scale-100'}`} />
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="hidden md:block">
+          <div className="hidden md:block text-title">
             <Link href={"/booking"}>
-              <Button label="Booking Now" />
+              <Button label="Đặt Lịch Ngay" />
             </Link>
           </div>
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-amber-100 text-amber-600 relative z-101"
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-[#fff5f4] text-[#e9b2b8] relative z-101"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
