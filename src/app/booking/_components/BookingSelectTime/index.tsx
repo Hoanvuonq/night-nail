@@ -43,7 +43,7 @@ export const TimeStep = ({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      className="flex flex-1 flex-col p-5 md:px-10 space-y-4" 
+      className="flex flex-1 flex-col p-5 md:px-10 space-y-4"
     >
       <div className="flex flex-col gap-0.5">
         <div className="flex items-center gap-2 text-amber-600">
@@ -89,33 +89,32 @@ export const TimeStep = ({
                 whileHover={!isBooked ? { scale: 1.02, y: -2 } : {}}
                 whileTap={!isBooked ? { scale: 0.96 } : {}}
                 onClick={() => !isBooked && onSelectTime(time)}
-                className={`relative cursor-pointer overflow-hidden rounded-2xl border py-3.5 text-md font-bold transition-all duration-300 ${
-                  isBooked
+                className={`relative cursor-pointer overflow-hidden rounded-2xl border py-3.5 text-md font-bold transition-all duration-300 ${isBooked
                     ? "border-zinc-100 bg-zinc-50 text-zinc-300 cursor-not-allowed"
                     : isActive
-                    ? "border-amber-400 bg-white text-amber-600 shadow-[0_8px_20px_-5px_rgba(251,191,36,0.3)]"
-                    : "border-zinc-100 bg-white text-zinc-500 hover:border-amber-200"
-                }`}
+                      ? "border-amber-400 bg-white text-amber-600 shadow-[0_8px_20px_-5px_rgba(251,191,36,0.3)]"
+                      : "border-zinc-100 bg-white text-zinc-500 hover:border-amber-200"
+                  }`}
               >
                 <span className={`relative z-10 transition-opacity ${isBooked ? "opacity-20" : "opacity-100"}`}>
                   {time}
                 </span>
 
                 {isBooked && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-zinc-100/40 backdrop-blur-[1px]">
+                  <div className="absolute inset-0 flex items-center justify-center bg-zinc-100/40 backdrop-blur-px">
                     <span className="text-[12px] font-bold text-amber-600 tracking-tighter uppercase leading-none border-b border-zinc-300">
                       Hết chỗ
                     </span>
                   </div>
                 )}
-                
+
                 {isActive && !isBooked && (
-                  <motion.div 
+                  <motion.div
                     layoutId="activeTime"
-                    className="absolute inset-0 bg-linear-to-br from-amber-500/5 to-amber-500/10" 
+                    className="absolute inset-0 bg-linear-to-br from-amber-500/5 to-amber-500/10"
                   />
                 )}
-                
+
                 {isLate && !isBooked && (
                   <div className="absolute top-1.5 right-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping absolute" />
@@ -145,8 +144,8 @@ export const TimeStep = ({
                 <p className="text-[10px] font-bold text-orange-900 uppercase leading-none mb-1">Ca cuối nè nàng</p>
                 <p className="text-[10px] text-orange-700 leading-tight">Vui lòng inbox em trước để sắp xếp tốt nhất nhé!</p>
               </div>
-              <Link 
-                href="https://m.me/yourpage" 
+              <Link
+                href="https://m.me/yourpage"
                 target="_blank"
                 className="shrink-0 text-[10px] font-bold text-white bg-orange-500 px-3 py-2 rounded-xl shadow-md active:scale-90 transition-transform"
               >
@@ -154,14 +153,14 @@ export const TimeStep = ({
               </Link>
             </motion.div>
           ) : isDateFull ? (
-             <motion.div
+            <motion.div
               key="full-info"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               className="rounded-2xl bg-zinc-50 border border-zinc-200 p-3.5 flex items-center gap-3"
             >
-               <div className="p-2 bg-white rounded-xl text-zinc-400 shadow-sm shrink-0">
+              <div className="p-2 bg-white rounded-xl text-zinc-400 shadow-sm shrink-0">
                 <Ban size={16} />
               </div>
               <p className="text-[10px] text-zinc-500 italic leading-tight">Ngày này đã kín chỗ. Nàng chọn ngày khác hoặc inbox em nhé! ✨</p>
@@ -174,7 +173,7 @@ export const TimeStep = ({
 
       <div className="mt-auto pt-2 text-center">
         <p className="text-[14px] text-zinc-600 italic">
-          Đúng giờ để có trải nghiệm tuyệt vời nhất nàng nhé 
+          Đúng giờ để có trải nghiệm tuyệt vời nhất nàng nhé
           <span className="animate-pulse text-2xl">✨</span>
         </p>
       </div>

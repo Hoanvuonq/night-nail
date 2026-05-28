@@ -1,11 +1,14 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Sparkles, ArrowUpRight } from "lucide-react";
 import { cn } from "@/utils/cn";
-import { TitleSection } from "@/components";
+import { SectionPage, TitleSection } from "@/components";
+import { GalleryModal } from "../ProcessSection/GalleryModal";
 
 export const BentoLookbook = () => {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const items = [
     {
       title: "Mắt Mèo Ngân Hà",
@@ -34,14 +37,14 @@ export const BentoLookbook = () => {
   ];
 
   return (
-    <section className="py-6 px-6 max-w-7xl mx-auto overflow-hidden bg-[#fff5f4]">
+    <SectionPage className="overflow-hidden bg-[#fff5f4]">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 gap-10">
         <div className="max-w-3xl">
           <TitleSection
             tagIcon={<Sparkles size={14} className="animate-pulse" />}
             tagText="Premium Lookbook"
-            titleNormal="Nơi những ngón tay"
-            titleHighlight="Kể Chuyện"
+            titleNormal="Bộ Sưu Tập"
+            titleHighlight="Nail Nghệ Thuật"
             align="left"
             className="mb-0 md:mb-0"
           />
@@ -62,6 +65,7 @@ export const BentoLookbook = () => {
         {items.map((item, i) => (
           <motion.div
             key={i}
+            onClick={() => setSelectedIndex(i)}
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.1, duration: 0.7 }}
@@ -102,6 +106,18 @@ export const BentoLookbook = () => {
           </motion.div>
         ))}
       </div>
-    </section>
+
+      <AnimatePresence>
+        {selectedIndex !== null && (
+          <GalleryModal
+            currentIndex={selectedIndex}
+            setCurrentIndex={setSelectedIndex}
+            onClose={() => setSelectedIndex(null)}
+            customData={items}
+            isImageOnly={true}
+          />
+        )}
+      </AnimatePresence>
+    </SectionPage>
   );
 };

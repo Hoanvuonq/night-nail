@@ -13,7 +13,7 @@ import { cn } from "@/utils/cn";
 
 const HomeScreens = () => {
   return (
-    <div className={cn("w-full py-8 px-8")}>
+    <div className={cn("w-full")}>
       <HeroSection />
       <Service />
       <ProcessSection />
@@ -21,7 +21,7 @@ const HomeScreens = () => {
       <LocationSection />
       <BentoLookbook />
       <QualityCommitment />
-      <WhyChooseUs />
+      {/* <WhyChooseUs /> */}
     </div>
   );
 };

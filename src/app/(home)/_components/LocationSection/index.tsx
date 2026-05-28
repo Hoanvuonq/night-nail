@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Car, Heart, MapPin } from "lucide-react";
 import Link from "next/link";
-import { TitleSection } from "@/components";
+import { SectionPage, TitleSection } from "@/components";
 
 const STUDIO_ADDRESS = "378/12 Thống Nhất, Phường 16, Quận Gò Vấp, TP.HCM";
 const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.5755918844666!2d106.66220237583886!3d10.843755157946562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529af8922a7e1%3A0xe6bbcb87cfc788fc!2zMzc4IMSQLiBUaOG7kW5nIE5o4bqldCwgQW4gSOG7mWkgxJDDtG5nLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1779857018229!5m2!1svi!2s";
@@ -13,7 +13,7 @@ export const LocationSection = () => {
       <div className="absolute top-10 left-10 w-48 h-48 bg-[#ff7ba9]/10 blur-3xl rounded-full animate-pulse pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-64 h-64 bg-[#f4c7cc]/20 blur-3xl rounded-full animate-bounce duration-[5s] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <SectionPage className="relative z-10">
         <TitleSection
           tagIcon={<MapPin size={14} className="animate-bounce" />}
           tagText="Địa chỉ xinh - Nail xịn - Chỉ có ở Night Nail"
@@ -95,7 +95,7 @@ export const LocationSection = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </SectionPage>
     </section>
   );
 };

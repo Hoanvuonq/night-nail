@@ -1,9 +1,8 @@
 "use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Clock, Plus } from "lucide-react";
+import React, { useState } from "react";
 
-// Giả sử TIME_SLOTS đến từ constants của bạn
 const TIME_SLOTS = ["09:00", "10:00", "11:00", "13:00", "14:30", "16:00", "17:30"];
 
 export const TimePickerCustom = ({ selectedTime, setSelectedTime }: any) => {
@@ -13,7 +12,7 @@ export const TimePickerCustom = ({ selectedTime, setSelectedTime }: any) => {
   const handleCustomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setCustomVal(val);
-    setSelectedTime(val); // Cập nhật thời gian tùy chỉnh vào state tổng
+    setSelectedTime(val);
   };
 
   return (
@@ -35,18 +34,16 @@ export const TimePickerCustom = ({ selectedTime, setSelectedTime }: any) => {
                 setIsCustom(false);
                 setSelectedTime(time);
               }}
-              className={`py-3.5 rounded-2xl text-[13px] font-bold tracking-widest transition-all duration-300 border w-full ${
-                isSelected
-                  ? "bg-linear-to-r from-[#ff7ba9] to-[#ff4d79] text-white border-transparent shadow-[0_8px_20px_rgba(255,123,169,0.4)]"
-                  : "bg-white/5 text-white/40 border-white/10 hover:border-[#ff7ba9]/40 hover:text-[#ff7ba9] hover:bg-white/10"
-              }`}
+              className={`py-3.5 rounded-2xl text-[13px] font-bold tracking-widest transition-all duration-300 border w-full ${isSelected
+                ? "bg-linear-to-r from-[#ff7ba9] to-[#ff4d79] text-white border-transparent shadow-[0_8px_20px_rgba(255,123,169,0.4)]"
+                : "bg-white/5 text-white/40 border-white/10 hover:border-[#ff7ba9]/40 hover:text-[#ff7ba9] hover:bg-white/10"
+                }`}
             >
               {time}
             </motion.button>
           );
         })}
 
-        {/* Ô tùy chỉnh thông minh */}
         <AnimatePresence mode="wait">
           {!isCustom ? (
             <motion.button
@@ -71,10 +68,10 @@ export const TimePickerCustom = ({ selectedTime, setSelectedTime }: any) => {
                 type="time"
                 value={customVal}
                 onChange={handleCustomChange}
-                onBlur={() => { if(!customVal) setIsCustom(false); }}
+                onBlur={() => { if (!customVal) setIsCustom(false); }}
                 className="w-full py-3 px-4 rounded-2xl bg-[#ff7ba9]/10 border-2 border-[#ff7ba9] text-[#ff7ba9] font-bold text-sm focus:outline-none shadow-[0_0_15px_rgba(255,123,169,0.2)]"
               />
-              <button 
+              <button
                 onClick={() => setIsCustom(false)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-bold text-[#ff7ba9] uppercase hover:text-white transition-colors"
               >

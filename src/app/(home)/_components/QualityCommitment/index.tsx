@@ -1,12 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import { Gem, Sparkles, Heart } from "lucide-react";
-import { TitleSection } from "@/components/TitleSection";
+import { SectionPage, TitleSection } from "@/components";
 import { DATA_QUALITY_COMMITMENTS } from "./type";
 
 export const QualityCommitment = () => {
   return (
-    <section className="py-12 md:py-16 px-6 max-w-7xl mx-auto relative overflow-hidden font-sans">
+    <SectionPage className="relative overflow-hidden font-sans">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ff7ba9]/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute top-0 right-0 w-64 h-64 bg-[#f4c7cc]/20 blur-[80px] rounded-full pointer-events-none" />
 
@@ -61,6 +61,6 @@ export const QualityCommitment = () => {
           </motion.div>
         ))}
       </div>
-    </section>
+    </SectionPage>
   );
 };

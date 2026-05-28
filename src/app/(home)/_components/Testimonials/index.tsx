@@ -1,14 +1,13 @@
-import { TitleSection } from "@/components";
+import { SectionPage, TitleSection } from "@/components";
 import { cn } from "@/utils/cn";
 
 export const Testimonials = () => (
-  <section className="relative overflow-hidden bg-[#fff5f4]">
-    <div className="max-w-6xl mx-auto px-6">
+  <section className="relative overflow-hidden bg-[#fff5f4] w-full">
+    <SectionPage>
       <TitleSection
         tagText="Đánh Giá"
         titleNormal="Cảm Nhận Từ"
         titleHighlight="Nàng"
-        className="mb-16 md:mb-24"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {[1, 2, 3].map((_, i) => (
@@ -35,6 +34,6 @@ export const Testimonials = () => (
           </div>
         ))}
       </div>
-    </div>
+    </SectionPage>
   </section>
 );

@@ -25,7 +25,7 @@ export const ServiceComponents = ({
         "flex items-center w-full justify-between gap-12 md:gap-24",
         `${reverse ? 'xl:flex-row-reverse' : 'xl:flex-row'} `,
         `flex-col md:mb-6 mb-4 relative`,
-        index % 2 === 0 ? 'mt-10' : 'mt-20')}
+        index % 2 === 0 ? 'mt-2' : 'mt-1')}
     >
       <div className="relative group shrink-0">
         <motion.div
@@ -77,7 +77,7 @@ export const ServiceComponents = ({
             <div className="h-0.5 w-8 bg-[#e9b2b8]" />
           </motion.div>
 
-          <h3 className="text-5xl md:text-5xl font-bold text-[#ff7ba9] leading-tight pacifico-regular-font ">
+          <h3 className="text-4xl md:text-5xl font-bold text-[#ff7ba9] leading-tight pacifico-regular-font ">
             <span className="relative inline-block">
               {title}
               <PinkPawIcon size={28} iconClassName="w-8 h-8 md:w-10 md:h-10" className="-top-4 -right-10 md:-top-5 md:-right-12" />
@@ -85,7 +85,7 @@ export const ServiceComponents = ({
           </h3>
         </div>
 
-        <p className="text-lg md:text-lg text-gray-600 font-medium italic leading-normal playpen-sans">
+        <p className="text-md md:text-lg md:w-atuo w-[90%] mx-auto text-gray-600 font-medium italic md:leading-normal leading-relaxed playpen-sans">
           "{description}"
         </p>
 

@@ -29,7 +29,7 @@ export const TitleSection = ({
   return (
     <div
       className={cn(
-        "flex flex-col mb-12 space-y-4 relative z-10",
+        "flex flex-col mb-8 md:mb-12 space-y-4 relative z-10",
         align === "center" ? "items-center text-center mx-auto" : "items-start text-left",
         className
       )}
@@ -47,7 +47,7 @@ export const TitleSection = ({
       <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter text-[#ff7ba9] leading-[1.1]">
         {titleNormal && <span className={titleNormalClassName}>{titleNormal} </span>}
         {titleHighlight && (
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-[#e9b2b8] via-[#ff7ba9] to-[#ff4d79] sriracha-regular pr-4 italic block md:inline">
+          <span className="relative inline-block text-transparent bg-clip-text bg-linear-to-r from-[#e9b2b8] via-[#ff7ba9] to-[#ff4d79] sriracha-regular pr-4 italic">
             {titleHighlight}
           </span>
         )}

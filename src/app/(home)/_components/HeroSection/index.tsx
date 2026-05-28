@@ -72,7 +72,7 @@ export const HeroSection = () => {
             ],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute -right-[10%] -top-[10%] h-125 w-125 rounded-full blur-[100px]"
+          className="absolute -right-[10%] -top-[10%] h-[400px] w-[400px] md:h-[500px] md:w-[500px] rounded-full blur-[100px]"
         />
         <motion.div
           animate={{
@@ -83,7 +83,7 @@ export const HeroSection = () => {
             ],
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-[10%] -left-[5%] h-100 w-100 rounded-full bg-[#f8d4d8]/50 blur-[80px]"
+          className="absolute -bottom-[10%] -left-[5%] h-[300px] w-[300px] md:h-[400px] md:w-[400px] rounded-full blur-[80px]"
         />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.04]" />
       </div>
@@ -103,14 +103,16 @@ export const HeroSection = () => {
               </span>
             </div>
 
-            <div className="relative mb-8 select-none flex flex-col items-center lg:items-start">
-              <h1 className="flex flex-col relative z-10 pinyon-script-regular">
-                <span className="block text-[#ff7ba9] opacity-30 text-[7rem] md:text-[10rem] lg:text-[13rem] font-normal leading-80 -mb-10 md:-mb-16 z-0 ml-0 md:ml-8 drop-shadow-sm">
+            <div className="relative mb-6 md:mb-8 select-none flex flex-col items-center lg:items-start w-full">
+              <h1 className="flex flex-col relative z-10 pinyon-script-regular text-center lg:text-left">
+                <span className="block text-[#ff7ba9] opacity-30 text-[6rem] sm:text-[8rem] md:text-[9rem] lg:text-[11rem] font-normal leading-none -mb-8 sm:-mb-12 md:-mb-14 lg:-mb-16 z-0 drop-shadow-sm">
                   Night
                 </span>
-                <span className="relative z-10 inline-block text-7xl md:text-[10rem] font-normal tracking-normal bg-linear-to-br from-[#ff7ba9] to-[#ff4d79] bg-clip-text text-transparent drop-shadow-sm pb-4 ml-12 md:ml-24">
+                <span className="relative z-10 inline-block text-[6rem] sm:text-[8rem] md:text-[9rem] lg:text-[11rem] font-normal tracking-normal bg-linear-to-br from-[#ff7ba9] to-[#ff4d79] bg-clip-text text-transparent drop-shadow-sm py-8 -my-4 ml-6 sm:ml-12 lg:ml-24">
                   Nail
-                  <PinkPawIcon />
+                  <span className="absolute top-6 -right-6 sm:top-10 sm:-right-8 lg:-right-10 w-6 sm:w-8 lg:w-10">
+                    <PinkPawIcon />
+                  </span>
                 </span>
               </h1>
             </div>
@@ -133,7 +135,7 @@ export const HeroSection = () => {
         <div className="order-1 flex w-full justify-center lg:order-2 lg:justify-end">
           <motion.div
             style={{ y: yParallax }}
-            className="relative aspect-square w-full max-w-150 lg:scale-105"
+            className="relative aspect-square w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] xl:max-w-[600px] lg:scale-105"
           >
             <motion.div
               initial={{ borderRadius: "42% 58% 70% 30% / 45% 45% 55% 55%" }}

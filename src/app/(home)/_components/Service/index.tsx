@@ -1,13 +1,13 @@
 "use client";
-import { TitleSection } from "@/components";
+import { SectionPage, TitleSection } from "@/components";
 import { ServiceComponents } from "@/components/serviceComponents";
 import { DATA_SERVICE } from "@/contants/service";
 
 export const Service = () => {
   return (
-    <section id="services" className="relative  py-12 overflow-hidden">
+    <section id="services" className="relative overflow-hidden w-full">
       <div className="absolute top-0 right-0 w-125 h-125blur-[150px] rounded-full pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-0 sm:px-10">
+      <SectionPage className="px-0 sm:px-10">
         <TitleSection
           tagText="Dành Cho Bạn"
           titleNormal="Nghệ Thuật"
@@ -17,7 +17,7 @@ export const Service = () => {
           titleNormalClassName="sriracha-regular text-[#f4c7cc]"
         />
 
-        <div className="flex flex-col md:gap-20 gap-4">
+        <div className="flex flex-col md:gap-8 gap-4">
           {DATA_SERVICE.map((service, idx) => (
             <ServiceComponents
               key={service.title}
@@ -26,7 +26,7 @@ export const Service = () => {
             />
           ))}
         </div>
-      </div>
+      </SectionPage>
     </section>
   );
 };
