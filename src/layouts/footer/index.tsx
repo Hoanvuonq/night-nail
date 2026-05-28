@@ -152,9 +152,9 @@ export const Footer = () => {
           {/* Left: Logo */}
           <div className="relative group shrink-0">
             <div className="absolute -inset-10 bg-[#ff7ba9]/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full duration-1000" />
-            <div className="relative w-56 h-56 p-4">
+            <div className="relative w-60 h-60 p-4">
               <Image
-                src="/images/logo/ha_ant.png"
+                src="/images/logo/ha_ant1.png"
                 alt="Night Nail Art"
                 fill
                 className="object-contain p-6"
@@ -209,11 +209,11 @@ export const Footer = () => {
           {/* Right: CTA & Social */}
           <div className="flex flex-col items-end gap-16 shrink-0">
             <Link href="/booking">
-              <Button label="Đặt Lịch Ngay" className="px-10 py-7 rounded-[24px] shadow-[0_8px_20px_-8px_rgba(255,123,169,0.6)]" />
+              <Button label="Đặt Lịch Ngay" className="shadow-[0_8px_20px_-8px_rgba(255,123,169,0.6)]" />
             </Link>
 
             <div className="space-y-5 text-right">
-              <p className="text-xs text-zinc-700 uppercase tracking-widest text-title font-bold">
+              <p className="text-xs text-[#ff7ba9] uppercase tracking-widest text-title font-bold">
                 Theo dõi em nhé
               </p>
               <div className="flex gap-4 justify-end">
@@ -238,7 +238,7 @@ export const Footer = () => {
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-8">
-        <div className="mt-4 lg:mt-10 playpen-sans pt-6 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-zinc-400 uppercase tracking-widest font-bold text-center md:text-left">
+        <div className="mt-4 playpen-sans pt-6 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-zinc-400 uppercase tracking-widest font-bold text-center md:text-left">
           <p className="flex items-center justify-center md:justify-start gap-1 w-full md:w-auto">
             <span className="text-lg leading-none">©</span> {currentYear} Night Nail Studio. All Rights Reserved.
           </p>
