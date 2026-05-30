@@ -44,14 +44,14 @@ const FooterInfoItem = ({
 
   if (href) {
     return (
-      <a
+      <Link
         href={href}
         target={href.startsWith('http') ? "_blank" : undefined}
         rel={href.startsWith('http') ? "noreferrer" : undefined}
         className="block"
       >
         {contentNode}
-      </a>
+      </Link>
     );
   }
   return contentNode;
@@ -106,7 +106,7 @@ export const Footer = () => {
           </div>
 
           <div className="space-y-4 border-y border-zinc-100 py-6">
-            <a
+            <Link
               href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent("378/12 Thống Nhất, Phường 16, Quận Gò Vấp, TP.HCM")}`}
               target="_blank"
               rel="noreferrer"
@@ -114,14 +114,14 @@ export const Footer = () => {
             >
               <MapPin size={14} className="text-[#ff7ba9] group-hover:scale-110 transition-transform" />
               <p className="group-hover:underline">378/12 Thống Nhất, Phường 16, Quận Gò Vấp, TP.HCM</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="tel:0942153511"
               className="flex items-center justify-center gap-2 text-sm text-zinc-800 hover:text-[#ff7ba9] transition-colors group"
             >
               <Phone size={14} className="text-[#ff7ba9] group-hover:scale-110 transition-transform" />
               <p className="font-bold tracking-widest uppercase group-hover:underline">094 215 3511</p>
-            </a>
+            </Link>
           </div>
 
           <div className="flex justify-center gap-4">
@@ -245,14 +245,14 @@ export const Footer = () => {
           <div className="flex items-center justify-center md:justify-end gap-2 text-zinc-400 w-full md:w-auto">
             <span className="capitalize text-xs tracking-normal">
               Designed with <span className="text-[#ff7ba9] animate-pulse">❤️</span> by{" "}
-              <a
+              <Link
                 href="https://www.facebook.com/Hoanvuonq.25/"
                 target="_blank"
                 rel="noreferrer"
                 className="text-[#ff7ba9] font-bold hover:underline transition-all"
               >
                 Coder: Hoanvuonq
-              </a>
+              </Link>
             </span>
           </div>
         </div>

@@ -113,14 +113,14 @@ export const GalleryModal = ({ currentIndex, setCurrentIndex, onClose, customDat
       >
         <button
           onClick={handlePrevious}
-          className="absolute left-2 md:-left-7 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/60 backdrop-blur-md md:bg-white md:shadow-[0_10px_30px_rgba(255,123,169,0.3)] flex items-center justify-center text-[#ff7ba9] hover:scale-110 transition-all z-[100] cursor-pointer border md:border-[#fce9eb] border-transparent"
+          className="absolute left-2 md:-left-7 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/60 backdrop-blur-md md:bg-white md:shadow-[0_10px_30px_rgba(255,123,169,0.3)] flex items-center justify-center text-[#ff7ba9] hover:scale-110 transition-all z-100 cursor-pointer border md:border-[#fce9eb] border-transparent"
         >
           <ChevronLeft size={32} />
         </button>
 
         <button
           onClick={handleNext}
-          className="absolute right-2 md:-right-7 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/60 backdrop-blur-md md:bg-white md:shadow-[0_10px_30px_rgba(255,123,169,0.3)] flex items-center justify-center text-[#ff7ba9] hover:scale-110 transition-all z-[100] cursor-pointer border md:border-[#fce9eb] border-transparent"
+          className="absolute right-2 md:-right-7 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/60 backdrop-blur-md md:bg-white md:shadow-[0_10px_30px_rgba(255,123,169,0.3)] flex items-center justify-center text-[#ff7ba9] hover:scale-110 transition-all z-100 cursor-pointer border md:border-[#fce9eb] border-transparent"
         >
           <ChevronRight size={32} />
         </button>
@@ -162,7 +162,7 @@ export const GalleryModal = ({ currentIndex, setCurrentIndex, onClose, customDat
         <div className="flex-1 flex flex-col md:flex-row items-center justify-center md:justify-between px-0 md:px-12 gap-8 min-h-0 relative w-full mt-4 md:mt-0">
 
           {/* Left Column */}
-          <div className={`hidden lg:flex flex-col w-[240px] xl:w-[280px] shrink-0 h-full justify-center pb-6 ${isImageOnly ? "!hidden" : ""}`}>
+          <div className={`hidden lg:flex flex-col w-[240px] xl:w-[280px] shrink-0 h-full justify-center pb-6 ${isImageOnly ? "hidden!" : ""}`}>
             <h2 className="text-2xl xl:text-3xl font-bold text-zinc-800 leading-tight">
               {currentItem.title}
             </h2>
@@ -232,7 +232,7 @@ export const GalleryModal = ({ currentIndex, setCurrentIndex, onClose, customDat
           </div>
 
           {/* Right Column */}
-          <div className={`hidden lg:flex flex-col w-[240px] xl:w-[280px] shrink-0 h-full justify-center pb-6 ${isImageOnly ? "!hidden" : ""}`}>
+          <div className={`hidden lg:flex flex-col w-[240px] xl:w-[280px] shrink-0 h-full justify-center pb-6 ${isImageOnly ? "hidden!" : ""}`}>
             <div className="bg-white rounded-2xl p-4 flex items-center gap-4 mb-8 shadow-sm border border-[#fce9eb]">
               <div className="w-10 h-10 rounded-full bg-[#fff0f3] flex items-center justify-center text-[#ff7ba9]">
                 <Heart size={20} fill="currentColor" />
