@@ -108,9 +108,9 @@ export const HeroSection = () => {
                 <span className="block text-[#ff7ba9] opacity-30 text-[6rem] sm:text-[8rem] md:text-[9rem] lg:text-[11rem] font-normal leading-none -mb-8 sm:-mb-12 md:-mb-14 lg:-mb-16 z-0 drop-shadow-sm">
                   Night
                 </span>
-                <span className="relative z-10 inline-block text-[6rem] sm:text-[8rem] md:text-[9rem] lg:text-[11rem] font-normal tracking-normal bg-linear-to-br from-[#ff7ba9] to-[#ff4d79] bg-clip-text text-transparent drop-shadow-sm py-8 -my-4 ml-6 sm:ml-12 lg:ml-24">
+                <span className="relative z-10 inline-block text-[6rem] sm:text-[8rem] md:text-[9rem] lg:text-[11rem] font-normal tracking-normal bg-linear-to-br from-[#ff7ba9] to-[#ff4d79] bg-clip-text text-transparent drop-shadow-sm py-8 pr-4 sm:pr-8 -my-4 ml-6 sm:ml-12 lg:ml-24">
                   Nail
-                  <span className="absolute top-6 -right-6 sm:top-10 sm:-right-8 lg:-right-10 w-6 sm:w-8 lg:w-10">
+                  <span className="absolute top-6 -right-2 sm:top-10 sm:right-0 lg:-right-2 w-6 sm:w-8 lg:w-10">
                     <PinkPawIcon />
                   </span>
                 </span>

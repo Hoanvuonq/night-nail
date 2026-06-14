@@ -30,6 +30,7 @@ export const LocationSection = () => {
           >
             <iframe
               src={MAP_EMBED_URL}
+              title="Bản đồ địa chỉ Night Nail Studio"
               width="100%"
               height="100%"
               style={{ border: 0 }}

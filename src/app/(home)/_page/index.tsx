@@ -1,15 +1,14 @@
 "use client";
-import {
-  BentoLookbook,
-  HeroSection,
-  LocationSection,
-  ProcessSection,
-  QualityCommitment,
-  Service,
-  Testimonials,
-  WhyChooseUs,
-} from "@/app/(home)/_components";
+import dynamic from "next/dynamic";
 import { cn } from "@/utils/cn";
+import { HeroSection } from "@/app/(home)/_components/HeroSection";
+
+const Service = dynamic(() => import("@/app/(home)/_components/Service").then(mod => mod.Service));
+const ProcessSection = dynamic(() => import("@/app/(home)/_components/ProcessSection").then(mod => mod.ProcessSection));
+const Testimonials = dynamic(() => import("@/app/(home)/_components/Testimonials").then(mod => mod.Testimonials));
+const LocationSection = dynamic(() => import("@/app/(home)/_components/LocationSection").then(mod => mod.LocationSection));
+const BentoLookbook = dynamic(() => import("@/app/(home)/_components/BentoLookbook").then(mod => mod.BentoLookbook));
+const QualityCommitment = dynamic(() => import("@/app/(home)/_components/QualityCommitment").then(mod => mod.QualityCommitment));
 
 const HomeScreens = () => {
   return (

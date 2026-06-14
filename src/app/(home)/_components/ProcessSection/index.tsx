@@ -105,12 +105,14 @@ export const ProcessSection = () => {
           <div className="hidden md:flex absolute top-[45%] -translate-y-1/2 left-4 right-4 justify-between z-30 pointer-events-none">
             <button
               onClick={() => scroll("left")}
+              aria-label="Cuộn sang trái"
               className="w-14 h-14 cursor-pointer hover-btn rounded-full bg-white/90 backdrop-blur-md shadow-[0_10px_40px_-10px_rgba(233,178,184,0.5)] border border-[#f4c7cc]/50 flex items-center justify-center text-[#ff7ba9] hover:bg-white hover:scale-110 transition-all pointer-events-auto"
             >
               <ArrowLeft size={24} strokeWidth={2.5} />
             </button>
             <button
               onClick={() => scroll("right")}
+              aria-label="Cuộn sang phải"
               className="w-14 h-14 cursor-pointer hover-btn rounded-full bg-white/90 backdrop-blur-md shadow-[0_10px_40px_-10px_rgba(233,178,184,0.5)] border border-[#f4c7cc]/50 flex items-center justify-center text-[#ff7ba9] hover:bg-white hover:scale-110 transition-all pointer-events-auto"
             >
               <ArrowRight size={24} strokeWidth={2.5} />

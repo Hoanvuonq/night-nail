@@ -39,14 +39,14 @@ export const Header = () => {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="flex items-center justify-between px-6 py-2 rounded-full pointer-events-auto shadow-xl"
       >
-        <Link href="/">
+        <Link href="/" aria-label="Trang chủ">
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="relative w-14 h-14 md:w-20 md:h-20 border-2 border-[#f3d5df] shadow-custom rounded-full"
           >
             <Image
               src="/images/logo/logo1.png"
-              alt="Logo"
+              alt="Night Nail Logo"
               fill
               className="object-contain rounded-full"
             />
@@ -62,7 +62,7 @@ export const Header = () => {
                 href={item.href}
                 className="group relative px-4 py-2"
               >
-                <span className={`relative text-title z-10 text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive ? 'text-[#ff7ba9]' : 'text-[#eb9ea7] group-hover:text-[#ff7ba9]'}`}>
+                <span className={`relative text-title z-10 text-xs font-bold uppercase tracking-[0.2em] transition-colors ${isActive ? 'text-[#d81b60]' : 'text-[#8c5963] group-hover:text-[#d81b60]'}`}>
                   {item.name}
                 </span>
                 <motion.div className={`absolute inset-0 bg-[#fff5f4] rounded-full transition-transform duration-300 ${isActive ? 'scale-100' : 'scale-0 group-hover:scale-100'}`} />
@@ -80,7 +80,8 @@ export const Header = () => {
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-[#fff5f4] text-[#e9b2b8] relative z-101"
+            aria-label={isMenuOpen ? "Đóng menu" : "Mở menu"}
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full bg-[#fff5f4] text-[#d81b60] relative z-101"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

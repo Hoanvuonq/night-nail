@@ -81,6 +81,7 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={onClose}
+                aria-label="Đóng menu"
                 className="w-10 h-10 rounded-full border border-amber-100 flex items-center justify-center text-zinc-900 bg-white shadow-sm"
               >
                 <X size={20} />
@@ -135,10 +136,10 @@ export const MenuComponent = ({ isOpen, onClose }: MenuProps) => {
                 <div className="space-y-3">
                   <p className="text-[8px] uppercase font-bold text-amber-600 tracking-widest">Mạng xã hội</p>
                   <div className="flex gap-4">
-                    <Link href="#" className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-all">
+                    <Link href="#" aria-label="Instagram" className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-all">
                       <Instagram size={16} />
                     </Link>
-                    <Link href="#" className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-all">
+                    <Link href="#" aria-label="Facebook" className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-all">
                       <Facebook size={16} />
                     </Link>
                   </div>
