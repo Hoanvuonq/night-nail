@@ -13,13 +13,23 @@ const QualityCommitment = dynamic(() => import("@/app/(home)/_components/Quality
 const HomeScreens = () => {
   return (
     <div className={cn("w-full")}>
+      {/* HeroSection has id="hero" inside */}
       <HeroSection />
-      <Service />
-      <ProcessSection />
-      <Testimonials />
-      <LocationSection />
-      <BentoLookbook />
-      <QualityCommitment />
+
+      <div id="service">
+        <Service />
+      </div>
+
+      <div id="product">
+        <ProcessSection />
+      </div>
+
+      <div id="about">
+        <Testimonials />
+        <LocationSection />
+        <BentoLookbook />
+        <QualityCommitment />
+      </div>
       {/* <WhyChooseUs /> */}
     </div>
   );

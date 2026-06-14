@@ -67,7 +67,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full overflow-hidden relative bg-[#FBFAF8] border-t border-zinc-100 font-sans mt-6">
+    <footer id="contact" className="w-full overflow-hidden relative bg-[#FBFAF8] border-t border-zinc-100 font-sans mt-6">
       <div className="absolute top-0 left-1/4 w-96 h-64 bg-[#ff7ba9]/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="lg:hidden w-full py-12 px-6 relative z-10">
@@ -107,7 +107,7 @@ export const Footer = () => {
 
           <div className="space-y-4 border-y border-zinc-100 py-6">
             <Link
-              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent("378/12 Thống Nhất, Phường 16, Quận Gò Vấp, TP.HCM")}`}
+              href="https://maps.app.goo.gl/GAyXPHR2MFohskex6"
               target="_blank"
               rel="noreferrer"
               className="flex items-center justify-center gap-2 text-xs text-zinc-500 font-medium hover:text-[#ff7ba9] transition-colors group"
@@ -183,7 +183,7 @@ export const Footer = () => {
                 icon={MapPin}
                 title="Địa chỉ studio"
                 content="378/12 Thống Nhất, Phường 16, Quận Gò Vấp, TP.HCM"
-                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent("378/12 Thống Nhất, Phường 16, Quận Gò Vấp, TP.HCM")}`}
+                href="https://maps.app.goo.gl/GAyXPHR2MFohskex6"
               />
               <FooterInfoItem
                 icon={Phone}
@@ -208,7 +208,7 @@ export const Footer = () => {
 
           {/* Right: CTA & Social */}
           <div className="flex flex-col items-end gap-16 shrink-0">
-            <Link href="/booking">
+            <Link href={"tel:0942153511"}>
               <Button label="Đặt Lịch Ngay" className="shadow-[0_8px_20px_-8px_rgba(255,123,169,0.6)]" />
             </Link>
 

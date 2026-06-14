@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SectionPage, TitleSection } from "@/components";
 
 const STUDIO_ADDRESS = "378/12 Thống Nhất, Phường 16, Quận Gò Vấp, TP.HCM";
-const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.5755918844666!2d106.66220237583886!3d10.843755157946562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529af8922a7e1%3A0xe6bbcb87cfc788fc!2zMzc4IMSQLiBUaOG7kW5nIE5o4bqldCwgQW4gSOG7mWkgxJDDtG5nLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1779857018229!5m2!1svi!2s";
+const MAP_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4821.685260071251!2d106.66234647583887!3d10.843727257947096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529005bf69ead%3A0x37aee8cbbef4017a!2sNight%20Nail!5e1!3m2!1svi!2s!4v1781431689743!5m2!1svi!2s";
 
 export const LocationSection = () => {
   return (
@@ -60,7 +60,7 @@ export const LocationSection = () => {
               </div>
               <div>
                 <h4 className="text-[#ff7ba9] font-bold text-xs md:text-sm uppercase tracking-widest mb-1">Hướng dẫn đường đi</h4>
-                <p className="text-zinc-500 text-xs font-medium">Khoảng 5 phút - Từ đầu hẻm Thống Nhất</p>
+                <p className="text-gray-700 text-xs font-medium">Khoảng 5 phút - Từ đầu hẻm Thống Nhất</p>
               </div>
             </div>
 
@@ -85,7 +85,7 @@ export const LocationSection = () => {
 
             {/* Bottom Dotted Button/Box */}
             <Link
-              href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STUDIO_ADDRESS)}`}
+              href="https://maps.app.goo.gl/GAyXPHR2MFohskex6"
               target="_blank"
               className="block w-full hover:opacity-90 transition-opacity"
             >

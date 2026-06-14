@@ -73,8 +73,8 @@ export const Header = () => {
 
         <div className="flex items-center gap-3">
           <div className="hidden md:block text-title">
-            <Link href={"/booking"}>
-              <Button label="Đặt Lịch Ngay" />
+            <Link href={"tel:0942153511"}>
+              <Button label="Gọi 094 215 3511" />
             </Link>
           </div>
 

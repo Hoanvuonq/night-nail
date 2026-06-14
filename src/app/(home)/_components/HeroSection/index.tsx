@@ -92,8 +92,8 @@ export const HeroSection = () => {
 
         <div className="order-2 text-center lg:order-1 lg:text-left">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#f4c7cc] bg-white/60 px-5 py-2 shadow-sm backdrop-blur-sm">
@@ -158,6 +158,7 @@ export const HeroSection = () => {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 "
                 priority
+                quality={65}
               />
 
             </motion.div>
