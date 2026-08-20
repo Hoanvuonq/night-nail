@@ -22,6 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <link href="https://fonts.googleapis.com/css2?family=Geom:ital,wght@0,300..900;1,300..900&family=Sriracha&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Sriracha&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Ga+Maamli&family=Playpen+Sans:wght@100..800&display=swap" rel="stylesheet" />
       </head>
       <body suppressHydrationWarning>

@@ -13,7 +13,10 @@ interface ITemplateProps {
 const Template = ({ children }: ITemplateProps) => {
   const pathname = usePathname();
 
-  const isFullScreenPage = pathname?.includes("/booking") || pathname?.includes("/services");
+  const isFullScreenPage =
+    pathname?.includes("/booking") ||
+    pathname?.includes("/services") ||
+    pathname?.includes("/vong-quay");
 
   return (
     <div className="flex flex-col min-h-screen relative w-full bg-[#fff5f4] selection:bg-[#f8d4d8]">

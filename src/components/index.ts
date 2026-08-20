@@ -11,3 +11,5 @@ export * from "./navMobile";
 export * from "./socialIcon";
 export * from "./serviceComponents";
 export * from "./TitleSection";
+export * from "./LuckyWheelModal";
+
