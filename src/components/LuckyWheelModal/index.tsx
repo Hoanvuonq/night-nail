@@ -7,6 +7,7 @@ import confetti from "canvas-confetti";
 import { X, Sparkles } from "lucide-react";
 import { LuckyWheelCanvas, PRIZES, PrizeItem } from "./LuckyWheelCanvas";
 import { PrizeWinModal } from "./PrizeWinModal";
+import { soundEffects } from "./soundEffects";
 
 interface Props {
   isOpen: boolean;
@@ -43,6 +44,7 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
     if (isSpinning) return;
 
     setIsSpinning(true);
+    soundEffects.playSpinStartSound();
 
     // Random spin duration between min 3.0s and max 5.0s
     const randomDuration = 3.0 + Math.random() * (5.0 - 3.0);
@@ -64,6 +66,7 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
       setWonPrize(selectedPrize);
       setShowWinModal(true);
       triggerConfetti();
+      soundEffects.playWinSound();
     }, randomDuration * 1000 + 100);
   };
 
@@ -72,7 +75,7 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-9999 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
           {/* Backdrop Blur */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -96,10 +99,8 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   "0 25px 50px -12px rgba(254, 188, 200, 0.4), 0 0 35px rgba(244, 114, 182, 0.25)",
               }}
             >
-              {/* Inner Dashed Border Line */}
-              <div className="absolute inset-3 border-2 border-dashed border-[#FEBCC8]/70 rounded-[32px] pointer-events-none" />
+              <div className="absolute inset-3 border-2 border-dashed border-[#FEBCC8]/70 rounded-4xl pointer-events-none" />
 
-              {/* Close Button */}
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 w-10 h-10 bg-white hover:bg-[#FFF0F4] rounded-full flex items-center justify-center text-[#F472B6] hover:text-[#E11D48] shadow-md hover:scale-110 transition duration-200 border border-[#FEBCC8]/50"
@@ -107,7 +108,6 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 <X className="w-5 h-5" />
               </button>
 
-              {/* Decorative Paw Prints 🐾 Floating in Card Background */}
               <div className="absolute top-16 left-6 text-[#FEBCC8]/60 text-2xl select-none pointer-events-none transform -rotate-12">
                 🐾
               </div>
@@ -124,9 +124,7 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 🐾
               </div>
 
-              {/* Content Layout Grid (2 Columns on Desktop) */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
-                {/* Left Column: Lucky Wheel */}
                 <div className="lg:col-span-6 flex flex-col items-center justify-center relative pt-2">
                   <LuckyWheelCanvas
                     rotationAngle={rotationAngle}
@@ -136,14 +134,11 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   />
                 </div>
 
-                {/* Right Column: Information Panel */}
                 <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 sm:space-y-5 pr-0 lg:pr-4">
-                  {/* Subtitle Header */}
                   <div className="flex items-center gap-2 text-[#F472B6] text-xs sm:text-sm font-bold tracking-[0.2em] uppercase">
                     <span>— NAIL ART STUDIO —</span>
                   </div>
 
-                  {/* Title in Calligraphy Script */}
                   <div className="relative">
                     <h2
                       className="text-4xl sm:text-5xl lg:text-6xl font-normal text-[#E11D48] leading-tight py-1"
@@ -159,8 +154,7 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     </span>
                   </div>
 
-                  {/* Ribbon Subtitle Badge */}
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-[#FEBCC8] via-[#F472B6] to-[#E11D48] text-white rounded-full font-extrabold text-xs sm:text-sm shadow-md tracking-wide">
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-linear-to-r from-[#FEBCC8] via-[#F472B6] to-[#E11D48] text-white rounded-full font-extrabold text-xs sm:text-sm shadow-md tracking-wide">
                     <Sparkles className="w-4 h-4 fill-white" />
                     <span>QUAY LÀ TRÚNG – NHẬN NGAY ƯU ĐÃI</span>
                     <Sparkles className="w-4 h-4 fill-white" />

@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { LuckyWheelCanvas, PRIZES, PrizeItem } from "@/components/LuckyWheelModal/LuckyWheelCanvas";
 import { PrizeWinModal } from "@/components/LuckyWheelModal/PrizeWinModal";
 import { PrizeSettingsModal } from "@/components/LuckyWheelModal/PrizeSettingsModal";
+import { soundEffects } from "@/components/LuckyWheelModal/soundEffects";
 import confetti from "canvas-confetti";
-import { Sparkles, Settings } from "lucide-react";
+import { Sparkles, X } from "lucide-react";
 import Link from "next/link";
 
 export default function LuckyWheelPage() {
@@ -35,6 +36,7 @@ export default function LuckyWheelPage() {
     if (isSpinning) return;
 
     setIsSpinning(true);
+    soundEffects.playSpinStartSound();
 
     // Random spin duration between min 3.0s and max 5.0s
     const randomDuration = 3.0 + Math.random() * (5.0 - 3.0);
@@ -66,20 +68,18 @@ export default function LuckyWheelPage() {
       setWonPrize(selectedPrize);
       setShowWinModal(true);
       triggerConfetti();
+      soundEffects.playWinSound();
     }, randomDuration * 1000 + 100);
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 relative overflow-hidden bg-gradient-to-br from-[#FFF5F7] via-[#FFF0F4] to-[#FFEBF0]">
-      {/* Background Decor Soft Lights */}
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 relative overflow-hidden bg-linear-to-br from-[#FFF5F7] via-[#FFF0F4] to-[#FFEBF0]">
       <div className="absolute top-10 left-10 w-96 h-96 bg-[#FEBCC8]/45 rounded-full blur-3xl animate-pulse pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[420px] h-[420px] bg-[#FFA6C9]/35 rounded-full blur-3xl animate-pulse pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-105 h-105 bg-[#FFA6C9]/35 rounded-full blur-3xl animate-pulse pointer-events-none" />
       <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-[#FFF0F4]/60 rounded-full blur-2xl pointer-events-none" />
 
-      {/* Main Wheel Section Container with generous spacing */}
       <div className="relative z-10 w-full max-w-7xl my-auto px-4 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 xl:gap-24 items-center justify-items-center relative z-10">
-          {/* Left Column - Wheel */}
           <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-center justify-center relative pt-2">
             <LuckyWheelCanvas
               rotationAngle={rotationAngle}
@@ -91,7 +91,6 @@ export default function LuckyWheelPage() {
             />
           </div>
 
-          {/* Right Column - Info & Action (Spacious & Clean Single-Line Aesthetic) */}
           <div
             className="lg:col-span-6 xl:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 sm:space-y-5 w-full max-w-xl mx-auto lg:mx-0 pl-0 lg:pl-4 xl:pl-6"
             style={{ fontFamily: "'Quicksand', 'Playpen Sans', sans-serif" }}
@@ -115,7 +114,7 @@ export default function LuckyWheelPage() {
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] text-white rounded-full font-bold text-xs sm:text-sm shadow-sm tracking-wide whitespace-nowrap">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-linear-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] text-white rounded-full font-bold text-xs sm:text-sm shadow-sm tracking-wide whitespace-nowrap">
               <Sparkles className="w-4 h-4 fill-white" />
               <span>QUAY LÀ TRÚNG – 100% NHẬN QUÀ</span>
               <Sparkles className="w-4 h-4 fill-white" />
@@ -145,7 +144,6 @@ export default function LuckyWheelPage() {
                 </div>
               </div>
 
-              {/* Extra Sale Highlight Tag */}
               <div className="pt-3.5 border-t border-dashed border-[#FEDBE5] flex items-center justify-between text-[11px] sm:text-xs text-[#D94876] font-bold gap-3">
                 <span className="flex items-center gap-1.5 text-[#E85D88]">
                   <span className="text-sm">🌸</span>
@@ -163,7 +161,7 @@ export default function LuckyWheelPage() {
                 disabled={isSpinning}
                 className={`w-full py-4 rounded-full font-bold text-white text-base sm:text-lg tracking-wider uppercase shadow-lg flex items-center justify-center gap-2.5 transition-all duration-300 border-2 border-white ${isSpinning
                   ? "bg-[#FED5DF] opacity-80 cursor-not-allowed"
-                  : "bg-gradient-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] hover:shadow-[#FEBCC8]/60 hover:shadow-xl cursor-pointer hover:scale-[1.01]"
+                  : "bg-linear-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] hover:shadow-[#FEBCC8]/60 hover:shadow-xl cursor-pointer hover:scale-[1.01]"
                   }`}
                 style={{
                   boxShadow:
