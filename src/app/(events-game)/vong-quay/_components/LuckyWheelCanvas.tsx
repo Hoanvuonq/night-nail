@@ -85,16 +85,46 @@ export const PRIZES: PrizeItem[] = [
 ];
 
 const SPARKLE_CONFIGS = [
-  [{ x: -25, y: -15, size: 0.8, color: "#FFFFFF", opacity: 0.9 }, { x: 25, y: -12, size: 0.9, color: "#FEBCC8", opacity: 0.65 }],
-  [{ x: -22, y: -14, size: 0.85, color: "#FFE4EC", opacity: 0.75 }, { x: 26, y: -16, size: 0.7, color: "#FFFFFF", opacity: 0.9 }],
-  [{ x: -26, y: -14, size: 0.75, color: "#FFFFFF", opacity: 0.85 }, { x: 22, y: -12, size: 1.0, color: "#FEBCC8", opacity: 0.6 }],
-  [{ x: -20, y: -16, size: 0.9, color: "#FEBCC8", opacity: 0.7 }, { x: 24, y: -12, size: 0.75, color: "#FFFFFF", opacity: 0.9 }],
-  [{ x: -22, y: -14, size: 0.7, color: "#FFFFFF", opacity: 0.95 }, { x: 22, y: -15, size: 0.85, color: "#FFE4EC", opacity: 0.75 }],
-  [{ x: -24, y: -12, size: 0.8, color: "#FEBCC8", opacity: 0.6 }, { x: 24, y: -16, size: 0.75, color: "#FFFFFF", opacity: 0.85 }],
-  [{ x: -20, y: -15, size: 0.8, color: "#FFFFFF", opacity: 0.9 }, { x: 25, y: -12, size: 0.95, color: "#FEBCC8", opacity: 0.65 }],
-  [{ x: -24, y: -14, size: 0.75, color: "#FFE4EC", opacity: 0.75 }, { x: 22, y: -16, size: 0.7, color: "#FFFFFF", opacity: 0.9 }],
-  [{ x: -22, y: -12, size: 0.85, color: "#FFFFFF", opacity: 0.85 }, { x: 24, y: -14, size: 0.9, color: "#FEBCC8", opacity: 0.6 }],
-  [{ x: -20, y: -16, size: 0.8, color: "#FEBCC8", opacity: 0.7 }, { x: 22, y: -12, size: 0.75, color: "#FFFFFF", opacity: 0.9 }],
+  [
+    { x: -25, y: -15, size: 0.8, color: "#FFFFFF", opacity: 0.9 },
+    { x: 25, y: -12, size: 0.9, color: "#FEBCC8", opacity: 0.65 },
+  ],
+  [
+    { x: -22, y: -14, size: 0.85, color: "#FFE4EC", opacity: 0.75 },
+    { x: 26, y: -16, size: 0.7, color: "#FFFFFF", opacity: 0.9 },
+  ],
+  [
+    { x: -26, y: -14, size: 0.75, color: "#FFFFFF", opacity: 0.85 },
+    { x: 22, y: -12, size: 1.0, color: "#FEBCC8", opacity: 0.6 },
+  ],
+  [
+    { x: -20, y: -16, size: 0.9, color: "#FEBCC8", opacity: 0.7 },
+    { x: 24, y: -12, size: 0.75, color: "#FFFFFF", opacity: 0.9 },
+  ],
+  [
+    { x: -22, y: -14, size: 0.7, color: "#FFFFFF", opacity: 0.95 },
+    { x: 22, y: -15, size: 0.85, color: "#FFE4EC", opacity: 0.75 },
+  ],
+  [
+    { x: -24, y: -12, size: 0.8, color: "#FEBCC8", opacity: 0.6 },
+    { x: 24, y: -16, size: 0.75, color: "#FFFFFF", opacity: 0.85 },
+  ],
+  [
+    { x: -20, y: -15, size: 0.8, color: "#FFFFFF", opacity: 0.9 },
+    { x: 25, y: -12, size: 0.95, color: "#FEBCC8", opacity: 0.65 },
+  ],
+  [
+    { x: -24, y: -14, size: 0.75, color: "#FFE4EC", opacity: 0.75 },
+    { x: 22, y: -16, size: 0.7, color: "#FFFFFF", opacity: 0.9 },
+  ],
+  [
+    { x: -22, y: -12, size: 0.85, color: "#FFFFFF", opacity: 0.85 },
+    { x: 24, y: -14, size: 0.9, color: "#FEBCC8", opacity: 0.6 },
+  ],
+  [
+    { x: -20, y: -16, size: 0.8, color: "#FEBCC8", opacity: 0.7 },
+    { x: 22, y: -12, size: 0.75, color: "#FFFFFF", opacity: 0.9 },
+  ],
 ];
 
 interface Props {
@@ -153,7 +183,9 @@ export const LuckyWheelCanvas: React.FC<Props> = ({
 
       // Alternating cute mystery icons when covered
       const mysteryIcons = ["gift", "heart", "percent", "nail"];
-      const activeIconType = isMysteryMode ? mysteryIcons[i % mysteryIcons.length] : prize.iconType;
+      const activeIconType = isMysteryMode
+        ? mysteryIcons[i % mysteryIcons.length]
+        : prize.iconType;
 
       return (
         <g key={prize.id}>
@@ -377,10 +409,11 @@ export const LuckyWheelCanvas: React.FC<Props> = ({
           whileTap={{ scale: isSpinning ? 1 : 0.95 }}
           onClick={onSpinClick}
           disabled={isSpinning}
-          className={`relative w-18 h-18 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full flex flex-col items-center justify-center shadow-lg transition-all duration-300 border-[3.5px] border-white ${isSpinning
-            ? "bg-[#FED5DF] cursor-not-allowed opacity-90"
-            : "bg-gradient-to-b from-[#FEDBE5] via-[#FFAEC4] to-[#F2789B] hover:shadow-[#FEBCC8]/70 hover:shadow-xl cursor-pointer"
-            }`}
+          className={`relative w-18 h-18 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full flex flex-col items-center justify-center shadow-lg transition-all duration-300 border-[3.5px] border-white ${
+            isSpinning
+              ? "bg-[#FED5DF] cursor-not-allowed opacity-90"
+              : "bg-gradient-to-b from-[#FEDBE5] via-[#FFAEC4] to-[#F2789B] hover:shadow-[#FEBCC8]/70 hover:shadow-xl cursor-pointer"
+          }`}
           style={{
             boxShadow:
               "0 0 16px rgba(254, 188, 200, 0.7), inset 0 2px 4px rgba(255,255,255,0.9)",

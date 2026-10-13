@@ -3,7 +3,16 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Settings, RotateCcw, Check, Gift, Percent, Heart, Sparkles } from "lucide-react";
+import {
+  X,
+  Settings,
+  RotateCcw,
+  Check,
+  Gift,
+  Percent,
+  Heart,
+  Sparkles,
+} from "lucide-react";
 import { PrizeItem, PRIZES } from "./LuckyWheelCanvas";
 
 interface Props {
@@ -25,7 +34,9 @@ export const PrizeSettingsModal: React.FC<Props> = ({
 }) => {
   const [mounted, setMounted] = useState(false);
   const [editablePrizes, setEditablePrizes] = useState<PrizeItem[]>([]);
-  const [selectedForcedIndex, setSelectedForcedIndex] = useState<number | null>(forcedPrizeIndex);
+  const [selectedForcedIndex, setSelectedForcedIndex] = useState<number | null>(
+    forcedPrizeIndex,
+  );
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   useEffect(() => {
@@ -45,7 +56,7 @@ export const PrizeSettingsModal: React.FC<Props> = ({
   const handlePrizeChange = (
     index: number,
     field: keyof PrizeItem,
-    value: string
+    value: string,
   ) => {
     const updated = [...editablePrizes];
     updated[index] = {
@@ -127,10 +138,11 @@ export const PrizeSettingsModal: React.FC<Props> = ({
                   <button
                     type="button"
                     onClick={() => setSelectedForcedIndex(null)}
-                    className={`px-3 py-2 text-xs font-bold rounded-xl border transition cursor-pointer ${selectedForcedIndex === null
+                    className={`px-3 py-2 text-xs font-bold rounded-xl border transition cursor-pointer ${
+                      selectedForcedIndex === null
                         ? "bg-gradient-to-r from-[#FFA6C9] via-[#F472B6] to-[#E11D48] text-white border-transparent shadow-sm"
                         : "bg-white text-[#881337] border-[#FEBCC8]/80 hover:bg-[#FFF0F4]"
-                      }`}
+                    }`}
                   >
                     🎲 Ngẫu nhiên
                   </button>
@@ -139,10 +151,11 @@ export const PrizeSettingsModal: React.FC<Props> = ({
                       key={p.id}
                       type="button"
                       onClick={() => setSelectedForcedIndex(idx)}
-                      className={`px-2.5 py-2 text-xs font-bold rounded-xl border truncate transition cursor-pointer ${selectedForcedIndex === idx
+                      className={`px-2.5 py-2 text-xs font-bold rounded-xl border truncate transition cursor-pointer ${
+                        selectedForcedIndex === idx
                           ? "bg-gradient-to-r from-[#FFA6C9] via-[#F472B6] to-[#E11D48] text-white border-transparent shadow-sm"
                           : "bg-white text-[#881337] border-[#FEBCC8]/80 hover:bg-[#FFF0F4]"
-                        }`}
+                      }`}
                     >
                       🎯 Ô {idx + 1}: {p.title}
                     </button>
@@ -216,7 +229,7 @@ export const PrizeSettingsModal: React.FC<Props> = ({
                             handlePrizeChange(
                               idx,
                               "iconType",
-                              e.target.value as any
+                              e.target.value as any,
                             )
                           }
                           className="w-full px-2 py-1.5 text-xs font-semibold rounded-xl border border-[#FEBCC8] focus:border-[#E11D48] bg-white text-[#881337]"
@@ -256,10 +269,11 @@ export const PrizeSettingsModal: React.FC<Props> = ({
                 <button
                   type="button"
                   onClick={handleSave}
-                  className={`w-full sm:w-auto px-6 py-2.5 font-bold text-xs sm:text-sm rounded-xl text-white shadow-md flex items-center justify-center gap-2 transition cursor-pointer ${savedSuccess
+                  className={`w-full sm:w-auto px-6 py-2.5 font-bold text-xs sm:text-sm rounded-xl text-white shadow-md flex items-center justify-center gap-2 transition cursor-pointer ${
+                    savedSuccess
                       ? "bg-emerald-600 hover:bg-emerald-700"
                       : "bg-gradient-to-r from-[#FFA6C9] via-[#F472B6] to-[#E11D48] hover:opacity-95"
-                    }`}
+                  }`}
                 >
                   {savedSuccess ? (
                     <>
@@ -276,6 +290,6 @@ export const PrizeSettingsModal: React.FC<Props> = ({
         </div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 };

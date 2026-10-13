@@ -16,7 +16,8 @@ const Template = ({ children }: ITemplateProps) => {
   const isFullScreenPage =
     pathname?.includes("/booking") ||
     pathname?.includes("/services") ||
-    pathname?.includes("/vong-quay");
+    pathname?.includes("/vong-quay") ||
+    pathname?.includes("/whac-a-mole");
 
   return (
     <div className="flex flex-col min-h-screen relative w-full bg-[#fff5f4] selection:bg-[#f8d4d8]">
@@ -24,7 +25,9 @@ const Template = ({ children }: ITemplateProps) => {
 
       {!isFullScreenPage && <Header />}
 
-      <main className={`flex-1 w-full relative z-10 ${!isFullScreenPage ? "pt-20" : "pt-0"}`}>
+      <main
+        className={`flex-1 w-full relative z-10 ${!isFullScreenPage ? "pt-20" : "pt-0"}`}
+      >
         {children}
 
         {!isFullScreenPage && <MobileNav />}

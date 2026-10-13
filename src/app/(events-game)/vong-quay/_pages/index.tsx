@@ -1,15 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
-import { LuckyWheelCanvas, PRIZES, PrizeItem } from "@/components/LuckyWheelModal/LuckyWheelCanvas";
-import { PrizeWinModal } from "@/components/LuckyWheelModal/PrizeWinModal";
-import { PrizeSettingsModal } from "@/components/LuckyWheelModal/PrizeSettingsModal";
-import { soundEffects } from "@/components/LuckyWheelModal/soundEffects";
+import {
+  LuckyWheelCanvas,
+  PRIZES,
+  PrizeItem,
+} from "@/app/(events-game)/vong-quay/_components/LuckyWheelCanvas";
+import {
+  PrizeWinModal,
+  soundEffects,
+  PrizeSettingsModal,
+} from "../_components";
 import confetti from "canvas-confetti";
-import { Sparkles, X } from "lucide-react";
-import Link from "next/link";
+import { Sparkles } from "lucide-react";
+import { useState } from "react";
 
-export default function LuckyWheelPage() {
+export const LuckyWheelScreen = () => {
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [spinDuration, setSpinDuration] = useState(2.2);
@@ -38,11 +43,9 @@ export default function LuckyWheelPage() {
     setIsSpinning(true);
     soundEffects.playSpinStartSound();
 
-    // Random spin duration between min 3.0s and max 5.0s
     const randomDuration = 3.0 + Math.random() * (5.0 - 3.0);
     setSpinDuration(randomDuration);
 
-    // Select prize (forced index if configured, otherwise random)
     let prizeIndex: number;
     if (
       forcedPrizeIndex !== null &&
@@ -63,13 +66,16 @@ export default function LuckyWheelPage() {
 
     setRotationAngle(targetAngle);
 
-    setTimeout(() => {
-      setIsSpinning(false);
-      setWonPrize(selectedPrize);
-      setShowWinModal(true);
-      triggerConfetti();
-      soundEffects.playWinSound();
-    }, randomDuration * 1000 + 100);
+    setTimeout(
+      () => {
+        setIsSpinning(false);
+        setWonPrize(selectedPrize);
+        setShowWinModal(true);
+        triggerConfetti();
+        soundEffects.playWinSound();
+      },
+      randomDuration * 1000 + 100,
+    );
   };
 
   return (
@@ -103,7 +109,8 @@ export default function LuckyWheelPage() {
               <h1
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-[#E85D88] whitespace-nowrap leading-tight py-1 px-1 tracking-normal"
                 style={{
-                  fontFamily: "'Dancing Script', 'Great Vibes', cursive, sans-serif",
+                  fontFamily:
+                    "'Dancing Script', 'Great Vibes', cursive, sans-serif",
                   filter: "drop-shadow(0 2px 6px rgba(254, 188, 200, 0.4))",
                 }}
               >
@@ -121,26 +128,51 @@ export default function LuckyWheelPage() {
             </div>
 
             <p className="text-[#B34366] text-xs sm:text-sm sm:text-base leading-relaxed font-medium">
-              10 Hộp quà bí mật đang chờ bạn khám phá chỉ với <strong className="text-[#E85D88] font-bold">1 lần quay duy nhất!</strong>
+              10 Hộp quà bí mật đang chờ bạn khám phá chỉ với{" "}
+              <strong className="text-[#E85D88] font-bold">
+                1 lần quay duy nhất!
+              </strong>
             </p>
 
             <div className="space-y-4 w-full bg-white/95 p-6 sm:p-7 rounded-[32px] border-2 border-[#FEDBE5] shadow-sm text-left backdrop-blur-sm">
               <div className="space-y-3 sm:space-y-3.5">
                 <div className="flex items-center gap-3.5 sm:gap-4 text-xs sm:text-sm font-bold text-[#9D385A]">
-                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">🎁</span>
-                  <span className="leading-snug">10 Hộp quà bí mật chứa đầy ưu đãi cực hời</span>
+                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">
+                    🎁
+                  </span>
+                  <span className="leading-snug">
+                    10 Hộp quà bí mật chứa đầy ưu đãi cực hời
+                  </span>
                 </div>
                 <div className="flex items-center gap-3.5 sm:gap-4 text-xs sm:text-sm font-bold text-[#9D385A]">
-                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">✨</span>
-                  <span className="leading-snug">Voucher giảm giá dịch vụ nail: <strong className="text-[#E85D88] font-black">10%, 7%, 5%</strong></span>
+                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">
+                    ✨
+                  </span>
+                  <span className="leading-snug">
+                    Voucher giảm giá dịch vụ nail:{" "}
+                    <strong className="text-[#E85D88] font-black">
+                      10%, 7%, 5%
+                    </strong>
+                  </span>
                 </div>
                 <div className="flex items-center gap-3.5 sm:gap-4 text-xs sm:text-sm font-bold text-[#9D385A]">
-                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">💰</span>
-                  <span className="leading-snug">Giảm trực tiếp hóa đơn: <strong className="text-[#E85D88] font-black">10K, 15K, 20K</strong></span>
+                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">
+                    💰
+                  </span>
+                  <span className="leading-snug">
+                    Giảm trực tiếp hóa đơn:{" "}
+                    <strong className="text-[#E85D88] font-black">
+                      10K, 15K, 20K
+                    </strong>
+                  </span>
                 </div>
                 <div className="flex items-center gap-3.5 sm:gap-4 text-xs sm:text-sm font-bold text-[#9D385A]">
-                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">💅</span>
-                  <span className="leading-snug">Tặng charm cao cấp, charm đổ khuôn & sticker</span>
+                  <span className="w-6 h-6 flex items-center justify-center text-base sm:text-lg shrink-0">
+                    💅
+                  </span>
+                  <span className="leading-snug">
+                    Tặng charm cao cấp, charm đổ khuôn & sticker
+                  </span>
                 </div>
               </div>
 
@@ -159,17 +191,22 @@ export default function LuckyWheelPage() {
               <button
                 onClick={handleSpin}
                 disabled={isSpinning}
-                className={`w-full py-4 rounded-full font-bold text-white text-base sm:text-lg tracking-wider uppercase shadow-lg flex items-center justify-center gap-2.5 transition-all duration-300 border-2 border-white ${isSpinning
-                  ? "bg-[#FED5DF] opacity-80 cursor-not-allowed"
-                  : "bg-linear-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] hover:shadow-[#FEBCC8]/60 hover:shadow-xl cursor-pointer hover:scale-[1.01]"
-                  }`}
+                className={`w-full py-4 rounded-full font-bold text-white text-base sm:text-lg tracking-wider uppercase shadow-lg flex items-center justify-center gap-2.5 transition-all duration-300 border-2 border-white ${
+                  isSpinning
+                    ? "bg-[#FED5DF] opacity-80 cursor-not-allowed"
+                    : "bg-linear-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] hover:shadow-[#FEBCC8]/60 hover:shadow-xl cursor-pointer hover:scale-[1.01]"
+                }`}
                 style={{
                   boxShadow:
                     "0 8px 20px -4px rgba(254, 188, 200, 0.7), inset 0 2px 4px rgba(255,255,255,0.8)",
                 }}
               >
                 <span>{isSpinning ? "ĐANG QUAY..." : "QUAY NGAY"}</span>
-                <img src="/images/icon-05.png" alt="Paw" className="w-5 h-5 object-contain" />
+                <img
+                  src="/images/icon-05.png"
+                  alt="Paw"
+                  className="w-5 h-5 object-contain"
+                />
               </button>
             </div>
 
@@ -196,4 +233,4 @@ export default function LuckyWheelPage() {
       />
     </div>
   );
-}
+};

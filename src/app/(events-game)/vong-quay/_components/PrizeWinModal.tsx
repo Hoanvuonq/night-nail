@@ -17,8 +17,7 @@ export const PrizeWinModal: React.FC<Props> = ({ isOpen, prize, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
-          {/* Soft Romantic Pastel Backdrop */}
+        <div className="fixed inset-0 z-10000 flex items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -27,21 +26,18 @@ export const PrizeWinModal: React.FC<Props> = ({ isOpen, prize, onClose }) => {
             className="absolute inset-0 bg-[#581c2b]/25 backdrop-blur-md"
           />
 
-          {/* Modal Container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
-            className="relative z-10 w-full max-w-md bg-gradient-to-b from-[#FFFDFE] to-[#FFF5F8] rounded-[36px] p-6 sm:p-8 shadow-2xl border-4 border-white text-center overflow-hidden"
+            className="relative z-10 w-full max-w-md bg-linear-to-b from-[#FFFDFE] to-[#FFF5F8] rounded-[36px] p-6 sm:p-8 shadow-2xl border-4 border-white text-center overflow-hidden"
             style={{
               boxShadow: "0 20px 45px rgba(254, 188, 200, 0.55)",
               fontFamily: "'Quicksand', 'Playpen Sans', sans-serif",
             }}
           >
-            {/* Inner Dashed Border Line */}
             <div className="absolute inset-3 border-2 border-dashed border-[#FEDBE5] rounded-[28px] pointer-events-none" />
 
-            {/* Background floating sparkles & paws */}
             <div className="absolute top-4 left-6 text-[#FFAEC4] animate-bounce">
               <Sparkles className="w-5 h-5" />
             </div>
@@ -49,7 +45,11 @@ export const PrizeWinModal: React.FC<Props> = ({ isOpen, prize, onClose }) => {
               <Heart className="w-5 h-5 fill-[#FFD1DC]" />
             </div>
             <div className="absolute top-8 right-12 select-none opacity-80">
-              <img src="/images/icon-05.png" alt="Paw" className="w-5 h-5 object-contain" />
+              <img
+                src="/images/icon-05.png"
+                alt="Paw"
+                className="w-5 h-5 object-contain"
+              />
             </div>
 
             {/* Close Button */}
@@ -76,7 +76,10 @@ export const PrizeWinModal: React.FC<Props> = ({ isOpen, prize, onClose }) => {
             {/* Title */}
             <h3
               className="text-3xl sm:text-4xl font-bold text-[#E85D88] mb-2 leading-tight"
-              style={{ fontFamily: "'Dancing Script', 'Great Vibes', cursive, sans-serif" }}
+              style={{
+                fontFamily:
+                  "'Dancing Script', 'Great Vibes', cursive, sans-serif",
+              }}
             >
               Bạn đã trúng thưởng!
             </h3>
@@ -91,12 +94,16 @@ export const PrizeWinModal: React.FC<Props> = ({ isOpen, prize, onClose }) => {
               </span>
               <div className="mt-3 px-3.5 py-1 bg-[#FFF7FA] rounded-full text-xs font-mono text-[#D94876] flex items-center gap-1.5 border border-[#FEDBE5]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#E85D88]" />
-                <span>MÃ ƯU ĐÃI: <strong className="text-[#9D385A]">NIGHTNAILS2026</strong></span>
+                <span>
+                  MÃ ƯU ĐÃI:{" "}
+                  <strong className="text-[#9D385A]">NIGHTNAILS2026</strong>
+                </span>
               </div>
             </div>
 
             <p className="text-xs text-[#B34366] mb-5 px-2 relative z-10 font-medium leading-relaxed">
-              Vui lòng chụp màn hình hoặc đưa mã ưu đãi này cho nhân viên Night Nails khi làm dịch vụ để áp dụng ngay!
+              Vui lòng chụp màn hình hoặc đưa mã ưu đãi này cho nhân viên Night
+              Nails khi làm dịch vụ để áp dụng ngay!
             </p>
 
             {/* CTA Button with White-Pink Paw */}
@@ -107,7 +114,11 @@ export const PrizeWinModal: React.FC<Props> = ({ isOpen, prize, onClose }) => {
               className="w-full py-3.5 bg-gradient-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] text-white font-bold rounded-full shadow-md hover:shadow-[#FEBCC8]/70 transition flex items-center justify-center gap-2 text-sm sm:text-base tracking-wider border-2 border-white relative z-10 cursor-pointer"
             >
               <span>NHẬN QUÀ NGAY</span>
-              <img src="/images/icon-05.png" alt="Paw" className="w-4.5 h-4.5 object-contain" />
+              <img
+                src="/images/icon-05.png"
+                alt="Paw"
+                className="w-4.5 h-4.5 object-contain"
+              />
             </motion.button>
           </motion.div>
         </div>
@@ -115,4 +126,3 @@ export const PrizeWinModal: React.FC<Props> = ({ isOpen, prize, onClose }) => {
     </AnimatePresence>
   );
 };
-

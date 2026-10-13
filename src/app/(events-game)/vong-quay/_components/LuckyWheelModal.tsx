@@ -61,13 +61,16 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
     setRotationAngle(targetAngle);
 
-    setTimeout(() => {
-      setIsSpinning(false);
-      setWonPrize(selectedPrize);
-      setShowWinModal(true);
-      triggerConfetti();
-      soundEffects.playWinSound();
-    }, randomDuration * 1000 + 100);
+    setTimeout(
+      () => {
+        setIsSpinning(false);
+        setWonPrize(selectedPrize);
+        setShowWinModal(true);
+        triggerConfetti();
+        soundEffects.playWinSound();
+      },
+      randomDuration * 1000 + 100,
+    );
   };
 
   if (!mounted) return null;
@@ -143,8 +146,10 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     <h2
                       className="text-4xl sm:text-5xl lg:text-6xl font-normal text-[#E11D48] leading-tight py-1"
                       style={{
-                        fontFamily: "'Dancing Script', 'Great Vibes', cursive, sans-serif",
-                        filter: "drop-shadow(0 2px 4px rgba(254, 188, 200, 0.4))",
+                        fontFamily:
+                          "'Dancing Script', 'Great Vibes', cursive, sans-serif",
+                        filter:
+                          "drop-shadow(0 2px 4px rgba(254, 188, 200, 0.4))",
                       }}
                     >
                       Vòng Quay May Mắn
@@ -162,14 +167,23 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
                   {/* Description */}
                   <p className="text-gray-600 text-xs sm:text-sm leading-relaxed max-w-md">
-                    Cơ hội nhận ngay các phần quà hấp dẫn khi quay vòng quay may mắn chỉ với <strong className="text-[#E11D48] font-bold">1 lần nhấn!</strong>
+                    Cơ hội nhận ngay các phần quà hấp dẫn khi quay vòng quay may
+                    mắn chỉ với{" "}
+                    <strong className="text-[#E11D48] font-bold">
+                      1 lần nhấn!
+                    </strong>
                   </p>
 
                   {/* Bullet Points with Paw Icons 🐾 */}
                   <div className="space-y-3 w-full max-w-md bg-white/95 p-4 sm:p-5 rounded-2xl border-2 border-[#FEBCC8] shadow-sm text-left">
                     <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-gray-800">
                       <span className="text-[#F472B6] text-base">🐾</span>
-                      <span>Giảm giá dịch vụ nail lên đến <strong className="text-[#E11D48] text-sm sm:text-base font-black">50%</strong></span>
+                      <span>
+                        Giảm giá dịch vụ nail lên đến{" "}
+                        <strong className="text-[#E11D48] text-sm sm:text-base font-black">
+                          50%
+                        </strong>
+                      </span>
                     </div>
                     <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-gray-800">
                       <span className="text-[#F472B6] text-base">🐾</span>
@@ -200,10 +214,11 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
                       whileTap={{ scale: isSpinning ? 1 : 0.97 }}
                       onClick={handleSpin}
                       disabled={isSpinning}
-                      className={`w-full py-4 rounded-full font-extrabold text-white text-lg tracking-wider uppercase shadow-xl flex items-center justify-center gap-2 transition-all duration-300 border-2 border-white ${isSpinning
-                        ? "bg-[#FEBCC8] opacity-80 cursor-not-allowed"
-                        : "bg-linear-to-r from-[#FEBCC8] via-[#F472B6] to-[#E11D48] hover:shadow-[#FEBCC8]/70 hover:shadow-2xl cursor-pointer"
-                        }`}
+                      className={`w-full py-4 rounded-full font-extrabold text-white text-lg tracking-wider uppercase shadow-xl flex items-center justify-center gap-2 transition-all duration-300 border-2 border-white ${
+                        isSpinning
+                          ? "bg-[#FEBCC8] opacity-80 cursor-not-allowed"
+                          : "bg-linear-to-r from-[#FEBCC8] via-[#F472B6] to-[#E11D48] hover:shadow-[#FEBCC8]/70 hover:shadow-2xl cursor-pointer"
+                      }`}
                       style={{
                         boxShadow:
                           "0 10px 25px -5px rgba(254, 188, 200, 0.8), inset 0 2px 4px rgba(255,255,255,0.8)",
@@ -232,6 +247,6 @@ export const LuckyWheelModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
       )}
     </AnimatePresence>,
-    document.body
+    document.body,
   );
 };
