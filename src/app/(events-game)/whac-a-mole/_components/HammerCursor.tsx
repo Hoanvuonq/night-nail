@@ -31,15 +31,15 @@ export default function HammerCursor({
             style={{
               left: `${x}%`,
               top: `${y}%`,
-              transform: "translate(-42%, -65%)",
+              transform: "translate(-67%, -23%)",
             }}
           >
             <motion.div
-              className="origin-[45%_70%]"
-              initial={{ scale: 0.9, rotate: -15 }}
+              className="origin-[67%_23%]"
+              initial={{ scale: 0.95, rotate: -15 }}
               animate={
                 smashing
-                  ? { rotate: [-15, 42, -15], scale: [1, 0.94, 1] }
+                  ? { rotate: [-15, 30, -15], scale: [1, 0.92, 1] }
                   : { rotate: -15, scale: 1 }
               }
               exit={{ opacity: 0, scale: 0.85 }}

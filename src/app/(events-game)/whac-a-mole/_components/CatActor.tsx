@@ -23,13 +23,14 @@ type Props = {
 };
 
 // Each new nonce gets a different, deterministic pseudo-random visual variant.
-// This avoids a server/client hydration mismatch from Math.random() in render.
+// Chọn ngẫu nhiên 1 trong 3 biểu cảm: appear-a, appear-b hoặc idle
 function selectAppearance(
   nonce: number,
   level: CatLevel,
-): "appear-a" | "appear-b" {
+): "appear-a" | "appear-b" | "idle" {
   const x = Math.sin(nonce * 127.1 + level * 311.7) * 43758.5453;
-  return x - Math.floor(x) < 0.5 ? "appear-a" : "appear-b";
+  const frac = x - Math.floor(x);
+  return frac < 0.33 ? "appear-a" : frac < 0.66 ? "appear-b" : "idle";
 }
 
 const ASSET_ROOT = "/whac-a-mole/cat";
@@ -53,7 +54,7 @@ export default function CatActor({
     onFinishedRef.current = onFinished;
   }, [onFinished]);
 
-  // On new spawn, choose either appearance independently of the previous cat.
+  // Khi spawn mới, chọn ngẫu nhiên 1 trong 3 dáng (appear-a, appear-b, idle) và giữ nguyên
   useEffect(() => {
     finishedOnce.current = false;
     setFinished(false);
@@ -74,24 +75,20 @@ export default function CatActor({
     }
   }, [isHit, isExpired, finished]);
 
+  // Xử lý chuỗi animation khi hit hoặc lặn xuống (down-1 -> down-2 -> finished)
+  // Không đổi appear sang idle nữa để tránh giật nhấp nháy
   useEffect(() => {
     if (finished) return;
     const duration: Partial<Record<CatMood, number>> = {
-      "appear-a": 220,
-      "appear-b": 220,
-      hit: 300,
-      "down-1": 130,
-      "down-2": 130,
+      hit: 320,
+      "down-1": 150,
+      "down-2": 150,
     };
     const ms = duration[mood];
     if (ms === undefined) return;
 
     const timer = window.setTimeout(() => {
       switch (mood) {
-        case "appear-a":
-        case "appear-b":
-          setMood(isHit ? "hit" : isExpired ? "down-1" : "idle");
-          break;
         case "hit":
           setMood("down-1");
           break;
@@ -108,7 +105,7 @@ export default function CatActor({
       }
     }, ms);
     return () => window.clearTimeout(timer);
-  }, [mood, finished, isHit, isExpired, nonce]);
+  }, [mood, finished, nonce]);
 
   const source = `${ASSET_ROOT}/cat-${String(level).padStart(2, "0")}/icon-cat-${mood}.png`;
   const down = mood === "down-1" || mood === "down-2";
@@ -138,27 +135,21 @@ export default function CatActor({
                 : { opacity: 1, y: "0%", scale: 1, rotate: 0 }
           }
           exit={{ opacity: 0, y: "95%", scale: 0.75 }}
-          transition={{ duration: mood === "hit" ? 0.3 : 0.2, ease: "easeOut" }}
+          transition={{
+            duration: mood === "hit" ? 0.3 : 0.28,
+            ease: "easeOut",
+          }}
         >
-          <AnimatePresence mode="sync" initial={false}>
-            <motion.span
-              key={mood}
-              className="absolute inset-0 block"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.075 }}
-            >
-              <Image
-                src={source}
-                alt={`Mèo cấp ${level}: ${mood}`}
-                fill
-                sizes="(max-width: 768px) 110px, 165px"
-                draggable={false}
-                className="object-contain object-bottom"
-              />
-            </motion.span>
-          </AnimatePresence>
+          <span className="absolute inset-0 block">
+            <Image
+              src={source}
+              alt={`Mèo cấp ${level}: ${mood}`}
+              fill
+              sizes="(max-width: 768px) 110px, 165px"
+              draggable={false}
+              className="object-contain object-bottom"
+            />
+          </span>
           <span className={`level-tag level-${level}`}>★ {level}</span>
           {mood === "hit" && (
             <motion.span

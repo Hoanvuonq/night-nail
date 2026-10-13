@@ -76,8 +76,8 @@ export const RewardCard = ({
     <div
       className={`reward-card mt-3 rounded-2xl sm:rounded-3xl border border-[#eed3bd] bg-[#fffaf4]/90 p-3.5 sm:p-4 md:p-5 backdrop-blur-md ${className}`}
     >
-      <h2 className="headline flex items-center justify-center gap-1.5 text-lg sm:text-xl text-[#995f47]">
-        <Sparkles size={18} /> Phân loại mèo
+      <h2 className="flex items-center justify-center gap-1.5 text-base sm:text-lg font-bold font-['Fredoka',sans-serif] text-[#8e523f] tracking-wide">
+        <Sparkles size={17} className="text-[#d88775]" /> Phân loại mèo
       </h2>
 
       <div className="mt-2.5 grid grid-cols-4 gap-1.5 sm:gap-2">
@@ -96,7 +96,7 @@ export const RewardCard = ({
               />
             </div>
             <span
-              className={`level-tag-static level-${cat.level} text-[10px] sm:text-xs py-0.5 px-1`}
+              className={`level-tag-static level-${cat.level} text-[10px] sm:text-xs py-0.5 px-1 font-['Fredoka',sans-serif]`}
             >
               ★ {cat.level} điểm
             </span>
@@ -104,8 +104,8 @@ export const RewardCard = ({
         ))}
       </div>
 
-      <h3 className="mt-3 flex items-center gap-1.5 font-bold text-xs sm:text-sm text-[#9b654b]">
-        <Gift size={16} /> Quà tặng từ Night Nail
+      <h3 className="mt-3 flex items-center gap-1.5 font-bold font-['Fredoka',sans-serif] text-xs sm:text-sm text-[#8e523f] tracking-wide">
+        <Gift size={16} className="text-[#d88775]" /> Quà tặng từ Night Nail
       </h3>
 
       <div className="mt-1 divide-y divide-[#f0dac8]">
