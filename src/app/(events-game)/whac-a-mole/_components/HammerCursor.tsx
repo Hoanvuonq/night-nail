@@ -7,6 +7,7 @@ type HammerCursorProps = {
   visible: boolean;
   idleVisible?: boolean;
   smashing: boolean;
+  swingTick?: number;
   x: number;
   y: number;
   src?: string;
@@ -16,6 +17,7 @@ export default function HammerCursor({
   visible,
   idleVisible = false,
   smashing,
+  swingTick = 0,
   x,
   y,
   src = "/whac-a-mole/hammer.png",
@@ -35,6 +37,7 @@ export default function HammerCursor({
             }}
           >
             <motion.div
+              key={swingTick}
               className="origin-[67%_23%]"
               initial={{ scale: 0.95, rotate: -15 }}
               animate={
@@ -43,7 +46,7 @@ export default function HammerCursor({
                   : { rotate: -15, scale: 1 }
               }
               exit={{ opacity: 0, scale: 0.85 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
             >
               <Image
                 src={src}
@@ -52,7 +55,7 @@ export default function HammerCursor({
                 height={430}
                 priority
                 draggable={false}
-                className="hammer-image h-auto w-full drop-shadow-[0_18px_18px_rgba(87,52,43,.28)]"
+                className="hammer-image pointer-events-none select-none h-auto w-full drop-shadow-[0_18px_18px_rgba(87,52,43,.28)]"
               />
             </motion.div>
           </div>

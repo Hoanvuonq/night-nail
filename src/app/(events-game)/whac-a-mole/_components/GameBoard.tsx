@@ -60,6 +60,7 @@ interface GameBoardProps {
   pointerIn: boolean;
   cursor: { x: number; y: number };
   hammerDown: boolean;
+  swingTick?: number;
   boardShakeTick?: number;
   countdownText?: string | null;
   onHit: (holeIndex: number, clickPos?: { x: number; y: number }) => void;
@@ -82,6 +83,7 @@ export const GameBoard = ({
   pointerIn,
   cursor,
   hammerDown,
+  swingTick = 0,
   boardShakeTick = 0,
   countdownText = null,
   onHit,
@@ -93,9 +95,9 @@ export const GameBoard = ({
   return (
     <section
       aria-label="Bàn đập mèo chín lỗ"
-      className="relative mx-auto w-full max-w-[min(100%,480px,56vh)] lg:max-w-200"
+      className="relative mx-auto w-full max-w-[min(calc(100%-28px),450px,54vh)] sm:max-w-[min(calc(100%-36px),480px,56vh)] md:max-w-[min(540px,60vh)] lg:max-w-[min(560px,68vh)] xl:max-w-[min(640px,72vh)]"
     >
-      <div className="relative mx-auto mb-1 sm:mb-2 w-full max-w-48 sm:max-w-64 md:max-w-80 select-none drop-shadow-md z-20">
+      <div className="relative mx-auto mb-1 sm:mb-2 w-full max-w-40 sm:max-w-56 md:max-w-68 lg:max-w-76 select-none drop-shadow-md z-20">
         <Image
           src="/whac-a-mole/final-grading-spreadsheet.png"
           alt="Bảng điểm Night Nail"
@@ -141,21 +143,31 @@ export const GameBoard = ({
             onSwing?.();
             const rect = boardRef.current?.getBoundingClientRect();
             if (rect) {
-              const clickX = ((e.clientX - rect.left) / rect.width) * 100;
-              const clickY = ((e.clientY - rect.top) / rect.height) * 100;
+              let cx = e.clientX;
+              let cy = e.clientY;
+              const anyEvent = e.nativeEvent as unknown as { touches?: TouchList; changedTouches?: TouchList };
+              if ((!cx && !cy) && anyEvent.touches?.[0]) {
+                cx = anyEvent.touches[0].clientX;
+                cy = anyEvent.touches[0].clientY;
+              } else if ((!cx && !cy) && anyEvent.changedTouches?.[0]) {
+                cx = anyEvent.changedTouches[0].clientX;
+                cy = anyEvent.changedTouches[0].clientY;
+              }
+              const clickX = Math.max(0, Math.min(100, ((cx - rect.left) / rect.width) * 100));
+              const clickY = Math.max(0, Math.min(100, ((cy - rect.top) / rect.height) * 100));
               onHit(-1, { x: clickX, y: clickY });
             }
           }}
           onPointerEnter={onPointerEnter}
           onPointerLeave={onPointerLeave}
           onPointerMove={onPointerMove}
-          className={`relative aspect-[790/760] w-full touch-manipulation select-none ${
+          className={`relative aspect-[790/760] w-full touch-none select-none ${
             phase === "playing" ? "cursor-none [&_*]:cursor-none" : ""
           }`}
         >
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute -left-[8%] sm:-top-[2%] z-30 w-[30%] sm:-left-[12%] sm:w-[36%] drop-shadow-xl"
+            className="pointer-events-none absolute -left-[7%] -top-[1%] z-30 w-[27%] sm:-left-[10%] sm:-top-[2%] sm:w-[32%] drop-shadow-xl"
             animate={{ rotate: [-1.5, 1.5, -1.5] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -171,7 +183,7 @@ export const GameBoard = ({
 
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute -left-[10%] top-[12%] z-20 w-[24%] sm:-left-[15%] sm:top-[28%] sm:w-[25%] drop-shadow-xl"
+            className="pointer-events-none absolute -left-[8%] top-[14%] z-20 w-[22%] sm:-left-[12%] sm:top-[28%] sm:w-[24%] drop-shadow-xl"
             animate={{ rotate: [-2, 2, -2] }}
             transition={{
               duration: 4.5,
@@ -204,7 +216,7 @@ export const GameBoard = ({
 
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute -right-[10%] top-[22%] z-0 w-[24%] sm:-right-[10%] sm:-top-[2%] sm:w-[30%] drop-shadow-xl"
+            className="pointer-events-none absolute -right-[8%] top-[18%] z-0 w-[22%] sm:-right-[9%] sm:-top-[2%] sm:w-[27%] drop-shadow-xl"
             animate={{ rotate: [2, -2, 2] }}
             transition={{
               duration: 4.8,
@@ -248,12 +260,22 @@ export const GameBoard = ({
                 onPointerDown={(e) => {
                   e.stopPropagation();
                   const rect = boardRef.current?.getBoundingClientRect();
+                  let cx = e.clientX;
+                  let cy = e.clientY;
+                  const anyEvent = e.nativeEvent as unknown as { touches?: TouchList; changedTouches?: TouchList };
+                  if ((!cx && !cy) && anyEvent.touches?.[0]) {
+                    cx = anyEvent.touches[0].clientX;
+                    cy = anyEvent.touches[0].clientY;
+                  } else if ((!cx && !cy) && anyEvent.changedTouches?.[0]) {
+                    cx = anyEvent.changedTouches[0].clientX;
+                    cy = anyEvent.changedTouches[0].clientY;
+                  }
                   const clickPos = rect
                     ? {
-                        x: ((e.clientX - rect.left) / rect.width) * 100,
-                        y: ((e.clientY - rect.top) / rect.height) * 100,
+                        x: Math.max(0, Math.min(100, ((cx - rect.left) / rect.width) * 100)),
+                        y: Math.max(0, Math.min(100, ((cy - rect.top) / rect.height) * 100)),
                       }
-                    : undefined;
+                    : { x: p.x, y: p.y };
                   onHit(index, clickPos);
                 }}
                 onClick={(e) => {
@@ -264,7 +286,7 @@ export const GameBoard = ({
                     ? `: ${CAT_NAMES[cat.level]}, ${cat.level} điểm`
                     : ": trống"
                 }`}
-                className="hole-hit group"
+                className="hole-hit group touch-none select-none"
                 style={{ left: `${p.x}%`, top: `${p.y}%` }}
               >
                 <AnimatePresence mode="popLayout">
@@ -303,16 +325,16 @@ export const GameBoard = ({
                 transition={{ duration: 0.65, ease: "easeOut" }}
                 className="pointer-events-none absolute inset-0 z-40 flex items-center justify-center select-none"
               >
-                <div className="flex flex-col items-center justify-center rounded-3xl border-2 border-white/90 bg-white/85 px-7 py-4 shadow-2xl backdrop-blur-md">
-                  <span className="headline text-6xl sm:text-7xl md:text-8xl font-black tracking-wider text-[#985844] drop-shadow-sm">
+                <div className="flex flex-col items-center justify-center rounded-2xl sm:rounded-3xl border-2 border-white/90 bg-white/85 px-4 py-2.5 sm:px-7 sm:py-4 shadow-2xl backdrop-blur-md">
+                  <span className="headline text-5xl sm:text-7xl md:text-8xl font-black tracking-wider text-[#985844] drop-shadow-sm">
                     {countdownText}
                   </span>
                   {countdownText !== "BẮT ĐẦU!" ? (
-                    <span className="mt-1 text-xs sm:text-sm font-black text-[#bc7d6d] tracking-widest uppercase">
+                    <span className="mt-1 text-[11px] sm:text-xs md:text-sm font-black text-[#bc7d6d] tracking-widest uppercase">
                       Chuẩn bị sẵn sàng...
                     </span>
                   ) : (
-                    <span className="mt-1 text-xs sm:text-sm font-black text-[#a65d49] tracking-widest uppercase">
+                    <span className="mt-1 text-[11px] sm:text-xs md:text-sm font-black text-[#a65d49] tracking-widest uppercase">
                       🐾 ĐẬP THẬT NHIỀU MÈO NÀO!
                     </span>
                   )}
@@ -325,6 +347,7 @@ export const GameBoard = ({
             visible={phase === "playing" || phase === "countdown"}
             idleVisible={phase === "ready" || phase === "finished"}
             smashing={hammerDown}
+            swingTick={swingTick}
             x={cursor.x}
             y={cursor.y}
             src="/whac-a-mole/hammer.png"

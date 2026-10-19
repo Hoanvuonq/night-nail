@@ -6,14 +6,9 @@ import { Volume2, VolumeX, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Cat, HitFlash, Phase } from "../_components";
 import { GameBoard, HOLES, RewardCard } from "../_components";
+import { PRIZES, type PrizeItem } from "../../vong-quay/_components/LuckyWheelCanvas";
 
-const DURATION = 30;
-const DEMO_PRIZES = [
-  "Voucher giảm 5%",
-  "Voucher giảm 7%",
-  "Giảm 10K",
-  "Tặng sticker nail",
-];
+const DURATION = 15;
 const today = () => new Date().toLocaleDateString("en-CA");
 const pickLevel = (): Cat["level"] => {
   const n = Math.random();
@@ -37,12 +32,14 @@ export const WhacAMoleScreen = () => {
   const [flash, setFlash] = useState<HitFlash | null>(null);
   const [hitNonces, setHitNonces] = useState<number[]>([]);
   const [hammerDown, setHammerDown] = useState(false);
+  const [swingTick, setSmashTick] = useState(0);
   const [cursor, setCursor] = useState({ x: 50, y: 70 });
   const [pointerIn, setPointerIn] = useState(false);
   const [sound, setSound] = useState(false);
   const [played, setPlayed] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [prize, setPrize] = useState("");
+  const [wonPrize, setWonPrize] = useState<PrizeItem | null>(null);
   const [session, setSession] = useState(0);
   const [boardShakeTick, setBoardShakeTick] = useState(0);
   const [countdownText, setCountdownText] = useState<string | null>(null);
@@ -55,6 +52,7 @@ export const WhacAMoleScreen = () => {
   const hammerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const countdownTimers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const scoreRef = useRef(0);
+  const hitsRef = useRef(0);
   const nonceRef = useRef(10);
   const lastHitTime = useRef(0);
 
@@ -70,19 +68,74 @@ export const WhacAMoleScreen = () => {
     [],
   );
 
+  // Theo dõi cử chỉ di chuyển và chạm cảm ứng trên iPhone, iPad & PC
   useEffect(() => {
     if (phase !== "playing" && phase !== "countdown") return;
-    const handleGlobalPointerMove = (e: PointerEvent) => {
+
+    const updateCursorFromCoords = (clientX: number, clientY: number) => {
       const rect = boardRef.current?.getBoundingClientRect();
       if (!rect) return;
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      const x = Math.max(2, Math.min(98, ((clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(2, Math.min(98, ((clientY - rect.top) / rect.height) * 100));
       setCursor({ x, y });
       setPointerIn(true);
     };
-    window.addEventListener("pointermove", handleGlobalPointerMove);
-    return () =>
-      window.removeEventListener("pointermove", handleGlobalPointerMove);
+
+    const handlePointerMove = (e: PointerEvent) => {
+      updateCursorFromCoords(e.clientX, e.clientY);
+    };
+
+    const handlePointerDown = (e: PointerEvent) => {
+      updateCursorFromCoords(e.clientX, e.clientY);
+    };
+
+    window.addEventListener("pointermove", handlePointerMove, { capture: true, passive: true });
+    window.addEventListener("pointerdown", handlePointerDown, { capture: true, passive: true });
+
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove, { capture: true });
+      window.removeEventListener("pointerdown", handlePointerDown, { capture: true });
+    };
+  }, [phase]);
+
+  // Ngăn chạm vuốt trên bàn cờ làm cuộn trang trên iOS/iPad Safari, đồng thời di chuyển búa theo ngón tay mượt mà
+  useEffect(() => {
+    if (phase !== "playing") return;
+    const boardEl = boardRef.current;
+    if (!boardEl) return;
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.cancelable) {
+        e.preventDefault();
+      }
+      if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = boardEl.getBoundingClientRect();
+        const x = Math.max(2, Math.min(98, ((touch.clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(2, Math.min(98, ((touch.clientY - rect.top) / rect.height) * 100));
+        setCursor({ x, y });
+        setPointerIn(true);
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = boardEl.getBoundingClientRect();
+        const x = Math.max(2, Math.min(98, ((touch.clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(2, Math.min(98, ((touch.clientY - rect.top) / rect.height) * 100));
+        setCursor({ x, y });
+        setPointerIn(true);
+      }
+    };
+
+    boardEl.addEventListener("touchmove", handleTouchMove, { passive: false });
+    boardEl.addEventListener("touchstart", handleTouchStart, { passive: true });
+
+    return () => {
+      boardEl.removeEventListener("touchmove", handleTouchMove);
+      boardEl.removeEventListener("touchstart", handleTouchStart);
+    };
   }, [phase]);
 
   const playBeepSound = useCallback(
@@ -91,6 +144,9 @@ export const WhacAMoleScreen = () => {
       try {
         const ctx = audioRef.current ?? new AudioContext();
         audioRef.current = ctx;
+        if (ctx.state === "suspended") {
+          ctx.resume().catch(() => {});
+        }
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = "sine";
@@ -113,6 +169,9 @@ export const WhacAMoleScreen = () => {
     try {
       const ctx = audioRef.current ?? new AudioContext();
       audioRef.current = ctx;
+      if (ctx.state === "suspended") {
+        ctx.resume().catch(() => {});
+      }
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = "triangle";
@@ -132,11 +191,28 @@ export const WhacAMoleScreen = () => {
     setPhase("finished");
     setCats([]);
     catsRef.current = [];
-    setPrize(DEMO_PRIZES[Math.floor(Math.random() * DEMO_PRIZES.length)]);
+
+    // Luôn đảm bảo 100% có quà theo danh sách 10 PRIZES bên game vòng quay
+    const finalHits = hitsRef.current;
+    let pool = PRIZES;
+    if (finalHits >= 10) {
+      // Đập tốt (>= 10 hits): cơ hội cao nhận các quà giá trị cao như Giảm 10%, Giảm 20K, Giảm 15K, Tặng 1 charm lớn
+      pool = PRIZES.filter((p) => [1, 2, 5, 6, 8].includes(p.id));
+    } else if (finalHits >= 5) {
+      // Điểm khá (5-9 hits): nhóm quà vừa như Giảm 7%, Giảm 10K, Giảm 15K, Tặng 2 sticker, Tặng 2 charm bé
+      pool = PRIZES.filter((p) => [2, 3, 4, 5, 7, 9].includes(p.id));
+    } else {
+      // Auto chơi / ít hits (0-4 hits): các quà vui vẻ như Giảm 5%, Giảm 10K, Tặng 2 sticker, Tặng 5% cho lần sau
+      pool = PRIZES.filter((p) => [3, 4, 7, 9, 10].includes(p.id));
+    }
+
+    const chosen = pool[Math.floor(Math.random() * pool.length)] || PRIZES[0];
+    setWonPrize(chosen);
+    setPrize(`${chosen.title} (${chosen.subtitle})`);
     setShowResult(true);
   }, []);
 
-  // Đếm ngược 30s khi đang chơi
+  // Đếm ngược 15s khi đang chơi
   useEffect(() => {
     if (phase !== "playing") return;
     const ticker = window.setInterval(
@@ -194,8 +270,8 @@ export const WhacAMoleScreen = () => {
       setCats(batch);
     };
     spawn();
-    // Tăng thời gian xuất hiện & biến mất từ 1150ms lên 1700ms để mèo ở lại lâu hơn, dễ đập trúng hơn
-    const timer = window.setInterval(spawn, 1700);
+    // 1500ms xuất hiện đợt mèo mới, phù hợp với game 15s để người chơi dễ quan sát và đập trúng
+    const timer = window.setInterval(spawn, 1500);
     return () => window.clearInterval(timer);
   }, [phase, session]);
 
@@ -207,10 +283,12 @@ export const WhacAMoleScreen = () => {
     setPointerIn(true);
     setCursor({ x: 50, y: 70 });
     scoreRef.current = 0;
+    hitsRef.current = 0;
     setScore(0);
     setHits(0);
     setSeconds(DURATION);
     setPrize("");
+    setWonPrize(null);
     setShowResult(false);
     setFlash(null);
     setHitNonces([]);
@@ -250,18 +328,28 @@ export const WhacAMoleScreen = () => {
     countdownTimers.current = [t1, t2, t3, t4];
   }
   function swing() {
+    setSmashTick((v) => v + 1);
     setHammerDown(false);
     requestAnimationFrame(() => setHammerDown(true));
     if (hammerTimer.current) clearTimeout(hammerTimer.current);
-    hammerTimer.current = setTimeout(() => setHammerDown(false), 230);
+    hammerTimer.current = setTimeout(() => setHammerDown(false), 220);
   }
   function hit(hole: number, clickPos?: { x: number; y: number }) {
     if (phaseRef.current !== "playing") return;
 
-    const now = Date.now();
-    if (now - lastHitTime.current < 260) return;
+    // Luôn cập nhật vị trí búa đến ngay điểm vừa click/chạm trên iPhone, iPad & PC
+    if (clickPos) {
+      setCursor(clickPos);
+      setPointerIn(true);
+    } else if (hole >= 0 && HOLES[hole]) {
+      setCursor({ x: HOLES[hole].x, y: HOLES[hole].y });
+      setPointerIn(true);
+    }
 
     swing();
+
+    const now = Date.now();
+    if (now - lastHitTime.current < 90) return;
 
     let targetCat =
       hole >= 0 ? catsRef.current.find((c) => c.id === hole) : undefined;
@@ -271,7 +359,7 @@ export const WhacAMoleScreen = () => {
       catsRef.current.forEach((c) => {
         const hPos = HOLES[c.id];
         const dist = Math.hypot(clickPos.x - hPos.x, clickPos.y - (hPos.y - 3));
-        if (dist < 13 && dist < closestDist) {
+        if (dist < 15 && dist < closestDist) {
           closestDist = dist;
           targetCat = c;
         }
@@ -293,8 +381,9 @@ export const WhacAMoleScreen = () => {
       430,
     );
     scoreRef.current += cat.level;
+    hitsRef.current += 1;
     setScore(scoreRef.current);
-    setHits((v) => v + 1);
+    setHits(hitsRef.current);
     setFlash({ hole: hitHole, level: cat.level, nonce: cat.nonce });
     setBoardShakeTick((v) => v + 1);
     window.setTimeout(
@@ -307,47 +396,51 @@ export const WhacAMoleScreen = () => {
     const rect = boardRef.current?.getBoundingClientRect();
     if (!rect) return;
     setCursor({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
+      x: Math.max(2, Math.min(98, ((e.clientX - rect.left) / rect.width) * 100)),
+      y: Math.max(2, Math.min(98, ((e.clientY - rect.top) / rect.height) * 100)),
     });
   }
 
   return (
-    <main className="scene h-screen max-h-screen overflow-hidden flex flex-col justify-center select-none">
+    <main className="scene min-h-[100dvh] h-[100dvh] overflow-x-hidden overflow-y-auto lg:overflow-hidden flex flex-col justify-center select-none touch-none scrollbar-hide py-2 sm:py-3 lg:py-0">
       <div className="scene-wash" aria-hidden />
 
       <button
         type="button"
         onClick={() => setSound((v) => !v)}
         aria-label={sound ? "Tắt âm thanh" : "Bật âm thanh"}
-        className="fixed top-3 right-4 z-40 rounded-full border border-white/90 bg-white/75 p-2.5 text-[#9d6e5d] shadow-md backdrop-blur-md transition-colors hover:bg-white"
+        className="fixed top-3 right-3 sm:right-4 z-40 rounded-full border border-white/90 bg-white/75 p-2 sm:p-2.5 text-[#9d6e5d] shadow-md backdrop-blur-md transition-colors hover:bg-white"
       >
         {sound ? <Volume2 size={18} /> : <VolumeX size={18} />}
       </button>
 
-      <button
-        type="button"
-        onClick={() => setShowRewardsDrawer(true)}
-        className="fixed top-3 left-4 z-40 lg:hidden flex items-center gap-1.5 rounded-full border border-white/90 bg-white/80 px-3.5 py-2 text-xs font-bold text-[#9d6e5d] shadow-md backdrop-blur-md transition-all hover:bg-white active:scale-95"
-      >
-        <span>🎁</span>
-        <span>Quà tặng</span>
-      </button>
+      {phase !== "playing" && phase !== "countdown" && (
+        <>
+          <button
+            type="button"
+            onClick={() => setShowRewardsDrawer(true)}
+            className="fixed top-3 left-3 sm:left-4 z-40 lg:hidden flex items-center gap-1.5 rounded-full border border-white/90 bg-white/80 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold text-[#9d6e5d] shadow-md backdrop-blur-md transition-all hover:bg-white active:scale-95"
+          >
+            <span>🎁</span>
+            <span>Quà tặng</span>
+          </button>
 
-      <button
-        type="button"
-        onClick={() => setShowRewardsDrawer(true)}
-        aria-label="Xem quà tặng"
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-30 lg:hidden flex flex-col items-center gap-1 rounded-l-2xl border-l-2 border-y-2 border-white/95 bg-[#fff8f2]/95 py-2.5 px-1.5 text-[#9d6e5d] shadow-lg backdrop-blur-md active:scale-95 transition-transform"
-      >
-        <span className="text-base">🎁</span>
-        <span className="text-[10px] font-black tracking-wider [writing-mode:vertical-rl] rotate-180 text-[#9b6049]">
-          QUÀ TẶNG
-        </span>
-      </button>
+          <button
+            type="button"
+            onClick={() => setShowRewardsDrawer(true)}
+            aria-label="Xem quà tặng"
+            className="fixed right-0 top-1/2 -translate-y-1/2 z-30 lg:hidden flex flex-col items-center gap-1 rounded-l-2xl border-l-2 border-y-2 border-white/95 bg-[#fff8f2]/95 py-2.5 px-1.5 text-[#9d6e5d] shadow-lg backdrop-blur-md active:scale-95 transition-transform"
+          >
+            <span className="text-base">🎁</span>
+            <span className="text-[10px] font-black tracking-wider [writing-mode:vertical-rl] rotate-180 text-[#9b6049]">
+              QUÀ TẶNG
+            </span>
+          </button>
+        </>
+      )}
 
-      <div className="relative z-10 mx-auto w-full max-w-387.5 px-3 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-3 sm:gap-5 lg:grid-cols-[1.18fr_.82fr] xl:gap-9">
+      <div className="relative z-10 mx-auto w-full max-w-360 sm:max-w-380 px-2 sm:px-4 md:px-6 lg:px-8">
+        <div className="grid items-center gap-2.5 sm:gap-4 lg:grid-cols-[1.12fr_.88fr] xl:grid-cols-[1.18fr_.82fr] lg:gap-6 xl:gap-9">
           <div className="flex flex-col items-center w-full">
             <GameBoard
               phase={phase}
@@ -362,6 +455,7 @@ export const WhacAMoleScreen = () => {
               pointerIn={pointerIn}
               cursor={cursor}
               hammerDown={hammerDown}
+              swingTick={swingTick}
               boardShakeTick={boardShakeTick}
               countdownText={countdownText}
               onHit={hit}
@@ -370,7 +464,7 @@ export const WhacAMoleScreen = () => {
               onPointerEnter={() => setPointerIn(true)}
               onPointerLeave={() => setPointerIn(false)}
             />
-            <div className="mt-1.5 sm:mt-2.5 flex flex-col items-center gap-1.5 w-full max-w-70 sm:max-w-85 lg:hidden">
+            <div className="mt-1 sm:mt-2 flex flex-col items-center gap-1 sm:gap-1.5 w-full max-w-65 sm:max-w-80 md:max-w-90 lg:hidden">
               <motion.button
                 type="button"
                 onClick={start}
@@ -390,23 +484,24 @@ export const WhacAMoleScreen = () => {
               <button
                 type="button"
                 onClick={() => setShowRewardsDrawer(true)}
-                className="flex items-center gap-1 text-[11px] font-bold text-[#a06857] hover:text-[#783e30] py-0.5 active:scale-95 transition-all"
+                disabled={phase === "playing" || phase === "countdown"}
+                className="flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#a06857] hover:text-[#783e30] py-0.5 active:scale-95 transition-all disabled:opacity-50"
               >
                 <span>🎁 Xem quà tặng & phân loại mèo</span>
                 <span>❯</span>
               </button>
             </div>
           </div>
-          <section className="hidden lg:block mx-auto w-full max-w-120">
+          <section className="hidden lg:block mx-auto w-full max-w-115 xl:max-w-125">
             <div className="text-center">
-              <h1 className="headline great-vibes-regular text-4xl sm:text-5xl leading-tight text-[#9b6049]">
+              <h1 className="headline great-vibes-regular text-3xl sm:text-4xl xl:text-5xl leading-tight text-[#9b6049]">
                 Đập Mèo Nhận Quà ♡
               </h1>
-              <div className="mt-1.5 inline-block rounded-full bg-linear-to-r from-[#e6b7a4] via-[#e9a89f] to-[#d89f87] px-3.5 py-1 text-xs font-bold text-white shadow-xs">
+              <div className="mt-1 inline-block rounded-full bg-linear-to-r from-[#e6b7a4] via-[#e9a89f] to-[#d89f87] px-3 py-0.5 xl:px-3.5 xl:py-1 text-[11px] xl:text-xs font-bold text-white shadow-xs">
                 ✦ BÉ MÈO XUẤT HIỆN · AUTO CHƠI LÀ CÓ QUÀ ✦
               </div>
-              <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-[#895d50]">
-                Trong 30 giây, các bé mèo đáng yêu sẽ liên tục xuất hiện. Đập
+              <p className="mt-1 text-xs xl:text-sm leading-relaxed text-[#895d50]">
+                Trong 15 giây, các bé mèo đáng yêu sẽ liên tục xuất hiện. Đập
                 càng nhiều mèo cấp cao, điểm càng lớn!
               </p>
             </div>
@@ -417,7 +512,7 @@ export const WhacAMoleScreen = () => {
               disabled={phase === "playing" || phase === "countdown"}
               whileTap={{ scale: 0.96 }}
               whileHover={{ scale: 1.02 }}
-              className="play-button mt-3 sm:mt-3.5 w-full rounded-full px-5 py-3 sm:py-3.5 text-lg sm:text-xl font-black tracking-wide text-white disabled:opacity-75 shadow-md"
+              className="play-button mt-2.5 xl:mt-3.5 w-full rounded-full px-5 py-2.5 xl:py-3.5 text-base xl:text-xl font-black tracking-wide text-white disabled:opacity-75 shadow-md"
             >
               🐾{" "}
               {phase === "countdown"
@@ -427,7 +522,7 @@ export const WhacAMoleScreen = () => {
                   : "BẮT ĐẦU CHƠI"}{" "}
               ❯
             </motion.button>
-            <p className="mt-1.5 text-center text-[11px] sm:text-xs font-medium text-[#ae7867]">
+            <p className="mt-1 text-center text-[10px] xl:text-[11px] font-medium text-[#ae7867]">
               🎀 Chào mừng đến với Event Night Nail · Chúc bạn may mắn 🎀
             </p>
           </section>
@@ -443,13 +538,13 @@ export const WhacAMoleScreen = () => {
             role="dialog"
             aria-modal="true"
             aria-label="Kết quả mini game"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#523b32]/50 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#523b32]/50 p-3 sm:p-4 backdrop-blur-md"
           >
             <motion.div
               initial={{ y: 30, scale: 0.85 }}
               animate={{ y: 0, scale: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-md rounded-4xl border-4 border-white bg-linear-to-b from-[#fffaf4] to-[#ffe9e3] p-8 text-center shadow-2xl"
+              className="relative w-full max-w-[min(calc(100%-24px),440px)] max-h-[92dvh] overflow-y-auto rounded-3xl sm:rounded-4xl border-3 sm:border-4 border-white bg-linear-to-b from-[#fffaf4] to-[#ffe9e3] p-5 sm:p-7 md:p-8 text-center shadow-2xl scrollbar-hide"
             >
               <button
                 aria-label="Đóng"
@@ -466,15 +561,54 @@ export const WhacAMoleScreen = () => {
               <h2 className="headline mt-3 text-4xl text-[#9a5e48]">
                 Chúc mừng!
               </h2>
-              <p className="mt-4 text-[#946656]">
-                Bạn đã đạt {score} điểm với {hits} lần đập trúng!
+              <div className="mt-2 inline-block rounded-full bg-linear-to-r from-[#ffe9e3] via-[#ffd6cc] to-[#ffded6] px-3.5 py-1 text-xs font-bold text-[#b65844] shadow-xs">
+                ✦ AUTO CHƠI LÀ CÓ QUÀ 100% ✦
+              </div>
+              <p className="mt-3 text-sm text-[#946656]">
+                {hits > 0 ? (
+                  <>
+                    Bạn đã đạt{" "}
+                    <b className="text-[#a54c38] text-base">{score}</b> điểm với{" "}
+                    <b className="text-[#a54c38] text-base">{hits}</b> lần đập
+                    trúng!
+                  </>
+                ) : (
+                  "Bạn đã hoàn thành 15 giây tham gia sự kiện!"
+                )}
               </p>
-              {prize && (
-                <div className="mt-4 rounded-2xl border-2 border-dashed border-[#ecc2ad] bg-white/70 p-5 text-xl font-extrabold text-[#bc776b]">
-                  {prize}
+              {wonPrize ? (
+                <div className="mt-3.5 sm:mt-4 rounded-2xl border-2 border-dashed border-[#ecc2ad] bg-white/90 p-3.5 sm:p-4 text-center shadow-xs">
+                  <span className="text-[11px] font-bold text-[#b87667] uppercase tracking-wider block mb-0.5">
+                    Phần quà may mắn của bạn:
+                  </span>
+                  <div className="text-2xl sm:text-3xl font-black text-[#b75a46] tracking-tight">
+                    {wonPrize.title}
+                  </div>
+                  <div className="text-xs sm:text-sm font-semibold text-[#8e523f] mt-0.5">
+                    {wonPrize.subtitle}
+                  </div>
+                  <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 bg-[#fff2ea] rounded-full text-[11px] font-mono text-[#a85844] border border-[#f5d7c5]">
+                    <span>MÃ ƯU ĐÃI:</span>
+                    <strong className="text-[#8e3f2d]">NIGHTNAILS2026</strong>
+                  </div>
+                  <p className="mt-2 text-[10px] sm:text-[11px] text-[#9a766c]">
+                    Chụp màn hình đưa cho nhân viên salon để áp dụng nhé ♡
+                  </p>
                 </div>
-              )}
-              <p className="mt-4 text-xs leading-6 text-[#9a766c]">
+              ) : prize ? (
+                <div className="mt-4 rounded-2xl border-2 border-dashed border-[#ecc2ad] bg-white/80 p-4 text-center shadow-xs">
+                  <span className="text-[11px] font-bold text-[#b87667] uppercase tracking-wider block mb-1">
+                    Phần quà may mắn của bạn:
+                  </span>
+                  <div className="text-xl sm:text-2xl font-black text-[#b75a46]">
+                    {prize}
+                  </div>
+                  <p className="mt-1 text-[11px] text-[#9a766c]">
+                    Chụp màn hình đưa cho nhân viên salon để áp dụng nhé ♡
+                  </p>
+                </div>
+              ) : null}
+              <p className="mt-3 text-xs leading-5 text-[#9a766c]">
                 Chúc mừng bạn đã nhận được phần quà may mắn từ Night Nail!
               </p>
               <div className="mt-5 flex flex-col gap-2.5">
@@ -549,7 +683,7 @@ export const WhacAMoleScreen = () => {
                     Đập Mèo Nhận Quà ♡
                   </h2>
                   <p className="mt-1 text-xs leading-relaxed text-[#895d50]">
-                    Trong 30 giây, các bé mèo đáng yêu sẽ liên tục xuất hiện.
+                    Trong 15 giây, các bé mèo đáng yêu sẽ liên tục xuất hiện.
                     Đập càng nhiều mèo cấp cao, điểm càng lớn!
                   </p>
                 </div>

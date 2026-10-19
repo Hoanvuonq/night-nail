@@ -191,11 +191,10 @@ export const LuckyWheelScreen = () => {
               <button
                 onClick={handleSpin}
                 disabled={isSpinning}
-                className={`w-full py-4 rounded-full font-bold text-white text-base sm:text-lg tracking-wider uppercase shadow-lg flex items-center justify-center gap-2.5 transition-all duration-300 border-2 border-white ${
-                  isSpinning
-                    ? "bg-[#FED5DF] opacity-80 cursor-not-allowed"
-                    : "bg-linear-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] hover:shadow-[#FEBCC8]/60 hover:shadow-xl cursor-pointer hover:scale-[1.01]"
-                }`}
+                className={`w-full py-4 rounded-full font-bold text-white text-base sm:text-lg tracking-wider uppercase shadow-lg flex items-center justify-center gap-2.5 transition-all duration-300 border-2 border-white ${isSpinning
+                  ? "bg-[#FED5DF] opacity-80 cursor-not-allowed"
+                  : "bg-linear-to-r from-[#FFB8CB] via-[#FFA6C1] to-[#F48CA6] hover:shadow-[#FEBCC8]/60 hover:shadow-xl cursor-pointer hover:scale-[1.01]"
+                  }`}
                 style={{
                   boxShadow:
                     "0 8px 20px -4px rgba(254, 188, 200, 0.7), inset 0 2px 4px rgba(255,255,255,0.8)",
